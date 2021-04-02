@@ -1,0 +1,38 @@
+{
+  "name": "local-voice",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "nodemon server/server.js",
+    "webpack": "webpack --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ambitious-aegean/local-voice.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ambitious-aegean/local-voice/issues"
+  },
+  "homepage": "https://github.com/ambitious-aegean/local-voice#readme",
+  "dependencies": {
+    "css-loader": "^5.2.0",
+    "express": "^4.17.1",
+    "mysql": "^2.18.1",
+    "react": "^17.0.2",
+    "react-dom": "^16.14.0",
+    "style-loader": "^2.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.13.14",
+    "@babel/preset-env": "^7.13.12",
+    "@babel/preset-react": "^7.13.13",
+    "babel-loader": "^8.2.2",
+    "nodemon": "^2.0.7",
+    "webpack": "^5.30.0",
+    "webpack-cli": "^4.6.0"
+  }
+}
