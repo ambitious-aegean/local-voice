@@ -6,11 +6,9 @@ import ListView from './ListView/ListView';
 
 const Main = ({ view, displayedIssues, setLoc }) => (
   <div id="main">
-    {
-      view === 'map'
-        ? <MapView displayedIssues={displayedIssues} setLoc={setLoc} />
-        : <ListView displayedIssues={displayedIssues} />
-    }
+    {view === 'map'
+      ? <MapView displayedIssues={displayedIssues} setLoc={setLoc} />
+      : <ListView displayedIssues={displayedIssues} />}
   </div>
 );
 

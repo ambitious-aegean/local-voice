@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Discussion from '../../ListView/IssueCard/Discussion/Discussion';
+// import Discussion from '../../ListView/IssueCard/Discussion/Discussion';
 
-const MapIssueModal = ({ issue }) =>(
+const MapIssueModal = ({ issue }) => (
   <div id="mapIssueModal">
-
+    {issue}
   </div>
 );
 

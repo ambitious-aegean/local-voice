@@ -1,3 +1,6 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable react/prop-types */
 import React from 'react';
 import {
   Map, GoogleApiWrapper, Marker, InfoWindow,
@@ -10,12 +13,13 @@ class MapView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showingInfoWindow: false,
-      activeMarker: {},
-      selectedIssue: {},
+      // showingInfoWindow: false,
+      // activeMarker: {},
+      // selectedIssue: {},
     };
   }
 
+  // onMarkerClick
   // onInfoWindowClick
 
   render() {
@@ -37,7 +41,7 @@ class MapView extends React.Component {
             >
               <div>
                 hi
-                <div role="button" onClick={() => {}}>
+                <div role="button" onClick={() => {}} onKeyPress={() => {}} tabIndex={0}>
                   see more
                 </div>
               </div>

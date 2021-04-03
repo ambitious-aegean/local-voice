@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import UserOptions from './UserOptions/UserOptions.jsx';
-import FilterOptions from './FilterOptions/FilterOptions.jsx';
+import UserOptions from './UserOptions/UserOptions';
+import FilterOptions from './FilterOptions/FilterOptions';
 
 const LeftSideBar = ({ user, categories, filterIssues }) => (
   <div id="leftSideBar">
