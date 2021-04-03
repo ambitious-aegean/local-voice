@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './styles.module.css';
+// import styles from './styles.module.css';
 
 import Home from './Home/Home';
 import LogIn from './LogIn/LogIn';
@@ -17,7 +17,7 @@ class App extends React.Component {
     const { loggedIn } = this.state;
     return (
       <div id="app">
-        {loggedIn
+        {!loggedIn
           ? <Home />
           : <LogIn />}
       </div>

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -67,6 +68,5 @@ class Home extends React.Component {
     );
   }
 }
-
 
 export default Home;

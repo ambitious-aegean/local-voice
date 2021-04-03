@@ -1,7 +1,9 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import axios from 'axios';
+// import axios from 'axios';
 
 import Discussion from './Discussion/Discussion';
 
@@ -14,13 +16,13 @@ class IssueCard extends React.Component {
     };
   }
 
-  handleViewDiscussionClick() {
+  // handleViewDiscussionClick() {
 
-  }
+  // }
 
-  getDiscussionData() {
+  // getDiscussionData() {
 
-  }
+  // }
 
   render() {
     const { clicked, discussionData } = this.state;
@@ -28,7 +30,7 @@ class IssueCard extends React.Component {
     return (
       <div id="issueCard">
 
-        <div id="viewDiscussion" onClick={}>
+        <div id="viewDiscussion" role="button" onClick={() => {}} onKeyPress={() => {}} tabIndex={0}>
           View Discussion
           {discussionData !== null
             ? <Discussion discussionData={discussionData} user={user} />
