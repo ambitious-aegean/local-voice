@@ -50,7 +50,7 @@ class Home extends React.Component {
     } = this.state;
     return (
       <div id="home">
-        <LeftSideBar filterIssues={this.filterIssues} />
+        <LeftSideBar user={user} filterIssues={this.filterIssues} />
         <CreateIssue />
         <Main view={view} displayedIssues={displayedIssues} />
       </div>
