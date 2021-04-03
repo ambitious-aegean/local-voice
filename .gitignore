@@ -2,3 +2,4 @@ node_modules
 db/index.js
 client/public/bundle.js
 mapConfig.js
+db/index.js

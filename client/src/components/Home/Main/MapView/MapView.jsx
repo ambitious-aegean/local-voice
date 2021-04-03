@@ -1,29 +1,35 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable react/prop-types */
 import React from 'react';
 import {
   Map, GoogleApiWrapper, Marker, InfoWindow,
 } from 'google-maps-react';
 import PropTypes from 'prop-types';
 
-import API_TOKEN from '../../../../mapConfig';
+import API_TOKEN from './mapConfig';
 
 class MapView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showingInfoWindow: false,
-      activeMarker: {},
-      selectedPlace: {},
+      // showingInfoWindow: false,
+      // activeMarker: {},
+      // selectedIssue: {},
     };
   }
 
+  // onMarkerClick
+  // onInfoWindowClick
+
   render() {
-    const { issues } = this.props;
+    const { issues, setLoc } = this.props;
     return (
       <Map
         google={this.props.google} // it says to do this but I don't know if it's actually necessary
         zoom={8}
         // style={mapStyles}
-        initialCenter={{ lat: 47.444, lng: -122.176 }}
+        initialCenter={{ lat: 47.444, lng: -122.176 }} // based on user location
       >
         {issues.map((issue) => (
           <div>
@@ -35,6 +41,9 @@ class MapView extends React.Component {
             >
               <div>
                 hi
+                <div role="button" onClick={() => {}} onKeyPress={() => {}} tabIndex={0}>
+                  see more
+                </div>
               </div>
             </InfoWindow>
           </div>
@@ -50,4 +59,5 @@ export default GoogleApiWrapper({
 
 MapView.propTypes = {
   issues: PropTypes.arrayOf(PropTypes.object).isRequired,
+  setLoc: PropTypes.func.isRequired,
 };
