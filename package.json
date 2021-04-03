@@ -29,6 +29,7 @@
     "jest": "^26.6.3",
     "jest-enzyme": "^7.1.2",
     "mysql": "^2.18.1",
+    "prop-types": "^15.7.2",
     "react": "^16.0.2",
     "react-dom": "^16.14.0",
     "style-loader": "^2.0.0"
