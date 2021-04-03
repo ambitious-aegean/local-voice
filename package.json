@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "server": "nodemon server/server.js",
+    "start": "nodemon server/server.js",
     "webpack": "webpack --watch",
     "lint": "./node_modules/.bin/eslint",
     "test:coverage": "jest --coverage --colors"

@@ -11,7 +11,4 @@ test ('render app', ()=>{
   const wrapper = shallow(<App/>)
   expect(wrapper.exists()).toBeTruthy()
 
-})
-
-
-
+});

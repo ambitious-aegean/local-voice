@@ -12,9 +12,11 @@ class MapView extends React.Component {
     this.state = {
       showingInfoWindow: false,
       activeMarker: {},
-      selectedPlace: {},
+      selectedIssue: {},
     };
   }
+
+  // onInfoWindowClick
 
   render() {
     const { issues } = this.props;
@@ -23,7 +25,7 @@ class MapView extends React.Component {
         google={this.props.google} // it says to do this but I don't know if it's actually necessary
         zoom={8}
         // style={mapStyles}
-        initialCenter={{ lat: 47.444, lng: -122.176 }}
+        initialCenter={{ lat: 47.444, lng: -122.176 }} // based on user location
       >
         {issues.map((issue) => (
           <div>
@@ -35,6 +37,9 @@ class MapView extends React.Component {
             >
               <div>
                 hi
+                <div role="button" onClick={() => {}}>
+                  see more
+                </div>
               </div>
             </InfoWindow>
           </div>
