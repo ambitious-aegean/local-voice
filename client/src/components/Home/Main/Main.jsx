@@ -1,23 +1,22 @@
 import React from 'react';
-import Map from './Map/Map.jsx';
-import List from './List/List.jsx';
+import PropTypes from 'prop-types';
 
-class Main extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+import MapView from './MapView/MapView.jsx';
+import ListView from './ListView/ListView.jsx';
 
-  render() {
-    const view = { this.props };
-    return (
-      <div id="main">
-        {
-          toggle === 'map'
-            ? <Map />
-            : <List />
-        }
-      </div>
-    );
-  }
-}
+const Main = ({ view, displayedIssues, setLoc }) => (
+  <div id="main">
+    {
+      view === 'map'
+        ? <MapView displayedIssues={displayedIssues} setLoc={setLoc} />
+        : <ListView displayedIssues={displayedIssues} />
+    }
+  </div>
+);
 
+Main.propTypes = {
+  view: PropTypes.string.isRequired,
+  displayedIssues: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
+
+export default Main;

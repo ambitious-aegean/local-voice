@@ -4,7 +4,7 @@ import {
 } from 'google-maps-react';
 import PropTypes from 'prop-types';
 
-import API_TOKEN from '../../../../mapConfig';
+import API_TOKEN from './mapConfig';
 
 class MapView extends React.Component {
   constructor(props) {
@@ -19,7 +19,7 @@ class MapView extends React.Component {
   // onInfoWindowClick
 
   render() {
-    const { issues } = this.props;
+    const { issues, setLoc } = this.props;
     return (
       <Map
         google={this.props.google} // it says to do this but I don't know if it's actually necessary
@@ -55,4 +55,5 @@ export default GoogleApiWrapper({
 
 MapView.propTypes = {
   issues: PropTypes.arrayOf(PropTypes.object).isRequired,
+  setLoc: PropTypes.func.isRequired,
 };
