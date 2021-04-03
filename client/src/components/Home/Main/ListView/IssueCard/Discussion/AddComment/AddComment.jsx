@@ -19,7 +19,8 @@ class AddComment extends React.Component {
 
   postComment() {
     const body = this.state;
-    //send post request to /comments
+    const { user } = this.props;
+    // send post request to /comments
   }
 
   render() {
@@ -29,10 +30,13 @@ class AddComment extends React.Component {
           <input id="text" type="text" value="comment" onChange={this.handleChange} />
           <input type="submit" value="comment" />
         </form>
-
       </div>
-    )
+    );
   }
 }
+
+AddComment.propTypes = {
+  user: PropTypes.objectOf(PropTypes.string).isRequired,
+};
 
 export default AddComment;
