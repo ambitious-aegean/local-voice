@@ -1,10 +1,10 @@
-/* eslint-disable no-unused-vars */
 import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
 import Header from './Header/Header.jsx';
 import LeftSideBar from './LeftSideBar/LeftSideBar.jsx';
+import RightSideBar from './RightSideBar/RightSideBar.jsx';
 import CreateIssue from './CreateIssue/CreateIssue.jsx';
 import Main from './Main/Main.jsx';
 
@@ -13,8 +13,9 @@ class Home extends React.Component {
     super(props);
     this.state = {
       user: {},
-      location: {},
-      issues: [],
+      location: null,
+      issues: null,
+      categories: null,
       displayedIssues: null,
       view: 0, // 0 = map view
     };
@@ -23,9 +24,9 @@ class Home extends React.Component {
     this.filterIssues = this.filterIssues.bind(this);
   }
 
-  componentDidMount() {
-    // send get request to retrieve the issues based on the user's location
-  }
+  // componentDidMount() {
+  //   // send get request to retrieve the issues based on the user's location
+  // }
 
   getIssues() {
     // query database for the issues based on the user location
@@ -56,16 +57,24 @@ class Home extends React.Component {
 
   render() {
     const {
-      user, location, issues, displayedIssues, view,
+      user, location, issues, categories, displayedIssues, view,
     } = this.state;
     return (
-      <div id="home">
-        <Header toggle={this.toggle} />
-        <LeftSideBar user={user} filterIssues={this.filterIssues} />
-        <CreateIssue />
-        <Main view={view} displayedIssues={displayedIssues} />
+      <div id="homeContainer">
+        <div id="home">
+          <Header toggle={this.toggle} />
+          {categories !== null
+            ? <LeftSideBar user={user} filterIssues={this.filterIssues} />
+            : ''}
+          {location !== null
+            ? <CreateIssue />
+            : ''}
+          {issues !== null
+            ? <Main view={view} displayedIssues={displayedIssues} />
+            : ''}
+          <RightSideBar />
+        </div>
       </div>
-
     );
   }
 }

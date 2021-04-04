@@ -23,7 +23,7 @@ class CreateIssue extends React.Component {
     const { user, location } = this.props;
     return (
       <div id="createIssue">
-
+        <IssueForm />
       </div>
     );
   }
