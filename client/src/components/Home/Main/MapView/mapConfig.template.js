@@ -1,0 +1,2 @@
+const API_TOKEN = 'GET_IT_FROM_SAM\'S_MSG_ON_SLACK_IT\'S_PINNED';
+module.exports = API_TOKEN;

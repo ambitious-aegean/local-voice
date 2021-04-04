@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import IssueForm from './IssueForm/IssueForm';
+import IssueForm from './IssueForm/IssueForm.jsx';
 
 class CreateIssue extends React.Component {
   constructor(props) {

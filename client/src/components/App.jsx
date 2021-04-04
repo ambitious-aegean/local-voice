@@ -1,8 +1,8 @@
 import React from 'react';
 // import styles from './styles.module.css';
 
-import Home from './Home/Home';
-import LogIn from './LogIn/LogIn';
+import Home from './Home/Home.jsx';
+import LogIn from './LogIn/LogIn.jsx';
 
 // sends user to either LogIn page or Home
 class App extends React.Component {

@@ -7,7 +7,7 @@ import {
 } from 'google-maps-react';
 import PropTypes from 'prop-types';
 
-import API_TOKEN from './mapConfig';
+import API_TOKEN from './mapConfig.js';
 
 class MapView extends React.Component {
   constructor(props) {

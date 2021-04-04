@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// import Discussion from '../../ListView/IssueCard/Discussion/Discussion';
+// import Discussion from '../../ListView/IssueCard/Discussion/Discussion.jsx';
 
 const MapIssueModal = ({ issue }) => (
   <div id="mapIssueModal">

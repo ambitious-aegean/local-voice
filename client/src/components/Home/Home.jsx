@@ -1,11 +1,12 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 
-import Header from './Header/Header';
-import LeftSideBar from './LeftSideBar/LeftSideBar';
-import CreateIssue from './CreateIssue/CreateIssue';
-import Main from './Main/Main';
+import Header from './Header/Header.jsx';
+import LeftSideBar from './LeftSideBar/LeftSideBar.jsx';
+import CreateIssue from './CreateIssue/CreateIssue.jsx';
+import Main from './Main/Main.jsx';
 
 class Home extends React.Component {
   constructor(props) {

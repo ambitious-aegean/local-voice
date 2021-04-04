@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import IssueCard from './IssueCard/IssueCard';
+import IssueCard from './IssueCard/IssueCard.jsx';
 
 const ListView = ({ user, displayedIssues }) => (
   <div id="listView">
