@@ -10,12 +10,12 @@ const Main = ({
   <div id="main">
     {view === 0
       ? <MapView displayedIssues={displayedIssues} location={location} getLoc={getLoc} />
-      : <ListView displayedIssues={displayedIssues} />}
+      : <ListView displayedIssues={displayedIssues} user={user} />}
   </div>
 );
 
 Main.propTypes = {
-  view: PropTypes.string.isRequired,
+  view: PropTypes.number.isRequired,
   displayedIssues: PropTypes.arrayOf(PropTypes.object).isRequired,
   location: PropTypes.objectOf(PropTypes.number).isRequired,
   getLoc: PropTypes.func.isRequired,

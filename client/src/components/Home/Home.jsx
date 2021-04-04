@@ -94,6 +94,7 @@ class Home extends React.Component {
           <Main
             view={view}
             displayedIssues={displayedIssues}
+            user={user}
             location={location}
             getLoc={this.getLoc}
           />
