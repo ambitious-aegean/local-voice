@@ -8,7 +8,7 @@ import LeftSideBar from './LeftSideBar/LeftSideBar.jsx';
 import CreateIssue from './CreateIssue/CreateIssue.jsx';
 import Main from './Main/Main.jsx';
 
-class Home extends React.Component {
+export class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -69,5 +69,3 @@ class Home extends React.Component {
     );
   }
 }
-
-export default Home;
