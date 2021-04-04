@@ -22,6 +22,6 @@ module.exports = {
     'react',
   ],
   rules: {
-    'import/extensions': ['.jsx', '.js', '.json', '.css'],
+    'import/extensions': ['.jsx', '.js', '.json', '.css']
   },
 };
