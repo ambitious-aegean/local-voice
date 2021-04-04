@@ -3,3 +3,4 @@ db/index.js
 client/public/bundle.js
 mapConfig.js
 client/src/components/Home/Main/MapView/mapConfig.js
+client/src/components/Home/dummydata/
