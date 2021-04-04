@@ -60,13 +60,14 @@ class Home extends React.Component {
     return (
       <div id="homeContainer">
         {issues !== null
-          ?
-          <div id="home">
-            <Header toggle={this.toggle} />
-            <LeftSideBar user={user} filterIssues={this.filterIssues} />
-            <CreateIssue />
-            <Main view={view} displayedIssues={displayedIssues} />
-          </div>
+          ? (
+            <div id="home">
+              <Header toggle={this.toggle} />
+              <LeftSideBar user={user} filterIssues={this.filterIssues} />
+              <CreateIssue />
+              <Main view={view} displayedIssues={displayedIssues} />
+            </div>
+          )
           : ''}
       </div>
 
