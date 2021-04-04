@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import Header from './Header/Header.jsx';
 import LeftSideBar from './LeftSideBar/LeftSideBar.jsx';
+import RightSideBar from './RightSideBar/RightSideBar.jsx';
 import CreateIssue from './CreateIssue/CreateIssue.jsx';
 import Main from './Main/Main.jsx';
 
@@ -12,8 +13,9 @@ class Home extends React.Component {
     super(props);
     this.state = {
       user: {},
-      location: {},
+      location: null,
       issues: null,
+      categories: null,
       displayedIssues: null,
       view: 0, // 0 = map view
     };
@@ -55,22 +57,24 @@ class Home extends React.Component {
 
   render() {
     const {
-      user, location, issues, displayedIssues, view,
+      user, location, issues, categories, displayedIssues, view,
     } = this.state;
     return (
       <div id="homeContainer">
-        {issues !== null
-          ? (
-            <div id="home">
-              <Header toggle={this.toggle} />
-              <LeftSideBar user={user} filterIssues={this.filterIssues} />
-              <CreateIssue />
-              <Main view={view} displayedIssues={displayedIssues} />
-            </div>
-          )
-          : ''}
+        <div id="home">
+          <Header toggle={this.toggle} />
+          {categories !== null
+            ? <LeftSideBar user={user} filterIssues={this.filterIssues} />
+            : ''}
+          {location !== null
+            ? <CreateIssue />
+            : ''}
+          {issues !== null
+            ? <Main view={view} displayedIssues={displayedIssues} />
+            : ''}
+          <RightSideBar />
+        </div>
       </div>
-
     );
   }
 }
