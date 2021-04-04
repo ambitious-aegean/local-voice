@@ -7,7 +7,7 @@ import {
 } from 'google-maps-react';
 import PropTypes from 'prop-types';
 
-import API_TOKEN from './mapConfig.js';
+import API_TOKEN from './mapConfig';
 
 class MapView extends React.Component {
   constructor(props) {
@@ -23,32 +23,39 @@ class MapView extends React.Component {
   // onInfoWindowClick
 
   render() {
-    const { issues, setLoc } = this.props;
+    const { displayedIssues, location, getLoc } = this.props;
+    const { lat, lng } = location;
     return (
-      <Map
-        google={this.props.google} // it says to do this but I don't know if it's actually necessary
-        zoom={8}
-        // style={mapStyles}
-        initialCenter={{ lat: 47.444, lng: -122.176 }} // based on user location
-      >
-        {issues.map((issue) => (
-          <div>
-            <Marker position={{ lat: issue.loc.lat, lng: issue.loc.lng }} />
-            <InfoWindow
-              onOpen={() => {}}
-              onClose={() => {}}
-              visible={() => {}}
-            >
-              <div>
-                hi
-                <div role="button" onClick={() => {}} onKeyPress={() => {}} tabIndex={0}>
-                  see more
-                </div>
+      <div id="mapView">
+        <Map
+          google={this.props.google} // it says to do this but I don't know if it's actually necessary
+          zoom={8}
+          // style={mapStyles}
+          initialCenter={{ lat, lng }} // based on user location
+          center={{ lat, lng }}
+        >
+          {displayedIssues.map((issue) => {
+            const { loc } = issue;
+            return (
+              <div key="i">
+                <Marker position={{ lat: loc.lat, lng: loc.lng }} />
+                <InfoWindow
+                  onOpen={() => {}}
+                  onClose={() => {}}
+                  visible={false}
+                >
+                  <div>
+                    Info Window
+                    <div role="button" onClick={() => {}} onKeyPress={() => {}} tabIndex={0}>
+                      see more
+                    </div>
+                  </div>
+                </InfoWindow>
               </div>
-            </InfoWindow>
-          </div>
-        ))}
-      </Map>
+            );
+          })}
+        </Map>
+      </div>
     );
   }
 }
@@ -58,6 +65,6 @@ export default GoogleApiWrapper({
 })(MapView);
 
 MapView.propTypes = {
-  issues: PropTypes.arrayOf(PropTypes.object).isRequired,
-  setLoc: PropTypes.func.isRequired,
+  displayedIssues: PropTypes.arrayOf(PropTypes.object).isRequired,
+  getLoc: PropTypes.func.isRequired,
 };

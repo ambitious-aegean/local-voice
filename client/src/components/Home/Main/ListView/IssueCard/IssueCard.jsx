@@ -12,7 +12,7 @@ class IssueCard extends React.Component {
     super(props);
     this.state = {
       clicked: false,
-      discussionData: null,
+      discussionData: [{ text: 'it was bad' }],
     };
   }
 
@@ -29,13 +29,12 @@ class IssueCard extends React.Component {
     const { issue, user } = this.props;
     return (
       <div id="issueCard">
-
-        <div id="viewDiscussion" role="button" onClick={() => {}} onKeyPress={() => {}} tabIndex={0}>
+        Issue Card
+        <div id="viewDiscussion" role="button" onClick={() => { this.setState({ clicked: !clicked }); }} onKeyPress={() => {}} tabIndex={0}>
           View Discussion
-          {discussionData !== null
+          {clicked
             ? <Discussion discussionData={discussionData} user={user} />
             : ''}
-
         </div>
       </div>
     );

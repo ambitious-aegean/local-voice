@@ -13,10 +13,23 @@ class Home extends React.Component {
     super(props);
     this.state = {
       user: {},
-      location: {},
-      issues: null,
+      location: {
+        lat: 100,
+        lng: 100,
+      },
+      issues: [{
+        loc: {
+          lat: 100,
+          lng: 100,
+        },
+      }],
       categories: [],
-      displayedIssues: null,
+      displayedIssues: [{
+        loc: {
+          lat: 100,
+          lng: 100,
+        },
+      }],
       view: 0, // 0 = map view
     };
     this.getLoc = this.getLoc.bind(this);
@@ -62,12 +75,24 @@ class Home extends React.Component {
     return (
       <div id="homeContainer">
         <div id="home">
-          <Header toggle={this.toggle} />
-            <LeftSideBar user={user} categories={categories} filterIssues={this.filterIssues} />
-            <CreateIssue user={user} location={location} />
-          {issues !== null
-            ? <Main view={view} displayedIssues={displayedIssues} />
-            : ''}
+          <Header
+            toggle={this.toggle}
+          />
+          <LeftSideBar
+            user={user}
+            categories={categories}
+            filterIssues={this.filterIssues}
+          />
+          <CreateIssue
+            user={user}
+            location={location}
+          />
+          <Main
+            view={view}
+            displayedIssues={displayedIssues}
+            location={location}
+            getLoc={this.getLoc}
+          />
           <RightSideBar />
         </div>
       </div>
