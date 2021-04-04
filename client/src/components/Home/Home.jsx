@@ -64,9 +64,7 @@ class Home extends React.Component {
         <div id="home">
           <Header toggle={this.toggle} />
             <LeftSideBar user={user} categories={categories} filterIssues={this.filterIssues} />
-          {location !== null
-            ? <CreateIssue user={user} location={location} />
-            : ''}
+            <CreateIssue user={user} location={location} />
           {issues !== null
             ? <Main view={view} displayedIssues={displayedIssues} />
             : ''}

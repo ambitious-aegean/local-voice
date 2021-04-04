@@ -22,7 +22,7 @@ class CreateIssue extends React.Component {
     const { clicked } = this.state;
     const { user, location } = this.props;
     return (
-      <div id="createIssue">
+      <div id="createIssue" onClick={() => { this.setState({ clicked: !clicked }); }}>
         here is the input area that you can click on to share an issue
         {clicked
           ? <IssueForm />
