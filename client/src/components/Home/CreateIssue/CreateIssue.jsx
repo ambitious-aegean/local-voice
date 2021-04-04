@@ -23,7 +23,10 @@ class CreateIssue extends React.Component {
     const { user, location } = this.props;
     return (
       <div id="createIssue">
-        <IssueForm />
+        here is the input area that you can click on to share an issue
+        {clicked
+          ? <IssueForm />
+          : ''}
       </div>
     );
   }

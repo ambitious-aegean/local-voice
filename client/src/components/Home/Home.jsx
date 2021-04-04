@@ -13,7 +13,7 @@ class Home extends React.Component {
     super(props);
     this.state = {
       user: {},
-      location: null,
+      location: {},
       issues: null,
       categories: [],
       displayedIssues: null,
@@ -63,11 +63,9 @@ class Home extends React.Component {
       <div id="homeContainer">
         <div id="home">
           <Header toggle={this.toggle} />
-          {categories !== null
-            ? <LeftSideBar user={user} categories={categories} filterIssues={this.filterIssues} />
-            : ''}
+            <LeftSideBar user={user} categories={categories} filterIssues={this.filterIssues} />
           {location !== null
-            ? <CreateIssue />
+            ? <CreateIssue user={user} location={location} />
             : ''}
           {issues !== null
             ? <Main view={view} displayedIssues={displayedIssues} />

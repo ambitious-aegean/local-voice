@@ -9,7 +9,7 @@ class IssueForm extends React.Component {
   render() {
     return (
       <div id="issueForm">
-
+        Issue Form
       </div>
     );
   }
