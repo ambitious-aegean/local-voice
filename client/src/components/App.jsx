@@ -5,7 +5,7 @@ import Home from './Home/Home.jsx';
 import LogIn from './LogIn/LogIn.jsx';
 
 // sends user to either LogIn page or Home
-class App extends React.Component {
+export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -24,5 +24,3 @@ class App extends React.Component {
     );
   }
 }
-
-export default App;

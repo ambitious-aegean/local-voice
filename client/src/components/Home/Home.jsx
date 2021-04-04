@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
@@ -8,13 +7,13 @@ import LeftSideBar from './LeftSideBar/LeftSideBar.jsx';
 import CreateIssue from './CreateIssue/CreateIssue.jsx';
 import Main from './Main/Main.jsx';
 
-export class Home extends React.Component {
+class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       user: {},
       location: {},
-      issues: [],
+      issues: null,
       displayedIssues: null,
       view: 0, // 0 = map view
     };
@@ -23,9 +22,9 @@ export class Home extends React.Component {
     this.filterIssues = this.filterIssues.bind(this);
   }
 
-  componentDidMount() {
-    // send get request to retrieve the issues based on the user's location
-  }
+  // componentDidMount() {
+  //   // send get request to retrieve the issues based on the user's location
+  // }
 
   getIssues() {
     // query database for the issues based on the user location
@@ -59,13 +58,20 @@ export class Home extends React.Component {
       user, location, issues, displayedIssues, view,
     } = this.state;
     return (
-      <div id="home">
-        <Header toggle={this.toggle} />
-        <LeftSideBar user={user} filterIssues={this.filterIssues} />
-        <CreateIssue />
-        <Main view={view} displayedIssues={displayedIssues} />
+      <div id="homeContainer">
+        {issues !== null
+          ?
+          <div id="home">
+            <Header toggle={this.toggle} />
+            <LeftSideBar user={user} filterIssues={this.filterIssues} />
+            <CreateIssue />
+            <Main view={view} displayedIssues={displayedIssues} />
+          </div>
+          : ''}
       </div>
 
     );
   }
 }
+
+export default Home;

@@ -18,4 +18,4 @@ Main.propTypes = {
   setLoc: PropTypes.func.isRequired,
 };
 
-export default Main;
+ export default Main;
