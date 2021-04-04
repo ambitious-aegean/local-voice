@@ -10,7 +10,7 @@ class UserOptions extends React.Component {
     const { user, filterIssues } = this.props;
     return (
       <div id="userOptions">
-
+        user options
       </div>
     );
   }

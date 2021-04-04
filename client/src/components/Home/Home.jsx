@@ -15,7 +15,7 @@ class Home extends React.Component {
       user: {},
       location: null,
       issues: null,
-      categories: null,
+      categories: [],
       displayedIssues: null,
       view: 0, // 0 = map view
     };
@@ -64,7 +64,7 @@ class Home extends React.Component {
         <div id="home">
           <Header toggle={this.toggle} />
           {categories !== null
-            ? <LeftSideBar user={user} filterIssues={this.filterIssues} />
+            ? <LeftSideBar user={user} categories={categories} filterIssues={this.filterIssues} />
             : ''}
           {location !== null
             ? <CreateIssue />
