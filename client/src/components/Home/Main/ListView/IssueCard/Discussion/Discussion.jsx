@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import CommentCard from './CommentCard/CommentCard';
-import AddComment from './AddComment/AddComment';
+import CommentCard from './CommentCard/CommentCard.jsx';
+import AddComment from './AddComment/AddComment.jsx';
 
 const Discussion = ({ discussionData, user }) => (
   <div id="discussion">

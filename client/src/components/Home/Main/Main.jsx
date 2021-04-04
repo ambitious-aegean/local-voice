@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import MapView from './MapView/MapView';
-import ListView from './ListView/ListView';
+import MapView from './MapView/MapView.jsx';
+import ListView from './ListView/ListView.jsx';
 
 const Main = ({ view, displayedIssues, setLoc }) => (
   <div id="main">

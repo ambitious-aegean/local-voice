@@ -1,3 +1,9 @@
+/* 
+Don't delete this!
+Copy the contents of this file into 'db/index.js' and configure it to your local machine.
+It'll be gitignored
+*/
+
 const mysql = require('mysql');
 
 const connection = mysql.createConnection({

@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 // import axios from 'axios';
 
-import Discussion from './Discussion/Discussion';
+import Discussion from './Discussion/Discussion.jsx';
 
 class IssueCard extends React.Component {
   constructor(props) {
