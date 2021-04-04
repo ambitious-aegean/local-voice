@@ -15,9 +15,9 @@ class IssueForm extends React.Component {
   }
 }
 
-IssueForm.propTypes = {
-  user: PropTypes.objectOf(PropTypes.string).isRequired,
-  location: PropTypes.objectOf(PropTypes.number).isRequired,
-};
+// IssueForm.propTypes = {
+//   user: PropTypes.objectOf(PropTypes.string).isRequired,
+//   location: PropTypes.objectOf(PropTypes.number).isRequired,
+// };
 
 export default IssueForm;
