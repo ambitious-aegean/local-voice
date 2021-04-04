@@ -13,6 +13,7 @@ const LeftSideBar = ({ user, categories, filterIssues }) => (
 
 LeftSideBar.propTypes = {
   user: PropTypes.objectOf(PropTypes.string).isRequired,
+  categories: PropTypes.arrayOf(PropTypes.string).isRequired,
   filterIssues: PropTypes.func.isRequired,
 };
 

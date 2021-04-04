@@ -23,7 +23,11 @@ class Home extends React.Component {
           lng: 100,
         },
       }],
-      categories: [],
+      categories: [
+        'theft',
+        'crime',
+        'for sale',
+      ],
       displayedIssues: [{
         loc: {
           lat: 100,
@@ -70,7 +74,7 @@ class Home extends React.Component {
 
   render() {
     const {
-      user, location, issues, categories, displayedIssues, view,
+      user, location, categories, displayedIssues, view,
     } = this.state;
     return (
       <div id="homeContainer">

@@ -16,7 +16,10 @@ class FilterOptions extends React.Component {
         <form>
           filter options
           {categories.map((category) => (
-            <input id="category" type="checkbox" value={category} />
+            <label>
+              {category}
+              <input id="category" type="checkbox" value={category} />
+            </label>
           ))}
         </form>
       </div>
