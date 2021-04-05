@@ -67,8 +67,8 @@ class MapView extends React.Component {
         url={issue.photos[0]}
         onClick={this.onMarkerClick}
         position={{
-          lat: issue.loc.lat,
-          lng: issue.loc.lng,
+          lat: issue.lat,
+          lng: issue.lng,
         }}
       />
     ));

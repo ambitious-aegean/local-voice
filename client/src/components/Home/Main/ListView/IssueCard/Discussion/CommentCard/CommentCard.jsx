@@ -9,8 +9,8 @@ const CommentCard = ({ comment, user }) => (
 );
 
 CommentCard.propTypes = {
-  comment: PropTypes.objectOf(PropTypes.string).isRequired,
-  user: PropTypes.objectOf(PropTypes.string).isRequired,
+  comment: PropTypes.objectOf(PropTypes.any).isRequired,
+  user: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
 export default CommentCard;
