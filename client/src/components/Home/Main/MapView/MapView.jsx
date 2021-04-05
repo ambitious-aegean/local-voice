@@ -8,7 +8,7 @@ import {
 import PropTypes from 'prop-types';
 import MapIssueModal from './MapIssueModal/MapIssueModal.jsx';
 
-import API_TOKEN from './mapConfig.js';
+// import API_TOKEN from './mapConfig.js';
 
 const mapStyles = {
   width: '50%',
@@ -128,7 +128,7 @@ class MapView extends React.Component {
 }
 
 export default GoogleApiWrapper({
-  apiKey: API_TOKEN,
+  apiKey: process.env.REACT_APP_MAP_API_KEY,
 })(MapView);
 
 MapView.propTypes = {
