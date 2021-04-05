@@ -23,6 +23,7 @@ DROP TABLE IF EXISTS `issues`;
 CREATE TABLE `issues` (
   `issue_id` INTEGER AUTO_INCREMENT,
   `user_id` INTEGER NULL DEFAULT NULL,
+  `title` VARCHAR(50) NULL DEFAULT NULL,
   `text` VARCHAR(1000) NULL DEFAULT NULL,
   `lat` DECIMAL(9,4) NULL DEFAULT NULL,
   `lng` DECIMAL(9,4) NULL DEFAULT NULL,
@@ -160,7 +161,7 @@ DROP TABLE IF EXISTS `photos`;
 CREATE TABLE `photos` (
   `photo_id` INTEGER AUTO_INCREMENT,
   `issue_id` INTEGER NULL DEFAULT NULL,
-  `photo_info` VARCHAR(100) NULL DEFAULT NULL,
+  `photo_info` VARCHAR(1000) NULL DEFAULT NULL,
   PRIMARY KEY (`photo_id`)
 );
 
@@ -206,7 +207,7 @@ ALTER TABLE `photos` ADD FOREIGN KEY (issue_id) REFERENCES `issues` (`issue_id`)
 LOAD DATA LOCAL INFILE './sample_data/users.csv'
 INTO TABLE users
 FIELDS TERMINATED BY ','
-LINES TERMINATED BY '\n'
+LINES TERMINATED BY '\r'
 IGNORE 1 ROWS;
 
 LOAD DATA LOCAL INFILE './sample_data/issues.csv'
@@ -224,7 +225,7 @@ IGNORE 1 ROWS;
 LOAD DATA LOCAL INFILE './sample_data/categories.csv'
 INTO TABLE categories
 FIELDS TERMINATED BY ','
-LINES TERMINATED BY '\n'
+LINES TERMINATED BY '\r'
 IGNORE 1 ROWS;
 
 LOAD DATA LOCAL INFILE './sample_data/issues_category.csv'
@@ -233,6 +234,11 @@ FIELDS TERMINATED BY ','
 LINES TERMINATED BY '\n'
 IGNORE 1 ROWS;
 
+LOAD DATA LOCAL INFILE './sample_data/photos.csv'
+INTO TABLE photos
+FIELDS TERMINATED BY ','
+LINES TERMINATED BY '\r'
+IGNORE 1 ROWS;
 
 -- ---
 -- Table Properties

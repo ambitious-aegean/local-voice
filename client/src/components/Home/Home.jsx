@@ -1,5 +1,6 @@
-import React from "react";
-// import axios from 'axios';
+import React from 'react';
+import axios from 'axios';
+
 
 import Header from "./Header/Header.jsx";
 import LeftSideBar from "./LeftSideBar/LeftSideBar.jsx";
@@ -47,9 +48,20 @@ class Home extends React.Component {
     this.filterIssues = this.filterIssues.bind(this);
   }
 
-  // componentDidMount() {
-  //   // send get request to retrieve the issues based on the user's location
-  // }
+  componentDidMount() {
+    // send get request to retrieve the issues based on the user's location
+    const options = {
+      method: 'get',
+      url: '/allIssues',
+    };
+    axios(options)
+      .then(response => {
+        console.log(response)
+        this.setState({
+          issues: response.data,
+        })
+      });
+  }
 
   getIssues() {
     // query database for the issues based on the user location
