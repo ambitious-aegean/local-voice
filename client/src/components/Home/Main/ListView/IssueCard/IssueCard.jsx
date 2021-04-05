@@ -42,7 +42,7 @@ class IssueCard extends React.Component {
 }
 
 IssueCard.propTypes = {
-  issue: PropTypes.objectOf(PropTypes.string).isRequired,
+  issue: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
 export default IssueCard;

@@ -1,6 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import axios from 'axios';
+// import axios from 'axios';
 
 import Header from './Header/Header.jsx';
 import LeftSideBar from './LeftSideBar/LeftSideBar.jsx';
@@ -12,10 +11,12 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: {},
+      user: {
+        name: 'foo',
+      },
       location: {
-        lat: 100,
-        lng: 100,
+        lat: 37.7749,
+        lng: -122.4194,
       },
       issues: [{
         loc: {
@@ -30,8 +31,8 @@ class Home extends React.Component {
       ],
       displayedIssues: [{
         loc: {
-          lat: 100,
-          lng: 100,
+          lat: 37.7749,
+          lng: -122.4194,
         },
       }],
       view: 0, // 0 = map view

@@ -5,7 +5,7 @@ import MapView from './MapView/MapView.jsx';
 import ListView from './ListView/ListView.jsx';
 
 const Main = ({
-  view, displayedIssues, location, getLoc,
+  view, user, displayedIssues, location, getLoc,
 }) => (
   <div id="main">
     {view === 0
@@ -16,6 +16,7 @@ const Main = ({
 
 Main.propTypes = {
   view: PropTypes.number.isRequired,
+  user: PropTypes.objectOf(PropTypes.string).isRequired,
   displayedIssues: PropTypes.arrayOf(PropTypes.object).isRequired,
   location: PropTypes.objectOf(PropTypes.number).isRequired,
   getLoc: PropTypes.func.isRequired,

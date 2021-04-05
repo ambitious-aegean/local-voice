@@ -13,14 +13,55 @@ class MapView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // showingInfoWindow: false,
-      // activeMarker: {},
-      // selectedIssue: {},
+      showingInfoWindow: false,
+      activeMarker: null,
+      selectedIssue: null,
     };
+    this.onMarkerClick = this.onMarkerClick.bind(this);
+    this.onClose = this.onClose.bind(this);
+    this.displayMarkers = this.displayMarkers.bind(this);
+    this.displayInfoWindows = this.displayInfoWindows.bind(this);
   }
 
-  // onMarkerClick
-  // onInfoWindowClick
+  onMarkerClick() {
+    this.setState({
+      showingInfoWindow: true,
+    }, this.displayInfoWindow);
+  }
+
+  onClose (props) {
+    if (this.state.showingInfoWindow) {
+      this.setState({
+        showingInfoWindow: false,
+        activeMarker: null
+      });
+    }
+  }
+
+  displayMarkers() {
+    return this.props.displayedIssues.map((issue) => (
+      <Marker
+        onClick={this.onMarkerClick}
+        position={{
+          lat: issue.loc.lat,
+          lng: issue.loc.lng,
+        }}
+      />
+    ));
+  }
+
+  displayInfoWindows() {
+    return (
+      <InfoWindow
+        onClose={this.onClose}
+        visible={this.state.showingInfoWindow}
+      >
+        <div>
+          Info Window
+        </div>
+      </InfoWindow>
+    );
+  }
 
   render() {
     const { displayedIssues, location, getLoc } = this.props;
@@ -28,32 +69,15 @@ class MapView extends React.Component {
     return (
       <div id="mapView">
         <Map
-          google={this.props.google} // it says to do this but I don't know if it's actually necessary
-          zoom={8}
+          google={this.props.google}
+          zoom={12}
           // style={mapStyles}
           initialCenter={{ lat, lng }} // based on user location
-          center={{ lat, lng }}
+          // center={{ lat, lng }}
+          displayedIssues={displayedIssues}
         >
-          {displayedIssues.map((issue) => {
-            const { loc } = issue;
-            return (
-              <div key="i">
-                <Marker position={{ lat: loc.lat, lng: loc.lng }} />
-                <InfoWindow
-                  onOpen={() => {}}
-                  onClose={() => {}}
-                  visible={false}
-                >
-                  <div>
-                    Info Window
-                    <div role="button" onClick={() => {}} onKeyPress={() => {}} tabIndex={0}>
-                      see more
-                    </div>
-                  </div>
-                </InfoWindow>
-              </div>
-            );
-          })}
+          {this.displayMarkers()}
+          {this.displayInfoWindows()}
         </Map>
       </div>
     );
