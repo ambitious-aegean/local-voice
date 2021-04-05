@@ -6,7 +6,6 @@ import FilterOptions from './FilterOptions/FilterOptions.jsx';
 const LeftSideBar = ({ user, categories, filterIssues }) => (
   <div id="leftSideBar">
     Left Side Bar
-    <UserOptions user={user} filterIssues={filterIssues} />
     <FilterOptions categories={categories} filterIssues={filterIssues} />
   </div>
 );
