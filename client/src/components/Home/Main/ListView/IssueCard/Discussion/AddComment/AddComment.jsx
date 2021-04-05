@@ -3,6 +3,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import axios from 'axios';
+
 class AddComment extends React.Component {
   constructor(props) {
     super(props);
@@ -20,9 +22,16 @@ class AddComment extends React.Component {
   }
 
   postComment() {
-    const body = this.state;
-    const { user } = this.props;
-    // send post request to /comments
+    const { text } = this.state;
+    const { issue, user } = this.props;
+    axios.post('/comments', {
+      issue_id: issue.issue_id,
+      text,
+      user_id: user.user_id,
+      date: new Date(),
+    })
+      .then((resp) => console.log(resp.data))
+      .catch((err) => console.log(err));
   }
 
   render() {
@@ -39,6 +48,7 @@ class AddComment extends React.Component {
 
 AddComment.propTypes = {
   user: PropTypes.objectOf(PropTypes.string).isRequired,
+  issue: PropTypes.objectOf(PropTypes.string).isRequired,
 };
 
 export default AddComment;

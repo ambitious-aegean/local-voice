@@ -4,13 +4,13 @@ import PropTypes from 'prop-types';
 import CommentCard from './CommentCard/CommentCard.jsx';
 import AddComment from './AddComment/AddComment.jsx';
 
-const Discussion = ({ discussionData, user }) => (
+const Discussion = ({ discussionData, issue, user }) => (
   <div id="discussion">
     <div id="comments">
       {discussionData.map((comment) => (
-        <CommentCard comment={comment} />
+        <CommentCard comment={comment} user={user} />
       ))}
-      <AddComment user={user} />
+      <AddComment issue={issue} user={user} />
     </div>
   </div>
 );
@@ -18,6 +18,7 @@ const Discussion = ({ discussionData, user }) => (
 Discussion.propTypes = {
   discussionData: PropTypes.arrayOf(PropTypes.object).isRequired,
   user: PropTypes.objectOf(PropTypes.string).isRequired,
+  issue: PropTypes.objectOf(PropTypes.string).isRequired,
 };
 
 export default Discussion;
