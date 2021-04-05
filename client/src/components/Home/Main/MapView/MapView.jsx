@@ -17,10 +17,23 @@ class MapView extends React.Component {
       // activeMarker: {},
       // selectedIssue: {},
     };
+    this.displayMarkers = this.displayMarkers.bind(this);
   }
 
   // onMarkerClick
   // onInfoWindowClick
+
+  displayMarkers() {
+    return this.props.displayedIssues.map((issue, index) => (
+      <Marker
+        key={index}
+        position={{
+          lat: issue.loc.lat,
+          lng: issue.loc.lng,
+        }}
+      />
+    ));
+  }
 
   render() {
     const { displayedIssues, location, getLoc } = this.props;
@@ -28,32 +41,14 @@ class MapView extends React.Component {
     return (
       <div id="mapView">
         <Map
-          google={this.props.google} // it says to do this but I don't know if it's actually necessary
-          zoom={8}
+          google={this.props.google}
+          zoom={12}
           // style={mapStyles}
-          mapCenter={{ lat, lng }} // based on user location
+          initialCenter={{ lat, lng }} // based on user location
           // center={{ lat, lng }}
+          displayedIssues={displayedIssues}
         >
-          {displayedIssues.map((issue) => {
-            const { loc } = issue;
-            return (
-              <div key="i">
-                <Marker position={{ lat: loc.lat, lng: loc.lng }} />
-                <InfoWindow
-                  onOpen={() => {}}
-                  onClose={() => {}}
-                  visible={false}
-                >
-                  <div>
-                    Info Window
-                    <div role="button" onClick={() => {}} onKeyPress={() => {}} tabIndex={0}>
-                      see more
-                    </div>
-                  </div>
-                </InfoWindow>
-              </div>
-            );
-          })}
+          {this.displayMarkers()}
         </Map>
       </div>
     );
