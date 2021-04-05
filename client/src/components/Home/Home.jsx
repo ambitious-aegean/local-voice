@@ -19,14 +19,7 @@ class Home extends React.Component {
         lat: 37.7749,
         lng: -122.4194,
       },
-      issues: [
-        {
-          loc: {
-            lat: 100,
-            lng: 100,
-          },
-        },
-      ],
+      issues: [],
       categories: ["theft", "crime", "for sale"],
       displayedIssues: [
         {
@@ -41,7 +34,7 @@ class Home extends React.Component {
           },
         },
       ],
-      view: 0, // 0 = map view
+      view: 1, // 0 = map view
     };
     this.getLoc = this.getLoc.bind(this);
     this.toggle = this.toggle.bind(this);
@@ -59,7 +52,7 @@ class Home extends React.Component {
         console.log(response)
         this.setState({
           issues: response.data,
-        })
+        });
       });
   }
 
@@ -91,7 +84,7 @@ class Home extends React.Component {
   }
 
   render() {
-    const { user, location, categories, displayedIssues, view } = this.state;
+    const { user, location, categories, displayedIssues, view, issues } = this.state;
     return (
       <div id="homeContainer">
         <div id="home">
@@ -104,7 +97,7 @@ class Home extends React.Component {
           <CreateIssue user={user} location={location} />
           <Main
             view={view}
-            displayedIssues={displayedIssues}
+            displayedIssues={issues}
             user={user}
             location={location}
             getLoc={this.getLoc}
