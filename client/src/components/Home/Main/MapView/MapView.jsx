@@ -31,8 +31,8 @@ class MapView extends React.Component {
           google={this.props.google} // it says to do this but I don't know if it's actually necessary
           zoom={8}
           // style={mapStyles}
-          initialCenter={{ lat, lng }} // based on user location
-          center={{ lat, lng }}
+          mapCenter={{ lat, lng }} // based on user location
+          // center={{ lat, lng }}
         >
           {displayedIssues.map((issue) => {
             const { loc } = issue;
@@ -61,7 +61,7 @@ class MapView extends React.Component {
 }
 
 export default GoogleApiWrapper({
-  apiKey: API_TOKEN,
+  apiKey: 'AIzaSyCO77WdgqHKfRLfeX3IQI-tfNHe9KSoRSg',
 })(MapView);
 
 MapView.propTypes = {
