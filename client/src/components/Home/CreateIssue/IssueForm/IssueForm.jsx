@@ -9,15 +9,15 @@ class IssueForm extends React.Component {
   render() {
     return (
       <div id="issueForm">
-
+        Issue Form
       </div>
     );
   }
 }
 
-IssueForm.propTypes = {
-  user: PropTypes.objectOf(PropTypes.string).isRequired,
-  location: PropTypes.objectOf(PropTypes.number).isRequired,
-};
+// IssueForm.propTypes = {
+//   user: PropTypes.objectOf(PropTypes.string).isRequired,
+//   location: PropTypes.objectOf(PropTypes.number).isRequired,
+// };
 
 export default IssueForm;

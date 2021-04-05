@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const RepCard = ({ official }) => (
   <div id="repCard">
-
+    rep card
   </div>
 );
 

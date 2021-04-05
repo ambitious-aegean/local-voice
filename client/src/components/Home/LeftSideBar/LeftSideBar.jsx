@@ -5,6 +5,7 @@ import FilterOptions from './FilterOptions/FilterOptions.jsx';
 
 const LeftSideBar = ({ user, categories, filterIssues }) => (
   <div id="leftSideBar">
+    Left Side Bar
     <UserOptions user={user} filterIssues={filterIssues} />
     <FilterOptions categories={categories} filterIssues={filterIssues} />
   </div>
@@ -12,6 +13,7 @@ const LeftSideBar = ({ user, categories, filterIssues }) => (
 
 LeftSideBar.propTypes = {
   user: PropTypes.objectOf(PropTypes.string).isRequired,
+  categories: PropTypes.arrayOf(PropTypes.string).isRequired,
   filterIssues: PropTypes.func.isRequired,
 };
 
