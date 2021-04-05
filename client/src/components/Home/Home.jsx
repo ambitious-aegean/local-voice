@@ -1,6 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import axios from 'axios';
+// import axios from 'axios';
 
 import Header from './Header/Header.jsx';
 import LeftSideBar from './LeftSideBar/LeftSideBar.jsx';
@@ -12,7 +11,9 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: {},
+      user: {
+        name: 'foo',
+      },
       location: {
         lat: 100,
         lng: 100,
