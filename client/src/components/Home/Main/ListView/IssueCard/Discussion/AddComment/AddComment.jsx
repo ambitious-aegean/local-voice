@@ -21,7 +21,8 @@ class AddComment extends React.Component {
     });
   }
 
-  postComment() {
+  postComment(e) {
+    e.preventDefault();
     const { text } = this.state;
     const { issue, user } = this.props;
     axios.post('/comments', {
@@ -38,7 +39,7 @@ class AddComment extends React.Component {
     return (
       <div id="addComment">
         <form onSubmit={this.postComment}>
-          <input id="text" type="text" value="comment" onChange={this.handleChange} />
+          <input id="text" type="text" onChange={this.handleChange} />
           <input type="submit" value="comment" />
         </form>
       </div>
@@ -47,8 +48,8 @@ class AddComment extends React.Component {
 }
 
 AddComment.propTypes = {
-  user: PropTypes.objectOf(PropTypes.string).isRequired,
-  issue: PropTypes.objectOf(PropTypes.string).isRequired,
+  user: PropTypes.objectOf(PropTypes.any).isRequired,
+  issue: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
 export default AddComment;

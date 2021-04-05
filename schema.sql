@@ -21,7 +21,7 @@ USE local_voice;
 DROP TABLE IF EXISTS `issues`;
 
 CREATE TABLE `issues` (
-  `issue_id` INTEGER AUTO_INCREMENT,
+  `issue_id` INTEGER NOT NULL AUTO_INCREMENT,
   `user_id` INTEGER NULL DEFAULT NULL,
   `title` VARCHAR(50) NULL DEFAULT NULL,
   `text` VARCHAR(1000) NULL DEFAULT NULL,
@@ -63,9 +63,9 @@ CREATE TABLE `comments` (
   `issue_id` INTEGER NULL DEFAULT NULL,
   `text` VARCHAR(1000) NULL DEFAULT NULL,
   `user_id` INTEGER NULL DEFAULT NULL,
-  `date` DATE NULL DEFAULT NULL,
+  `date` VARCHAR(50) NULL DEFAULT NULL,
   PRIMARY KEY (`comment_id`)
-);
+)''
 
 -- ---
 -- Table 'issues_category'

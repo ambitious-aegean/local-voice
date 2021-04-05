@@ -33,7 +33,7 @@ class CreateIssue extends React.Component {
 }
 
 CreateIssue.propTypes = {
-  user: PropTypes.objectOf(PropTypes.string).isRequired,
+  user: PropTypes.objectOf(PropTypes.any).isRequired,
   location: PropTypes.objectOf(PropTypes.number).isRequired,
 };
 

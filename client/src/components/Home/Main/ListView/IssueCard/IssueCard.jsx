@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable camelcase */
 /* eslint-disable react/prop-types */
@@ -13,29 +14,39 @@ class IssueCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      clicked: false,
-      discussionData: [{ text: 'it was bad' }],
+      viewDiscussion: false,
+      discussionData: [],
     };
+    this.getDiscussionData = this.getDiscussionData.bind(this);
+    this.closeDiscussion = this.closeDiscussion.bind(this);
   }
 
   handleViewDiscussionClick() {
-    let { clicked } = this.state;
-    clicked = !clicked;
-    this.setState({ clicked });
+    const { viewDiscussion } = this.state;
+    this.setState({ viewDiscussion: true });
+    this.getDiscussionData();
   }
 
-  static getDiscussionData() {
-    axios.get('/comments')
-      .then((resp) => console.log(resp.data)) // load this.state.discussionData
+  closeDiscussion() {
+    this.setState({ viewDiscussion: false });
+  }
+
+  getDiscussionData() {
+    const { issue } = this.props;
+    const { issue_id } = issue;
+    axios.get(`/comments/?issue_id=${issue_id}`)
+      .then((resp) => {
+        this.setState({ discussionData: resp.data });
+      })
       .catch((err) => console.log(err));
   }
 
   render() {
-    const { clicked, discussionData } = this.state;
+    const { viewDiscussion, discussionData } = this.state;
     const { issue, user } = this.props;
     const {
       categories, date, flag_count, issue_id, lat, lng, photos, rep_email, rep_name,
-      rep_photo_url, resolved, text, title, up_vote, user_id, username
+      rep_photo_url, resolved, text, title, up_vote, user_id, username,
     } = issue;
     return (
       <div id="issueCard">
@@ -52,7 +63,7 @@ class IssueCard extends React.Component {
         <div>{text}</div>
         <div id="issueCard-photos">
           {photos.map((photo, index) => (
-            <img alt={issue.title} src={photo} />
+            <img key={index} alt={issue.title} src={photo} />
           ))}
         </div>
         <div>
@@ -61,39 +72,20 @@ class IssueCard extends React.Component {
         <div>
           {flag_count} flags
         </div>
-        <div id="viewDiscussion" role="button" onClick={() => this.handleViewDiscussionClick()} onKeyPress={() => {}} tabIndex={0}>
+        <button id="viewDiscussion" type="button" onClick={() => this.handleViewDiscussionClick()} onKeyPress={() => {}} tabIndex={0}>
           View Discussion
-          {clicked
+          {viewDiscussion
             ? <Discussion discussionData={discussionData} issue={issue} user={user} />
             : ''}
-        </div>
+        </button>
       </div>
     );
   }
 }
 
 IssueCard.propTypes = {
-  issue: PropTypes.objectOf(PropTypes.object).isRequired,
-  user: PropTypes.objectOf(PropTypes.object).isRequired,
+  issue: PropTypes.objectOf(PropTypes.any).isRequired,
+  user: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
 export default IssueCard;
-
-/*
-categories [String]
-date
-flag_count
-issue_id
-lat
-lng
-photos [String]
-rep_email
-rep_name
-rep_photo_url
-resolved
-text
-title
-up_vote
-user_id
-username
-*/
