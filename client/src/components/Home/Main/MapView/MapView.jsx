@@ -61,7 +61,7 @@ class MapView extends React.Component {
 }
 
 export default GoogleApiWrapper({
-  apiKey: 'AIzaSyCO77WdgqHKfRLfeX3IQI-tfNHe9KSoRSg',
+  apiKey: API_TOKEN,
 })(MapView);
 
 MapView.propTypes = {
