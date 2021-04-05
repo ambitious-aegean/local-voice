@@ -5,3 +5,4 @@ mapConfig.js
 client/src/components/Home/Main/MapView/mapConfig.js
 civicConfig.js
 client/src/components/Home/dummydata/
+.env
