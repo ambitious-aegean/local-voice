@@ -6,41 +6,65 @@ import {
   Map, GoogleApiWrapper, Marker, InfoWindow,
 } from 'google-maps-react';
 import PropTypes from 'prop-types';
+import MapIssueModal from './MapIssueModal/MapIssueModal.jsx';
 
-import API_TOKEN from './mapConfig.js';
+// import API_TOKEN from './mapConfig.js';
+
+const mapStyles = {
+  width: '50%',
+  height: '400px',
+};
 
 class MapView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       showingInfoWindow: false,
+      showingIssueModal: false,
       activeMarker: null,
-      selectedIssue: null,
+      selectedIssue: {},
     };
     this.onMarkerClick = this.onMarkerClick.bind(this);
     this.onClose = this.onClose.bind(this);
     this.displayMarkers = this.displayMarkers.bind(this);
-    this.displayInfoWindows = this.displayInfoWindows.bind(this);
+    this.displayInfoWindow = this.displayInfoWindow.bind(this);
+    // this.onWindowClick = this.onWindowClick.bind(this);
   }
 
-  onMarkerClick() {
+  componentDidMount() {
+    this.displayMarkers();
+  }
+
+  onMarkerClick(props, marker, e) {
     this.setState({
+      selectedIssue: props,
+      activeMarker: marker,
       showingInfoWindow: true,
     }, this.displayInfoWindow);
   }
 
-  onClose (props) {
+  onClose(props) {
     if (this.state.showingInfoWindow) {
       this.setState({
         showingInfoWindow: false,
-        activeMarker: null
+        activeMarker: null,
       });
     }
   }
 
+  // onWindowClick(e) {
+  //   this.setState({
+  //     showingIssueModal: true
+  //   }, this.displayIssueModal);
+  // }
+
   displayMarkers() {
-    return this.props.displayedIssues.map((issue) => (
+    return this.props.displayedIssues.map((issue, i) => (
       <Marker
+        key={i}
+        name={issue.name}
+        description={issue.description}
+        url={issue.photos[0]}
         onClick={this.onMarkerClick}
         position={{
           lat: issue.loc.lat,
@@ -50,16 +74,36 @@ class MapView extends React.Component {
     ));
   }
 
-  displayInfoWindows() {
+  displayInfoWindow() {
     return (
       <InfoWindow
+        marker={this.state.activeMarker}
         onClose={this.onClose}
         visible={this.state.showingInfoWindow}
       >
         <div>
           Info Window
+          <h4>
+            {this.state.selectedIssue.name}
+          </h4>
+          <h4>
+            {this.state.selectedIssue.description}
+          </h4>
+          <img src={this.state.selectedIssue.url} alt="" />
+          <div role="button" tabIndex={0}>
+            See more ...
+          </div>
         </div>
       </InfoWindow>
+    );
+  }
+
+  displayIssueModal() {
+    const { selectedIssue } = this.state;
+    // invoke axios.get request for comments here?? or within MapIssueModal
+    // conditionally render MapIssueModal based on state
+    return (
+      <MapIssueModal issue={selectedIssue} />
     );
   }
 
@@ -71,13 +115,12 @@ class MapView extends React.Component {
         <Map
           google={this.props.google}
           zoom={12}
-          // style={mapStyles}
+          style={mapStyles}
           initialCenter={{ lat, lng }} // based on user location
-          // center={{ lat, lng }}
           displayedIssues={displayedIssues}
         >
           {this.displayMarkers()}
-          {this.displayInfoWindows()}
+          {this.displayInfoWindow()}
         </Map>
       </div>
     );
@@ -85,7 +128,7 @@ class MapView extends React.Component {
 }
 
 export default GoogleApiWrapper({
-  apiKey: API_TOKEN,
+  apiKey: process.env.REACT_APP_MAP_API_KEY,
 })(MapView);
 
 MapView.propTypes = {
