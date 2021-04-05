@@ -13,26 +13,54 @@ class MapView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // showingInfoWindow: false,
-      // activeMarker: {},
-      // selectedIssue: {},
+      showingInfoWindow: false,
+      activeMarker: null,
+      selectedIssue: null,
     };
+    this.onMarkerClick = this.onMarkerClick.bind(this);
+    this.onClose = this.onClose.bind(this);
     this.displayMarkers = this.displayMarkers.bind(this);
+    this.displayInfoWindows = this.displayInfoWindows.bind(this);
   }
 
-  // onMarkerClick
-  // onInfoWindowClick
+  onMarkerClick() {
+    this.setState({
+      showingInfoWindow: true,
+    }, this.displayInfoWindow);
+  }
+
+  onClose (props) {
+    if (this.state.showingInfoWindow) {
+      this.setState({
+        showingInfoWindow: false,
+        activeMarker: null
+      });
+    }
+  }
 
   displayMarkers() {
-    return this.props.displayedIssues.map((issue, index) => (
+    return this.props.displayedIssues.map((issue) => (
       <Marker
-        key={index}
+        onClick={this.onMarkerClick}
         position={{
           lat: issue.loc.lat,
           lng: issue.loc.lng,
         }}
       />
     ));
+  }
+
+  displayInfoWindows() {
+    return (
+      <InfoWindow
+        onClose={this.onClose}
+        visible={this.state.showingInfoWindow}
+      >
+        <div>
+          Info Window
+        </div>
+      </InfoWindow>
+    );
   }
 
   render() {
@@ -49,6 +77,7 @@ class MapView extends React.Component {
           displayedIssues={displayedIssues}
         >
           {this.displayMarkers()}
+          {this.displayInfoWindows()}
         </Map>
       </div>
     );
