@@ -16,7 +16,12 @@ class IssueCard extends React.Component {
     this.state = {
       viewDiscussion: false,
       discussionData: [],
+      voteClicked: false,
+      voteFlag: false,
+      voteWatched: false,
     };
+    this.up_vote = this.up_vote.bind(this);
+    this.down_vote = this.down_vote.bind(this);
     this.getDiscussionData = this.getDiscussionData.bind(this);
     this.closeDiscussion = this.closeDiscussion.bind(this);
   }
@@ -41,17 +46,32 @@ class IssueCard extends React.Component {
     this.setState({ viewDiscussion: false });
   }
 
-  upVote() {
+  up_vote() {
+    this.setState({
+      voteClicked: true,
+    });
+
     const { issue } = this.props;
     const { issue_id, user_id } = issue;
-    axios.put(`/issues/up_vote/?issue_id=${issue_id}&user_id=${user_id}`)
+    axios.put(`/allIssues/up_vote/?issue_id=${issue_id}&user_id=${user_id}`)
+      .catch((err) => { throw err; });
+  }
+
+  down_vote() {
+    this.setState({
+      voteClicked: false,
+    });
+
+    const { issue } = this.props;
+    const { issue_id, user_id } = issue;
+    axios.put(`/allIssues/down_vote/?issue_id=${issue_id}&user_id=${user_id}`)
       .catch((err) => { throw err; });
   }
 
   flag() {
     const { issue } = this.props;
     const { issue_id, user_id } = issue;
-    axios.put(`/issues/flag_count/?issue_id=${issue_id}&user_id=${user_id}`)
+    axios.put(`/allIssues/flag_count/?issue_id=${issue_id}&user_id=${user_id}`)
       .catch((err) => { throw err; });
   }
 
@@ -90,9 +110,22 @@ class IssueCard extends React.Component {
         <div>
           watch
         </div>
-        <div>
-          {up_vote} upvotes
-        </div>
+        {!this.state.voteClicked
+          ? (
+            <div>
+              <button type="button" onClick={this.up_vote}>
+                <span> up icon </span>
+              </button>
+              {up_vote} upvotes
+            </div>
+          ) : (
+            <div>
+              <button type="button" onClick={this.down_vote}>
+                <span> down icon </span>
+              </button>
+              {up_vote + 1} upvotes
+            </div>
+          )}
         <div>
           {flag_count} flags
         </div>
