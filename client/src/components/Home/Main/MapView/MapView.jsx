@@ -132,7 +132,7 @@ class MapView extends React.Component {
           style={mapStyles}
           initialCenter={{ lat, lng }} // based on user location
           displayedIssues={displayedIssues}
-          draggable={false}
+          draggable={true}
         >
           {this.displayMarkers()}
           {this.displayInfoWindow()}
