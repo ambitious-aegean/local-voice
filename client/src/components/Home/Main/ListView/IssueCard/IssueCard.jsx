@@ -27,10 +27,6 @@ class IssueCard extends React.Component {
     this.getDiscussionData();
   }
 
-  closeDiscussion() {
-    this.setState({ viewDiscussion: false });
-  }
-
   getDiscussionData() {
     const { issue } = this.props;
     const { issue_id } = issue;
@@ -39,6 +35,10 @@ class IssueCard extends React.Component {
         this.setState({ discussionData: resp.data });
       })
       .catch((err) => { throw err; });
+  }
+
+  closeDiscussion() {
+    this.setState({ viewDiscussion: false });
   }
 
   render() {
