@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/no-unused-prop-types */
 /* eslint-disable react/no-unused-state */
@@ -15,8 +16,9 @@ class IssueForm extends React.Component {
     this.state = {
       address: '',
       location,
-      categories: [],
-      message: '',
+      category: '',
+      title: '',
+      text: '',
       photos: [],
       reps: [],
     };
@@ -32,13 +34,12 @@ class IssueForm extends React.Component {
   componentDidMount() {
     const { location } = this.props;
     this.setAddressFromCoordinates(location);
-    // console.log('location on component mount:', location);
     this.setReps(location);
   }
 
   handleChange(event) {
     const {
-      address, categories, message, photos, reps,
+      address, categories, text, photos, reps,
     } = this.state;
     const { id, value } = event.target;
     if (id === 'address') {
@@ -65,7 +66,6 @@ class IssueForm extends React.Component {
       },
     })
       .then((resp) => {
-        console.log(resp.data);
         this.setState({ reps: resp.data });
       })
       .catch((err) => console.log(err));
@@ -100,22 +100,33 @@ class IssueForm extends React.Component {
 
   render() {
     const { address, reps } = this.state;
-    // console.log(reps);
     return (
       <div id="issueForm">
-        <form onSubmit={this.handleSubmit}>
+        <form style={{ display: 'flex', flexDirection: 'column' }} onSubmit={this.handleSubmit}>
           <label htmlFor="address">
             Address
-            <input type="text" value={address} onChange={this.handleChange} required id="address" />
+            <input style={{ width: '300px' }} type="text" value={address} onChange={this.handleChange} required id="address" />
           </label>
-          <button type="button" id="setLocation" onClick={this.setLocation}>set location</button>
-          <label htmlFor="categories">
+          <button style={{ width: '100px' }} type="button" id="setLocation" onClick={this.setLocation}>set location</button>
+          <label htmlFor="category">
             Categories
-            <input type="checkbox" onChange={this.handleChange} required id="categories" />
+            <select name="category" id="category">
+              <option value="nuisance">nuisance</option>
+              <option value="public agencies">public angencies</option>
+              <option value="infrastructure">infrastructure</option>
+              <option value="safety">safety</option>
+              <option value="waste">waste</option>
+              <option value="permits">permits</option>
+              <option value="stolen mail">stolen mail</option>
+            </select>
           </label>
-          <label htmlFor="message">
-            Message
-            <input type="text" onChange={this.handleChange} required id="message" />
+          <label htmlFor="title">
+            title
+            <input type="text" onChange={this.handleChange} required id="title" />
+          </label>
+          <label htmlFor="text">
+            text
+            <input type="text" onChange={this.handleChange} required id="text" />
           </label>
           <label htmlFor="photos">
             Photos
@@ -123,9 +134,15 @@ class IssueForm extends React.Component {
           </label>
           <label htmlFor="reps">
             Choose a Rep
-            <input type="text" onChange={this.handleChange} required id="reps" />
+            <select name="rep" id="rep">
+              {reps.map((rep) => (
+                <option key={rep.name}>
+                  {rep.name} ({rep.title})
+                </option>
+              ))}
+            </select>
           </label>
-          <input type="submit" value="Submit Issue" />
+          <input style={{ width: '100px' }} type="submit" value="submit issue" />
         </form>
       </div>
     );
