@@ -1,7 +1,7 @@
 const axios = require('axios');
 
-//const key = process.env.GEOCODE_API_KEY;
-
+//const key = process.env.REACT_APP_GEOCODE_API_KEY;
+const key = 'AIzaSyByqH8a9lFtsXrgqRNZIbN9T7-Wmw5-v4w';
 
 // geocoding
 const getLocation = (req, res) => {

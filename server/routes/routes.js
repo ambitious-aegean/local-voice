@@ -3,6 +3,7 @@ const express = require('express');
 const issueModal = require('../controllers/issueModal/issueModal.js');
 const { getComments } = require('../controllers/commentsControllers.js');
 const { postComment } = require('../controllers/commentsControllers.js');
+const { allIssues } = require('../controllers/issuesControllers.js');
 
 const { getReps } = require('../controllers/repsController.js');
 const { getAddress, getLocation } = require('../controllers/locAddController.js');
@@ -18,5 +19,6 @@ router.get('/reps', getReps);
 
 router.get('/address', getAddress);
 router.get('/location', getLocation);
+router.get('/allIssues', allIssues);
 
 module.exports = router;

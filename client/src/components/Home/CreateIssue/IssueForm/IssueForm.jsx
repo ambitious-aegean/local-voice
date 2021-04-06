@@ -104,12 +104,13 @@ class IssueForm extends React.Component {
   }
 
   render() {
+    const { address } = this.state;
     return (
       <div id="issueForm">
         <form onSubmit={this.handleSubmit}>
           <label htmlFor="address">
             Address
-            <input type="text" onChange={this.handleChange} required id="address" />
+            <input type="text" /* value={address} */ onChange={this.handleChange} required id="address" />
           </label>
           <button type="button" id="setLocation" onClick={this.setLocation}>set location</button>
           <label htmlFor="categories">
