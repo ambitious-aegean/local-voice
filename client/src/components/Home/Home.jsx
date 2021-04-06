@@ -34,6 +34,7 @@ class Home extends React.Component {
           },
         },
       ],
+      watched: [],
       view: 0, // 0 = map view
     };
     this.getIssues = this.getIssues.bind(this);
@@ -44,16 +45,24 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
+    const { user, location } = this.state;
     // send get request to retrieve the issues based on the user's location
-    this.getIssues();
+    this.getIssues(user.user_id, location.lat, location.lng);
   }
 
-  getIssues() {
+  getIssues(user_id, lat, lng) {
     // query database for the issues based on the user location
-    axios.get('/allIssues')
+    axios.get('/allIssues', {
+      params: {
+        user_id,
+        lat,
+        lng,
+      },
+    })
       .then((response) => {
         this.setState({
-          issues: response.data,
+          issues: response.data.issues,
+          watched: response.data.watched,
         });
       })
       .catch((err) => { throw err; });
