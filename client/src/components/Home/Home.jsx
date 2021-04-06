@@ -6,7 +6,7 @@ import LeftSideBar from './LeftSideBar/LeftSideBar.jsx';
 import RightSideBar from './RightSideBar/RightSideBar.jsx';
 import CreateIssue from './CreateIssue/CreateIssue.jsx';
 import Main from './Main/Main.jsx';
-import styles from  './home.module.css';
+import styles from './home.module.css';
 
 class Home extends React.Component {
   constructor(props) {

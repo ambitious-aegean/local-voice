@@ -5,10 +5,10 @@ const db = require('../../db/index.js');
 
 const allIssues = (req, res) => {
   const { user_id, lat, lng } = req.query;
-  const maxLat = Number(lat) + (2 * 0.015);
-  const minLat = lat - (2 * 0.015);
-  const maxLng = Number(lng) + (2 * 0.018);
-  const minLng = lng - (2 * 0.018);
+  const maxLat = Number(lat) + (5 * 0.015);
+  const minLat = lat - (5 * 0.015);
+  const maxLng = Number(lng) + (5 * 0.018);
+  const minLng = lng - (5 * 0.018);
   const query = `SELECT i.*, c.cat_name, p.photo_info, u.username FROM issues i
   LEFT JOIN issues_category ic on i.issue_id = ic.issue_id
   LEFT JOIN categories c on c.cat_id = ic.cat_id
