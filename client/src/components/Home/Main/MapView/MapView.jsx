@@ -35,6 +35,7 @@ class MapView extends React.Component {
     this.onClose = this.onClose.bind(this);
     this.displayMarkers = this.displayMarkers.bind(this);
     this.displayInfoWindow = this.displayInfoWindow.bind(this);
+    this.onMapDragEnd = this.onMapDragEnd.bind(this);
     this.getUserLocation = this.getUserLocation.bind(this);
   }
 
@@ -58,6 +59,18 @@ class MapView extends React.Component {
       activeMarker: marker,
       showingInfoWindow: true,
     }, this.displayInfoWindow);
+  }
+
+  onMapDragEnd(mapProps, map) {
+    const { getLoc } = this.props;
+    const lat = map.getCenter().lat();
+    const lng = map.getCenter().lng();
+    const location = { lat, lng };
+    console.log(location);
+    this.setState({
+      location,
+    });
+    getLoc(location);
   }
 
   getUserLocation() {
@@ -137,7 +150,8 @@ class MapView extends React.Component {
           style={mapStyles}
           initialCenter={{ lat, lng }} // based on user location
           displayedIssues={displayedIssues}
-          draggable={true}
+          // draggable={true}
+          onDragend={(mapProps, map) => this.onMapDragEnd(mapProps, map)}
         >
           {this.displayMarkers()}
           {this.displayInfoWindow()}
