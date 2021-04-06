@@ -43,15 +43,15 @@ class IssueCard extends React.Component {
 
   upVote() {
     const { issue } = this.props;
-    const { issue_id } = issue;
-    axios.put(`/issues/up_vote/?issue_id=${issue_id}`)
+    const { issue_id, user_id } = issue;
+    axios.put(`/issues/up_vote/?issue_id=${issue_id}&user_id=${user_id}`)
       .catch((err) => { throw err; });
   }
 
   flag() {
     const { issue } = this.props;
-    const { issue_id } = issue;
-    axios.put(`/issues/flag_count/?issue_id=${issue_id}`)
+    const { issue_id, user_id } = issue;
+    axios.put(`/issues/flag_count/?issue_id=${issue_id}&user_id=${user_id}`)
       .catch((err) => { throw err; });
   }
 
