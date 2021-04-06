@@ -65,7 +65,7 @@ CREATE TABLE `comments` (
   `user_id` INTEGER NULL DEFAULT NULL,
   `date` VARCHAR(50) NULL DEFAULT NULL,
   PRIMARY KEY (`comment_id`)
-)''
+);
 
 -- ---
 -- Table 'issues_category'
