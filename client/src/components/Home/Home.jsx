@@ -35,7 +35,7 @@ class Home extends React.Component {
           },
         },
       ],
-      view: 1, // 0 = map view
+      view: 0, // 0 = map view
     };
     this.getLoc = this.getLoc.bind(this);
     this.toggle = this.toggle.bind(this);
