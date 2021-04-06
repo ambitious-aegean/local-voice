@@ -58,6 +58,7 @@ class IssueForm extends React.Component {
 
   getReps() {
     const { location } = this.state;
+    const { lat, lng } = location;
     axios.get('/reps', {
       params: {
         lat,
@@ -73,7 +74,6 @@ class IssueForm extends React.Component {
   coordinatesToAddress(location) {
     let address = '';
     const { lat, lng } = location;
-    console.log('LOCATION**', location);
     axios.get('/address', {
       params: {
         lat,
@@ -81,9 +81,10 @@ class IssueForm extends React.Component {
       },
     })
       .then((resp) => {
-        address = resp.data.results.formatted_address;
+        console.log(resp.data);
+        address = resp.data;
       })
-      .catch((err) => console.log(err));
+      .catch((err) => { throw err; });
     return address;
   }
 
@@ -95,9 +96,10 @@ class IssueForm extends React.Component {
       },
     })
       .then((resp) => {
-        location = resp.data.results.geometry.location;
+        console.log(resp.data);
+        location = resp.data;
       })
-      .catch((err) => console.log(err));
+      .catch((err) => { throw err; });
     return location;
   }
 

@@ -1,6 +1,7 @@
 const axios = require('axios');
 
-const key = process.env.CIVIC_API_KEY;
+//const key = process.env.CIVIC_API_KEY;
+const key = 'AIzaSyByqH8a9lFtsXrgqRNZIbN9T7-Wmw5-v4w';
 
 const getReps = (req, res) => {
   const { lat, lng } = req.query;
