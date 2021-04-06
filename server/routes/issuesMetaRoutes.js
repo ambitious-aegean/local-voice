@@ -56,4 +56,20 @@ issuesMetaRouter.put('/flag_count', (req, res) => {
   });
 });
 
+issuesMetaRouter.put('/down_vote', (req, res) => {
+  const { issue_id, user_id } = req.query;
+  db.query(`UPDATE issues
+        SET up_vote = up_vote - 1
+        WHERE issue_id = ${issue_id}`,
+  (err, result) => {
+    if (err) { throw err; }
+    const query3 = `DELETE FROM user_up_vote
+    WHERE user_id = ${user_id} AND issue_id = ${issue_id}`;
+    db.query(query3, (err1, data) => {
+      if (err1) { throw err1; }
+      res.status(204).send(data);
+    });
+  });
+});
+
 module.exports = issuesMetaRouter;
