@@ -9,8 +9,6 @@ const dotenv = require('dotenv').config();
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '../client/public')));
 
-const db = require('../db/index.js');
-
 app.use('/', router);
 
 app.listen(port, () => {
