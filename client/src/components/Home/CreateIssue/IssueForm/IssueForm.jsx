@@ -73,6 +73,7 @@ class IssueForm extends React.Component {
   coordinatesToAddress(location) {
     let address = '';
     const { lat, lng } = location;
+    console.log('LOCATION**', location);
     axios.get('/address', {
       params: {
         lat,
