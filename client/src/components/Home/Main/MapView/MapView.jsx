@@ -56,6 +56,7 @@ class MapView extends React.Component {
   }
 
   getUserLocation() {
+    const { getLoc } = this.props;
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         const location = {
@@ -65,10 +66,10 @@ class MapView extends React.Component {
         this.setState({
           location,
         });
+        getLoc(location);
       });
     }
   }
-
 
   displayMarkers() {
     return this.props.displayedIssues.map((issue, i) => (
@@ -120,7 +121,8 @@ class MapView extends React.Component {
   }
 
   render() {
-    const { displayedIssues, location, getLoc } = this.props;
+    const { displayedIssues } = this.props;
+    const { location } = this.state;
     const { lat, lng } = location;
     return (
       <div id="mapView">
