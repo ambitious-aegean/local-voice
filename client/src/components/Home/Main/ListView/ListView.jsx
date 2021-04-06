@@ -9,14 +9,14 @@ const ListView = ({ user, displayedIssues }) => (
     <div id="issues">
       Issues
       {displayedIssues.map((issue) => (
-        <IssueCard issue={issue} user={user} />
+        <IssueCard key={issue.issue_id} issue={issue} user={user} />
       ))}
     </div>
   </div>
 );
 
 ListView.propTypes = {
-  user: PropTypes.objectOf(PropTypes.string).isRequired,
+  user: PropTypes.objectOf(PropTypes.any).isRequired,
   displayedIssues: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 

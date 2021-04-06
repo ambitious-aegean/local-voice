@@ -6,13 +6,15 @@ import LeftSideBar from './LeftSideBar/LeftSideBar.jsx';
 import RightSideBar from './RightSideBar/RightSideBar.jsx';
 import CreateIssue from './CreateIssue/CreateIssue.jsx';
 import Main from './Main/Main.jsx';
+import styles from  './home.module.css';
 
 class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       user: {
-        name: 'foo',
+        username: 'someguy123',
+        user_id: 1,
       },
       location: {
         lat: 37.7749,
@@ -38,8 +40,10 @@ class Home extends React.Component {
         permits: false,
         'stolen mail': false,
       },
-      intialLoad: true,
+      initialLoad: true,
       filteredIssues: [],
+      myIssuesFilter: false,
+      watchedIssuesFilter: false,
       categories: ['theft', 'crime', 'for sale', 'infrastructure', 'nuisance', 'public agencies', 'safety', 'waste',
         'permits', 'stolen mail'],
       displayedIssues: [
@@ -70,9 +74,12 @@ class Home extends React.Component {
           },
         },
       ],
+      watched: [],
       view: 0, // 0 = map view
     };
+    this.getIssues = this.getIssues.bind(this);
     this.getLoc = this.getLoc.bind(this);
+    this.getIssues = this.getIssues.bind(this);
     this.toggle = this.toggle.bind(this);
     this.filterIssues = this.filterIssues.bind(this);
     this.filterMyIssues = this.filterMyIssues.bind(this);
@@ -80,25 +87,30 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
+    const { user, location } = this.state;
     // send get request to retrieve the issues based on the user's location
-    const options = {
-      method: 'get',
-      url: '/allIssues',
-    };
-    axios(options)
-      .then((response) => {
-        console.log(response);
-        this.setState({
-          issues: response.data,
-        });
-      });
+    this.getIssues(user.user_id, location.lat, location.lng);
   }
 
-  getIssues() {
+  getIssues(user_id, lat, lng) {
     // query database for the issues based on the user location
-    this.setState({
-      issues: 'results of db query',
-    });
+    axios.get('/allIssues', {
+      params: {
+        user_id,
+        lat,
+        lng,
+      },
+    })
+      .then((response) => {
+        this.setState({
+          issues: response.data.issues,
+          watched: response.data.watched,
+        }, () => {
+          console.log('this.state.issues: ', this.state.issues);
+          console.log('this.state.watched: ', this.state.watched);
+        });
+      })
+      .catch((err) => { throw err; });
   }
 
   getLoc(location) {
@@ -109,20 +121,45 @@ class Home extends React.Component {
 
   // function to filter issues for user's issues
   filterMyIssues() {
-    console.log('filtering my issues');
-    this.setState(
-      {
-        displayedIssues: this.state.displayedIssues.filter((issue) => issue.username === this.state.user.name),
-      },
-    );
+    this.setState({
+      initialLoad: false,
+      myIssuesFilter: !this.state.myIssuesFilter
+    }, () => {
+      if (this.state.myIssuesFilter) {
+        this.setState({
+          filteredIssues: this.state.issues.filter((issue) => issue.username === this.state.user.username)
+        });
+      } else {
+        this.setState({
+          filteredIssues: this.state.issues
+        });
+      }
+    });
   }
 
   // function to filter issues for user's watched issues
   filterWatchedIssues() {
-    // need to have issues data query additionally retrive data the current user is watching
-    // setState of watched issues to this.state.filterWatchedIssues
-    // when toggling the watched issues filter, send this.state.watchedIssues as props to Main
-    // when toggling off the watched issues filter, sned this.state.displayedIssues as props to Main
+    this.setState({
+      initialLoad: false,
+      watchedIssuesFilter: !this.state.watchedIssuesFilter
+    }, () => {
+      if (this.state.watchedIssuesFilter) {
+        let issuesArray = this.state.issues;
+        let filteredIssues = [];
+        for (let i = 0; i < issuesArray.length; i++) {
+          if (this.state.watched.includes(issuesArray[i].issue_id)) {
+            filteredIssues.push(issuesArray[i]);
+          }
+        }
+        this.setState({
+          filteredIssues: filteredIssues,
+        });
+      } else {
+        this.setState({
+          filteredIssues: this.state.issues
+        });
+      }
+    });
   }
 
   toggle() {
@@ -138,25 +175,20 @@ class Home extends React.Component {
       initialLoad: false,
     });
 
-    // iterate through currentCategories state object
-    // if true, add it to axios get request options
-    // axios.get with all of the filtered categories
+    // return true if at least one of the issue's categories matched one of the currently checked categories
     const atLeastOneCategory = (categories) => {
-      // one or more matching
+      // one or more matching return true
       for (let i = 0; i < categories.length; i++) {
-        // console.log('this.state.currentCategories in atLeastOneCategory: ', this.state.currentCategories);
         if (this.state.currentCategories[categories[i]]) {
-          // console.log('returning true');
           return true;
         }
       }
-      // zero matching
+      // zero matching return false
       return false;
     };
 
     // change state on which box is checked
     const newCategories = this.state.currentCategories;
-
     newCategories[e.target.name] = !this.state.currentCategories[e.target.name];
 
     this.setState(
@@ -165,16 +197,16 @@ class Home extends React.Component {
         // displayedIssues: this.state.displayedIssues.filter(issue => issue.categories.includes(category))
       }, () => {
         let noFilter = true;
-        for (const key in newCategories) {
-          if (newCategories[key] === true) {
+        for (const category in newCategories) {
+          if (newCategories[category] === true) {
             noFilter = false;
             break;
           }
         }
 
-        const modifiedIssues = this.state.displayedIssues.filter((issue) => atLeastOneCategory(issue.categories) === true);
+        const modifiedIssues = this.state.issues.filter((issue) => atLeastOneCategory(issue.categories) === true);
         this.setState({
-          filteredIssues: noFilter === true ? this.state.displayedIssues : modifiedIssues,
+          filteredIssues: noFilter === true ? this.state.issues : modifiedIssues,
         }, () => {
           console.log(this.state.currentCategories);
 
@@ -186,12 +218,12 @@ class Home extends React.Component {
 
   render() {
     const {
-      user, location, categories, initialLoad, filteredIssues, displayedIssues, view,
+      issues,user, location, categories, initialLoad, filteredIssues, view,
     } = this.state;
     return (
-      <div id="homeContainer">
-        <div id="home">
-          <Header toggle={this.toggle} />
+      <div id="homeContainer" className={styles.homeContainer}>
+        <Header toggle={this.toggle} />
+        <div id="flexContainer" className={styles.flexContainer}>
           <LeftSideBar
             user={user}
             categories={categories}
@@ -199,14 +231,16 @@ class Home extends React.Component {
             filterMyIssues={this.filterMyIssues}
             filterWatchedIssues={this.filterWatchedIssues}
           />
-          <CreateIssue user={user} location={location} />
-          <Main
-            view={view}
-            displayedIssues={initialLoad? displayedIssues: filteredIssues}
-            user={user}
-            location={location}
-            getLoc={this.getLoc}
-          />
+          <div id="mainContainer" className={styles.mainContainer}>
+          <CreateIssue user={user} location={location}/>
+            <Main
+              view={view}
+              displayedIssues={initialLoad ? issues : filteredIssues}
+              user={user}
+              location={location}
+              getLoc={this.getLoc}
+            />
+          </div>
           <RightSideBar />
         </div>
       </div>

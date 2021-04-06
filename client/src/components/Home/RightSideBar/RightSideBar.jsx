@@ -1,8 +1,9 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
+import styles from './styles.module.css';
 
 const RightSideBar = () => (
-  <div id="rightSideBar">
+  <div className={styles.rightContainer}>
     RightSideBar
   </div>
 );

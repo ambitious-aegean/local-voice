@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styles from '../styles/filterOptions.module.css';
 
 class FilterOptions extends React.Component {
   constructor(props) {
@@ -18,14 +19,16 @@ class FilterOptions extends React.Component {
   render() {
     const { categories, filterIssues } = this.props;
     return (
-      <div id="filterOptions">
-        <form>
-          filter options
-          {categories.map((category) => (
-            <label key={category}>
+      <div className={styles.filterOptions}>
+        <form className={styles.formContainer}>
+          Search Filter Options
+          {categories.map((category, index) => (
+            <div key={index}>
+            <input className={styles.checkbox} name={category} value={category} id="category" type="checkbox" onChange={filterIssues} />
+            <label className={styles.labels} key={category}>
               {category}
-              <input name={category} value={category} id="category" type="checkbox" onChange={filterIssues} />
             </label>
+            </div>
           ))}
         </form>
       </div>

@@ -16,7 +16,7 @@ const Main = ({
 
 Main.propTypes = {
   view: PropTypes.number.isRequired,
-  user: PropTypes.objectOf(PropTypes.string).isRequired,
+  user: PropTypes.objectOf(PropTypes.any).isRequired,
   displayedIssues: PropTypes.arrayOf(PropTypes.object).isRequired,
   location: PropTypes.objectOf(PropTypes.number).isRequired,
   getLoc: PropTypes.func.isRequired,
