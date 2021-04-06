@@ -38,7 +38,7 @@ class IssueCard extends React.Component {
       .then((resp) => {
         this.setState({ discussionData: resp.data });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => { throw err; });
   }
 
   render() {
