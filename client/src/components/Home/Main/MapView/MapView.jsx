@@ -2,10 +2,8 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
 import React from 'react';
-import {
-  Map, GoogleApiWrapper, Marker, InfoWindow,
-} from 'google-maps-react';
 import PropTypes from 'prop-types';
+import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
 import MapIssueModal from './MapIssueModal/MapIssueModal.jsx';
 
 // import API_TOKEN from './mapConfig.js';
@@ -35,6 +33,22 @@ class MapView extends React.Component {
     this.displayMarkers();
   }
 
+  displayMarkers() {
+    return this.props.displayedIssues.map((issue, i) => (
+      <Marker
+        key={i}
+        name={issue.name}
+        description={issue.description}
+        url={issue.photos[0]}
+        onClick={this.onMarkerClick}
+        position={{
+          lat: issue.loc.lat,
+          lng: issue.loc.lng,
+        }}
+      />
+    ));
+  }
+
   onMarkerClick(props, marker, e) {
     this.setState({
       selectedIssue: props,
@@ -58,21 +72,6 @@ class MapView extends React.Component {
   //   }, this.displayIssueModal);
   // }
 
-  displayMarkers() {
-    return this.props.displayedIssues.map((issue, i) => (
-      <Marker
-        key={i}
-        name={issue.name}
-        description={issue.description}
-        url={issue.photos[0]}
-        onClick={this.onMarkerClick}
-        position={{
-          lat: issue.loc.lat,
-          lng: issue.loc.lng,
-        }}
-      />
-    ));
-  }
 
   displayInfoWindow() {
     return (

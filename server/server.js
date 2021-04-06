@@ -1,19 +1,14 @@
 const express = require('express');
+const path = require('path');
+const router = require('./routes/routes.js');
+const db = require('../db/index.js');
+const dotenv = require('dotenv').config();
 
 const app = express();
 const port = 3000;
-const path = require('path');
-const router = require('./routes/routes.js');
-const dotenv = require('dotenv').config();
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '../client/public')));
-
-const db = require('../db/index.js');
-
-// app.get('/', (req, res) => {
-//   res.send('Hello World!')
-// })
 
 app.get('/allIssues', (req, res) => {
   const query = `SELECT i.*, c.cat_name, p.photo_info, u.username FROM issues i

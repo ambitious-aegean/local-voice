@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
 
-
 import Header from "./Header/Header.jsx";
 import LeftSideBar from "./LeftSideBar/LeftSideBar.jsx";
 import RightSideBar from "./RightSideBar/RightSideBar.jsx";
@@ -34,7 +33,7 @@ class Home extends React.Component {
           },
         },
       ],
-      view: 1, // 0 = map view
+      view: 0, // 0 = map view
     };
     this.getLoc = this.getLoc.bind(this);
     this.toggle = this.toggle.bind(this);
