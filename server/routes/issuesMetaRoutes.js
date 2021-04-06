@@ -26,7 +26,7 @@ issuesMetaRouter.put('/up_vote', (req, res) => {
         db.query(query3, (err3, data2) => {
           if (err3) { throw err3; }
           res.status(200).send(result);
-        })
+        });
       });
     }
   });
