@@ -146,7 +146,7 @@ class MapView extends React.Component {
       <div id="mapView">
         <Map
           google={this.props.google}
-          zoom={12}
+          zoom={14}
           style={mapStyles}
           initialCenter={{ lat, lng }} // based on user location
           displayedIssues={displayedIssues}
