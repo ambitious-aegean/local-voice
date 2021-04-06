@@ -38,6 +38,7 @@ class Home extends React.Component {
         permits: false,
         'stolen mail': false,
       },
+      intialLoad: true,
       filteredIssues: [],
       categories: ['theft', 'crime', 'for sale', 'infrastructure', 'nuisance', 'public agencies', 'safety', 'waste',
         'permits', 'stolen mail'],
@@ -51,13 +52,13 @@ class Home extends React.Component {
             'https://magazine.northeast.aaa.com/wp-content/uploads/2017/10/how-to-report-a-stolen-car-1-640x423.jpg',
           ],
           loc: {
-            lat: 37.7749,
-            lng: -122.4194,
+            lat: 37.75974,
+            lng: -122.47736,
           },
         },
         {
           categories: ['theft', 'waste',
-            ],
+          ],
           name: 'important issue',
           description: 'my car was stolen with all of my things in it',
           photos: [
@@ -67,7 +68,7 @@ class Home extends React.Component {
             lat: 37.7749,
             lng: -122.4194,
           },
-        }
+        },
       ],
       view: 0, // 0 = map view
     };
@@ -118,8 +119,10 @@ class Home extends React.Component {
 
   // function to filter issues for user's watched issues
   filterWatchedIssues() {
-    // need to have issues data query additionally include data from the watched issues table
-    // filter displayedIssues for user's watched issues, and setState
+    // need to have issues data query additionally retrive data the current user is watching
+    // setState of watched issues to this.state.filterWatchedIssues
+    // when toggling the watched issues filter, send this.state.watchedIssues as props to Main
+    // when toggling off the watched issues filter, sned this.state.displayedIssues as props to Main
   }
 
   toggle() {
@@ -130,6 +133,11 @@ class Home extends React.Component {
   }
 
   filterIssues(e) {
+    // change intialLoad to false
+    this.setState({
+      initialLoad: false,
+    });
+
     // iterate through currentCategories state object
     // if true, add it to axios get request options
     // axios.get with all of the filtered categories
@@ -156,9 +164,8 @@ class Home extends React.Component {
         currentCategories: newCategories,
         // displayedIssues: this.state.displayedIssues.filter(issue => issue.categories.includes(category))
       }, () => {
-
         let noFilter = true;
-        for (let key in newCategories) {
+        for (const key in newCategories) {
           if (newCategories[key] === true) {
             noFilter = false;
             break;
@@ -168,26 +175,18 @@ class Home extends React.Component {
         const modifiedIssues = this.state.displayedIssues.filter((issue) => atLeastOneCategory(issue.categories) === true);
         this.setState({
           filteredIssues: noFilter === true ? this.state.displayedIssues : modifiedIssues,
-        }, ()=>{
-          console.log(this.state.currentCategories)
+        }, () => {
+          console.log(this.state.currentCategories);
 
           console.log('this.state.filteredIssues: ', this.state.filteredIssues);
-
         });
       },
     );
-
-
-
-    // filter out the issues that does not contain any of the checked boxes
-
-
-    // return issues that pass the test of having at least one matching categories
   }
 
   render() {
     const {
-      user, location, categories, filteredIssues, view,
+      user, location, categories, initialLoad, filteredIssues, displayedIssues, view,
     } = this.state;
     return (
       <div id="homeContainer">
@@ -203,7 +202,7 @@ class Home extends React.Component {
           <CreateIssue user={user} location={location} />
           <Main
             view={view}
-            displayedIssues={filteredIssues}
+            displayedIssues={initialLoad? displayedIssues: filteredIssues}
             user={user}
             location={location}
             getLoc={this.getLoc}
