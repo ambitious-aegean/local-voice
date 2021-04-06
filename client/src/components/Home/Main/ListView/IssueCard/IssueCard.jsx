@@ -41,6 +41,27 @@ class IssueCard extends React.Component {
     this.setState({ viewDiscussion: false });
   }
 
+  upVote() {
+    const { issue } = this.props;
+    const { issue_id, user_id } = issue;
+    axios.put(`/issues/up_vote/?issue_id=${issue_id}&user_id=${user_id}`)
+      .catch((err) => { throw err; });
+  }
+
+  flag() {
+    const { issue } = this.props;
+    const { issue_id, user_id } = issue;
+    axios.put(`/issues/flag_count/?issue_id=${issue_id}&user_id=${user_id}`)
+      .catch((err) => { throw err; });
+  }
+
+  watch() {
+    const { issue } = this.props;
+    const { issue_id, user_id } = issue;
+    axios.put(`/users/watch/?user_id=${user_id}&issue_id=${issue_id}`)
+      .catch((err) => { throw err; });
+  }
+
   render() {
     const { viewDiscussion, discussionData } = this.state;
     const { issue, user } = this.props;
@@ -65,6 +86,9 @@ class IssueCard extends React.Component {
           {photos.map((photo, index) => (
             <img key={index} alt={issue.title} src={photo} />
           ))}
+        </div>
+        <div>
+          watch
         </div>
         <div>
           {up_vote} upvotes
