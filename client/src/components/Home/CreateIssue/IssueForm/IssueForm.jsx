@@ -24,6 +24,7 @@ class IssueForm extends React.Component {
     this.setAddressFromCoordinates = this.setAddressFromCoordinates.bind(this);
     this.setCoordinatesFromAddress = this.setCoordinatesFromAddress.bind(this);
     this.setLocation = this.setLocation.bind(this);
+    this.setReps = this.setReps.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -50,11 +51,9 @@ class IssueForm extends React.Component {
   setLocation() {
     const { address } = this.state;
     this.setCoordinatesFromAddress(address);
-    this.getReps();
   }
 
-  getReps() {
-    const { location } = this.state;
+  setReps(location) {
     const { lat, lng } = location;
     axios.get('/reps', {
       params: {
@@ -63,9 +62,7 @@ class IssueForm extends React.Component {
       },
     })
       .then((resp) => {
-        this.setState({
-          reps: resp.data,
-        });
+        this.setState({ reps: resp.data });
       })
       .catch((err) => console.log(err));
   }
@@ -80,6 +77,7 @@ class IssueForm extends React.Component {
     })
       .then((resp) => {
         this.setState({ address: resp.data });
+        this.setReps(location);
       })
       .catch((err) => { throw err; });
   }
@@ -92,12 +90,14 @@ class IssueForm extends React.Component {
     })
       .then((resp) => {
         this.setState({ location: resp.data });
+        this.setReps(resp.data);
       })
       .catch((err) => { throw err; });
   }
 
   render() {
-    const { address, location } = this.state;
+    const { address, reps } = this.state;
+    console.log(reps);
     return (
       <div id="issueForm">
         <form onSubmit={this.handleSubmit}>
