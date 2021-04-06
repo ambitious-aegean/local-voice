@@ -20,7 +20,7 @@ class Home extends React.Component {
         lng: -122.4194,
       },
       issues: [],
-      categories: ['theft', 'crime', "for sale"],
+      categories: ['theft', 'crime', 'for sale'],
       displayedIssues: [
         {
           name: 'important issue',
