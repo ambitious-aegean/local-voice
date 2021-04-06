@@ -1,20 +1,32 @@
+/* eslint-disable no-restricted-syntax */
 const axios = require('axios');
+require('dotenv').config();
 
-//const key = process.env.REACT_APP_CIVIC_API_KEY;
-const key = 'AIzaSyByqH8a9lFtsXrgqRNZIbN9T7-Wmw5-v4w';
+const key = process.env.CIVIC_API_KEY;
 
 const getReps = (req, res) => {
   const { lat, lng } = req.query;
-  const address = `${lat}, ${lng}`;
+  const address = `${lat},${lng}`;
   axios.get('https://www.googleapis.com/civicinfo/v2/representatives', {
     params: {
       key,
       address,
-      levels: [
-        'locality',
-      ],
+      levels: 'locality',
     },
-  }).then((resp) => res.send(resp))
+  }).then((resp) => {
+    const { offices, officials } = resp.data;
+    const response = [];
+    for (const office of offices) {
+      const official = officials[office.officialIndices];
+      response.push({
+        name: official.name,
+        title: office.name,
+        email: official.emails[0],
+        photoUrl: official.photoUrl || 'noPhoto',
+      });
+    }
+    res.send(response);
+  })
     .catch(() => res.sendStatus(400));
 };
 

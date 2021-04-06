@@ -21,8 +21,8 @@ class IssueForm extends React.Component {
       reps: [],
     };
 
-    this.coordinatesToAddress = this.coordinatesToAddress.bind(this);
-    this.addressToCoordinates = this.addressToCoordinates.bind(this);
+    this.setAddressFromCoordinates = this.setAddressFromCoordinates.bind(this);
+    this.setCoordinatesFromAddress = this.setCoordinatesFromAddress.bind(this);
     this.setLocation = this.setLocation.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -30,19 +30,17 @@ class IssueForm extends React.Component {
 
   componentDidMount() {
     const { location } = this.props;
-    const address = this.coordinatesToAddress(location);
-    console.log('ADDRESS:', address);
-    this.setState({ address });
+    this.setAddressFromCoordinates(location);
   }
 
   handleChange(event) {
     const {
       address, categories, message, photos, reps,
     } = this.state;
-    const { id, val } = event.target;
-    this.setState({
-      [id]: val,
-    });
+    const { id, value } = event.target;
+    if (id === 'address') {
+      this.setState({ address: value });
+    }
   }
 
   handleSubmit(event) {
@@ -51,8 +49,7 @@ class IssueForm extends React.Component {
 
   setLocation() {
     const { address } = this.state;
-    const location = this.addressToCoordinates(address);
-    this.setState({ location });
+    this.setCoordinatesFromAddress(address);
     this.getReps();
   }
 
@@ -66,13 +63,14 @@ class IssueForm extends React.Component {
       },
     })
       .then((resp) => {
-        this.setState({ reps: resp.data.officials });
+        this.setState({
+          reps: resp.data,
+        });
       })
       .catch((err) => console.log(err));
   }
 
-  coordinatesToAddress(location) {
-    let address = '';
+  setAddressFromCoordinates(location) {
     const { lat, lng } = location;
     axios.get('/address', {
       params: {
@@ -81,36 +79,31 @@ class IssueForm extends React.Component {
       },
     })
       .then((resp) => {
-        console.log(resp.data);
-        address = resp.data;
+        this.setState({ address: resp.data });
       })
       .catch((err) => { throw err; });
-    return address;
   }
 
-  addressToCoordinates(address) {
-    let location = {};
+  setCoordinatesFromAddress(address) {
     axios.get('/location', {
       params: {
         address,
       },
     })
       .then((resp) => {
-        console.log(resp.data);
-        location = resp.data;
+        this.setState({ location: resp.data });
       })
       .catch((err) => { throw err; });
-    return location;
   }
 
   render() {
-    const { address } = this.state;
+    const { address, location } = this.state;
     return (
       <div id="issueForm">
         <form onSubmit={this.handleSubmit}>
           <label htmlFor="address">
             Address
-            <input type="text" /* value={address} */ onChange={this.handleChange} required id="address" />
+            <input type="text" value={address} onChange={this.handleChange} required id="address" />
           </label>
           <button type="button" id="setLocation" onClick={this.setLocation}>set location</button>
           <label htmlFor="categories">

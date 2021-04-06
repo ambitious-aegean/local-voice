@@ -1,7 +1,8 @@
 const axios = require('axios');
+require('dotenv').config();
 
-//const key = process.env.REACT_APP_GEOCODE_API_KEY;
-const key = 'AIzaSyByqH8a9lFtsXrgqRNZIbN9T7-Wmw5-v4w';
+const key = process.env.GEOCODE_API_KEY;
+//const key = 'AIzaSyA-c6dRChBpUIiL8zUjqd019m_9rm44pFo';
 
 // geocoding
 const getLocation = (req, res) => {
@@ -14,7 +15,7 @@ const getLocation = (req, res) => {
     },
   })
     .then((resp) => {
-      console.log(resp.data.results[0].geometry.location);
+      console.log('location determined:', resp.data.results[0].geometry.location);
       res.send(resp.data.results[0].geometry.location);
     })
     .catch(() => res.sendStatus(400));
