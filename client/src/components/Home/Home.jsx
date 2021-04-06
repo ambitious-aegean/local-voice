@@ -1,19 +1,18 @@
 import React from 'react';
 import axios from 'axios';
 
-
-import Header from "./Header/Header.jsx";
-import LeftSideBar from "./LeftSideBar/LeftSideBar.jsx";
-import RightSideBar from "./RightSideBar/RightSideBar.jsx";
-import CreateIssue from "./CreateIssue/CreateIssue.jsx";
-import Main from "./Main/Main.jsx";
+import Header from './Header/Header.jsx';
+import LeftSideBar from './LeftSideBar/LeftSideBar.jsx';
+import RightSideBar from './RightSideBar/RightSideBar.jsx';
+import CreateIssue from './CreateIssue/CreateIssue.jsx';
+import Main from './Main/Main.jsx';
 
 class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       user: {
-        name: "foo",
+        name: 'foo',
       },
       location: {
         lat: 37.7749,
@@ -27,25 +26,56 @@ class Home extends React.Component {
           },
         },
       ],
-      categories: ["theft", "crime", "for sale"],
+      currentCategories: {
+        theft: false,
+        crime: false,
+        'for sale': false,
+        infrastructure: false,
+        nuisance: false,
+        'public agencies': false,
+        safety: false,
+        waste: false,
+        permits: false,
+        'stolen mail': false,
+      },
+      filteredIssues: [],
+      categories: ['theft', 'crime', 'for sale', 'infrastructure', 'nuisance', 'public agencies', 'safety', 'waste',
+        'permits', 'stolen mail'],
       displayedIssues: [
         {
-          name: "important issue",
-          description: "my car was stolen with all of my things in it",
+          categories: ['safety', 'waste',
+            'permits', 'stolen mail'],
+          name: 'important issue',
+          description: 'my car was stolen with all of my things in it',
           photos: [
-            "https://magazine.northeast.aaa.com/wp-content/uploads/2017/10/how-to-report-a-stolen-car-1-640x423.jpg",
+            'https://magazine.northeast.aaa.com/wp-content/uploads/2017/10/how-to-report-a-stolen-car-1-640x423.jpg',
           ],
           loc: {
             lat: 37.7749,
             lng: -122.4194,
           },
         },
+        {
+          categories: ['theft', 'waste',
+            ],
+          name: 'important issue',
+          description: 'my car was stolen with all of my things in it',
+          photos: [
+            'https://magazine.northeast.aaa.com/wp-content/uploads/2017/10/how-to-report-a-stolen-car-1-640x423.jpg',
+          ],
+          loc: {
+            lat: 37.7749,
+            lng: -122.4194,
+          },
+        }
       ],
       view: 0, // 0 = map view
     };
     this.getLoc = this.getLoc.bind(this);
     this.toggle = this.toggle.bind(this);
     this.filterIssues = this.filterIssues.bind(this);
+    this.filterMyIssues = this.filterMyIssues.bind(this);
+    this.filterWatchedIssues = this.filterWatchedIssues.bind(this);
   }
 
   componentDidMount() {
@@ -55,18 +85,18 @@ class Home extends React.Component {
       url: '/allIssues',
     };
     axios(options)
-      .then(response => {
-        console.log(response)
+      .then((response) => {
+        console.log(response);
         this.setState({
           issues: response.data,
-        })
+        });
       });
   }
 
   getIssues() {
     // query database for the issues based on the user location
     this.setState({
-      issues: "results of db query",
+      issues: 'results of db query',
     });
   }
 
@@ -76,6 +106,22 @@ class Home extends React.Component {
     });
   }
 
+  // function to filter issues for user's issues
+  filterMyIssues() {
+    console.log('filtering my issues');
+    this.setState(
+      {
+        displayedIssues: this.state.displayedIssues.filter((issue) => issue.username === this.state.user.name),
+      },
+    );
+  }
+
+  // function to filter issues for user's watched issues
+  filterWatchedIssues() {
+    // need to have issues data query additionally include data from the watched issues table
+    // filter displayedIssues for user's watched issues, and setState
+  }
+
   toggle() {
     const { view } = this.state;
     this.setState({
@@ -83,15 +129,66 @@ class Home extends React.Component {
     });
   }
 
-  filterIssues() {
-    // filtering algorithm
-    this.setState({
-      displayedIssues: "result of filtering algorithm",
-    });
+  filterIssues(e) {
+    // iterate through currentCategories state object
+    // if true, add it to axios get request options
+    // axios.get with all of the filtered categories
+    const atLeastOneCategory = (categories) => {
+      // one or more matching
+      for (let i = 0; i < categories.length; i++) {
+        // console.log('this.state.currentCategories in atLeastOneCategory: ', this.state.currentCategories);
+        if (this.state.currentCategories[categories[i]]) {
+          // console.log('returning true');
+          return true;
+        }
+      }
+      // zero matching
+      return false;
+    };
+
+    // change state on which box is checked
+    const newCategories = this.state.currentCategories;
+
+    newCategories[e.target.name] = !this.state.currentCategories[e.target.name];
+
+    this.setState(
+      {
+        currentCategories: newCategories,
+        // displayedIssues: this.state.displayedIssues.filter(issue => issue.categories.includes(category))
+      }, () => {
+
+        let noFilter = true;
+        for (let key in newCategories) {
+          if (newCategories[key] === true) {
+            noFilter = false;
+            break;
+          }
+        }
+
+        const modifiedIssues = this.state.displayedIssues.filter((issue) => atLeastOneCategory(issue.categories) === true);
+        this.setState({
+          filteredIssues: noFilter === true ? this.state.displayedIssues : modifiedIssues,
+        }, ()=>{
+          console.log(this.state.currentCategories)
+
+          console.log('this.state.filteredIssues: ', this.state.filteredIssues);
+
+        });
+      },
+    );
+
+
+
+    // filter out the issues that does not contain any of the checked boxes
+
+
+    // return issues that pass the test of having at least one matching categories
   }
 
   render() {
-    const { user, location, categories, displayedIssues, view } = this.state;
+    const {
+      user, location, categories, filteredIssues, view,
+    } = this.state;
     return (
       <div id="homeContainer">
         <div id="home">
@@ -100,11 +197,13 @@ class Home extends React.Component {
             user={user}
             categories={categories}
             filterIssues={this.filterIssues}
+            filterMyIssues={this.filterMyIssues}
+            filterWatchedIssues={this.filterWatchedIssues}
           />
           <CreateIssue user={user} location={location} />
           <Main
             view={view}
-            displayedIssues={displayedIssues}
+            displayedIssues={filteredIssues}
             user={user}
             location={location}
             getLoc={this.getLoc}

@@ -5,9 +5,15 @@ class FilterOptions extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selected: null,
+      selected: {},
     };
   }
+
+  // onChange(e) {
+  //   this.setState({
+  //     selected:
+  //   });
+  // }
 
   render() {
     const { categories, filterIssues } = this.props;
@@ -18,7 +24,7 @@ class FilterOptions extends React.Component {
           {categories.map((category) => (
             <label key={category}>
               {category}
-              <input id="category" type="checkbox" value={category} />
+              <input name={category} value={category} id="category" type="checkbox" onChange={filterIssues} />
             </label>
           ))}
         </form>
