@@ -16,12 +16,16 @@ class IssueCard extends React.Component {
     this.state = {
       viewDiscussion: false,
       discussionData: [],
-      voteClicked: false,
-      voteFlag: false,
-      voteWatched: false,
+      voted: false,
+      flagged: false,
+      watched: false,
     };
+    this.watch = this.watch.bind(this);
     this.up_vote = this.up_vote.bind(this);
+    this.flag = this.flag.bind(this);
+    this.unwatch = this.unwatch.bind(this);
     this.down_vote = this.down_vote.bind(this);
+    this.unflag = this.unflag.bind(this);
     this.getDiscussionData = this.getDiscussionData.bind(this);
     this.closeDiscussion = this.closeDiscussion.bind(this);
   }
@@ -48,7 +52,7 @@ class IssueCard extends React.Component {
 
   up_vote() {
     this.setState({
-      voteClicked: true,
+      voted: true,
     });
 
     const { issue } = this.props;
@@ -59,7 +63,7 @@ class IssueCard extends React.Component {
 
   down_vote() {
     this.setState({
-      voteClicked: false,
+      voted: false,
     });
 
     const { issue } = this.props;
@@ -69,21 +73,53 @@ class IssueCard extends React.Component {
   }
 
   flag() {
+    this.setState({
+      flagged: true,
+    });
+
     const { issue } = this.props;
     const { issue_id, user_id } = issue;
-    axios.put(`/allIssues/flag_count/?issue_id=${issue_id}&user_id=${user_id}`)
+    axios.put(`/allIssues/flag/?issue_id=${issue_id}&user_id=${user_id}`)
+      .catch((err) => { throw err; });
+  }
+
+  unflag() {
+    this.setState({
+      flagged: false,
+    });
+
+    const { issue } = this.props;
+    const { issue_id, user_id } = issue;
+    axios.put(`/allIssues/unflag/?issue_id=${issue_id}&user_id=${user_id}`)
       .catch((err) => { throw err; });
   }
 
   watch() {
+    this.setState({
+      watched: true,
+    });
+
     const { issue } = this.props;
     const { issue_id, user_id } = issue;
     axios.put(`/users/watch/?user_id=${user_id}&issue_id=${issue_id}`)
       .catch((err) => { throw err; });
   }
 
+  unwatch() {
+    this.setState({
+      watched: false,
+    });
+
+    const { issue } = this.props;
+    const { issue_id, user_id } = issue;
+    axios.delete(`/users/unwatch/?user_id=${user_id}&issue_id=${issue_id}`)
+      .catch((err) => { throw err; });
+  }
+
   render() {
-    const { viewDiscussion, discussionData } = this.state;
+    const {
+      voted, flagged, watched, viewDiscussion, discussionData
+    } = this.state;
     const { issue, user } = this.props;
     const {
       categories, date, flag_count, issue_id, lat, lng, photos, rep_email, rep_name,
@@ -107,10 +143,21 @@ class IssueCard extends React.Component {
             <img key={index} alt={issue.title} src={photo} />
           ))}
         </div>
-        <div>
-          watch
-        </div>
-        {!this.state.voteClicked
+        {!watched
+          ? (
+            <div>
+              <button type="button" onClick={this.watch}>
+                <span> watch icon </span>
+              </button>
+            </div>
+          ) : (
+            <div>
+              <button type="button" onClick={this.unwatch}>
+                <span> unwatch icon </span>
+              </button>
+            </div>
+          )}
+        {!voted
           ? (
             <div>
               <button type="button" onClick={this.up_vote}>
@@ -126,9 +173,20 @@ class IssueCard extends React.Component {
               {up_vote + 1} upvotes
             </div>
           )}
-        <div>
-          {flag_count} flags
-        </div>
+        {!flagged
+          ? (
+            <div>
+              <button type="button" onClick={this.flag}>
+                <span> (empty) flag icon </span>
+              </button>
+            </div>
+          ) : (
+            <div>
+              <button type="button" onClick={this.unflag}>
+                <span> flag icon </span>
+              </button>
+            </div>
+          )}
         <button id="viewDiscussion" type="button" onClick={() => this.handleViewDiscussionClick()} onKeyPress={() => {}} tabIndex={0}>
           View Discussion
           {viewDiscussion
