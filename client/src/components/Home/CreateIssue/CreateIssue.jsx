@@ -21,7 +21,7 @@ class CreateIssue extends React.Component {
     const { user, location } = this.props;
     return (
       <div id="createIssue" onClick={this.handleClick}>
-        here is the input area that you can click on to share an issue
+        report an issue
         {clicked
           ? <IssueForm user={user} location={location} />
           : ''}

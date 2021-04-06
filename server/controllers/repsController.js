@@ -27,7 +27,7 @@ const getReps = (req, res) => {
     }
     res.send(response);
   })
-    .catch(() => res.sendStatus(400));
+    .catch(() => res.send([]));
 };
 
 module.exports = {
