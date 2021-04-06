@@ -62,10 +62,10 @@ class MapView extends React.Component {
     return this.props.displayedIssues.map((issue, i) => (
       <Marker
         key={i}
-        name={issue.name}
-        description={issue.description}
+        title={issue.title}
+        text={issue.text}
         url={issue.photos[0]}
-        onClick={this.onMarkerClick}
+        onMouseover={this.onMarkerClick}
         position={{
           lat: issue.lat,
           lng: issue.lng,
@@ -84,10 +84,10 @@ class MapView extends React.Component {
         <div>
           Info Window
           <h4>
-            {this.state.selectedIssue.name}
+            {this.state.selectedIssue.title}
           </h4>
           <h4>
-            {this.state.selectedIssue.description}
+            {this.state.selectedIssue.text}
           </h4>
           <img src={this.state.selectedIssue.url} alt="" />
           <div role="button" tabIndex={0}>
