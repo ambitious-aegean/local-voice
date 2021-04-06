@@ -11,7 +11,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, '../client/public')));
 
 app.use('/', router);
-app.use('/issues', issuesMetaRouter);
+app.use('/allIssues', issuesMetaRouter);
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
