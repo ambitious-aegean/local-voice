@@ -18,7 +18,9 @@ const mapStyles = {
 class MapView extends React.Component {
   constructor(props) {
     super(props);
+    const { location } = this.props;
     this.state = {
+      location,
       showingInfoWindow: false,
       showingIssueModal: false,
       activeMarker: null,
@@ -28,19 +30,12 @@ class MapView extends React.Component {
     this.onClose = this.onClose.bind(this);
     this.displayMarkers = this.displayMarkers.bind(this);
     this.displayInfoWindow = this.displayInfoWindow.bind(this);
-    // this.onWindowClick = this.onWindowClick.bind(this);
+    this.getUserLocation = this.getUserLocation.bind(this);
   }
 
   componentDidMount() {
-    this.displayMarkers();
-  }
-
-  onMarkerClick(props, marker, e) {
-    this.setState({
-      selectedIssue: props,
-      activeMarker: marker,
-      showingInfoWindow: true,
-    }, this.displayInfoWindow);
+    this.getUserLocation();
+    // this.displayMarkers();
   }
 
   onClose(props) {
@@ -52,11 +47,28 @@ class MapView extends React.Component {
     }
   }
 
-  // onWindowClick(e) {
-  //   this.setState({
-  //     showingIssueModal: true
-  //   }, this.displayIssueModal);
-  // }
+  onMarkerClick(props, marker, e) {
+    this.setState({
+      selectedIssue: props,
+      activeMarker: marker,
+      showingInfoWindow: true,
+    }, this.displayInfoWindow);
+  }
+
+  getUserLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        const location = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        };
+        this.setState({
+          location,
+        });
+      });
+    }
+  }
+
 
   displayMarkers() {
     return this.props.displayedIssues.map((issue, i) => (
@@ -118,6 +130,7 @@ class MapView extends React.Component {
           style={mapStyles}
           initialCenter={{ lat, lng }} // based on user location
           displayedIssues={displayedIssues}
+          draggable={false}
         >
           {this.displayMarkers()}
           {this.displayInfoWindow()}

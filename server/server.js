@@ -11,10 +11,6 @@ app.use(express.static(path.join(__dirname, '../client/public')));
 
 const db = require('../db/index.js');
 
-// app.get('/', (req, res) => {
-//   res.send('Hello World!')
-// })
-
 app.get('/allIssues', (req, res) => {
   const query = `SELECT i.*, c.cat_name, p.photo_info, u.username FROM issues i
     LEFT JOIN issues_category ic on i.issue_id = ic.issue_id
@@ -25,7 +21,6 @@ app.get('/allIssues', (req, res) => {
     if (err) {
       console.log(err);
     } else {
-      console.log(data);
       const issueData = {};
       data.forEach((row) => {
         if (!issueData[row.issue_id]) {
