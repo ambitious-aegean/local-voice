@@ -1,14 +1,15 @@
 const express = require('express');
-const path = require('path');
-const router = require('./routes/routes.js');
-const db = require('../db/index.js');
-const dotenv = require('dotenv').config();
 
 const app = express();
 const port = 3000;
+const path = require('path');
+const router = require('./routes/routes.js');
+const dotenv = require('dotenv').config();
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '../client/public')));
+
+const db = require('../db/index.js');
 
 app.get('/allIssues', (req, res) => {
   const query = `SELECT i.*, c.cat_name, p.photo_info, u.username FROM issues i
@@ -20,7 +21,6 @@ app.get('/allIssues', (req, res) => {
     if (err) {
       console.log(err);
     } else {
-      console.log(data);
       const issueData = {};
       data.forEach((row) => {
         if (!issueData[row.issue_id]) {

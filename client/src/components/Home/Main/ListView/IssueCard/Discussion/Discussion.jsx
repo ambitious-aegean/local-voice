@@ -8,7 +8,7 @@ const Discussion = ({ discussionData, issue, user }) => (
   <div id="discussion">
     <div id="comments">
       {discussionData.map((comment) => (
-        <CommentCard comment={comment} user={user} />
+        <CommentCard key={comment.comment_id} comment={comment} user={user} />
       ))}
       <AddComment issue={issue} user={user} />
     </div>
@@ -17,8 +17,8 @@ const Discussion = ({ discussionData, issue, user }) => (
 
 Discussion.propTypes = {
   discussionData: PropTypes.arrayOf(PropTypes.object).isRequired,
-  user: PropTypes.objectOf(PropTypes.string).isRequired,
-  issue: PropTypes.objectOf(PropTypes.string).isRequired,
+  user: PropTypes.objectOf(PropTypes.any).isRequired,
+  issue: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
 export default Discussion;
