@@ -125,7 +125,7 @@ class IssueCard extends React.Component {
 
     const { issue } = this.props;
     const { issue_id, user_id } = issue;
-    axios.delete(`/allIssues/unwatch/?user_id=${user_id}&issue_id=${issue_id}`)
+    axios.put(`/allIssues/unwatch/?user_id=${user_id}&issue_id=${issue_id}`)
       .catch((err) => { throw err; });
   }
 
