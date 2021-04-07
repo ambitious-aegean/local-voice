@@ -46,34 +46,6 @@ class Home extends React.Component {
       watchedIssuesFilter: false,
       categories: ['theft', 'crime', 'for sale', 'infrastructure', 'nuisance', 'public agencies', 'safety', 'waste',
         'permits', 'stolen mail'],
-      displayedIssues: [
-        {
-          categories: ['safety', 'waste',
-            'permits', 'stolen mail'],
-          name: 'important issue',
-          description: 'my car was stolen with all of my things in it',
-          photos: [
-            'https://magazine.northeast.aaa.com/wp-content/uploads/2017/10/how-to-report-a-stolen-car-1-640x423.jpg',
-          ],
-          loc: {
-            lat: 37.75974,
-            lng: -122.47736,
-          },
-        },
-        {
-          categories: ['theft', 'waste',
-          ],
-          name: 'important issue',
-          description: 'my car was stolen with all of my things in it',
-          photos: [
-            'https://magazine.northeast.aaa.com/wp-content/uploads/2017/10/how-to-report-a-stolen-car-1-640x423.jpg',
-          ],
-          loc: {
-            lat: 37.7749,
-            lng: -122.4194,
-          },
-        },
-      ],
       watched: [],
       view: 0, // 0 = map view
     };
@@ -123,15 +95,15 @@ class Home extends React.Component {
   filterMyIssues() {
     this.setState({
       initialLoad: false,
-      myIssuesFilter: !this.state.myIssuesFilter
+      myIssuesFilter: !this.state.myIssuesFilter,
     }, () => {
       if (this.state.myIssuesFilter) {
         this.setState({
-          filteredIssues: this.state.issues.filter((issue) => issue.username === this.state.user.username)
+          filteredIssues: this.state.issues.filter((issue) => issue.username === this.state.user.username),
         });
       } else {
         this.setState({
-          filteredIssues: this.state.issues
+          filteredIssues: this.state.issues,
         });
       }
     });
@@ -141,22 +113,22 @@ class Home extends React.Component {
   filterWatchedIssues() {
     this.setState({
       initialLoad: false,
-      watchedIssuesFilter: !this.state.watchedIssuesFilter
+      watchedIssuesFilter: !this.state.watchedIssuesFilter,
     }, () => {
       if (this.state.watchedIssuesFilter) {
-        let issuesArray = this.state.issues;
-        let filteredIssues = [];
+        const issuesArray = this.state.issues;
+        const filteredIssues = [];
         for (let i = 0; i < issuesArray.length; i++) {
           if (this.state.watched.includes(issuesArray[i].issue_id)) {
             filteredIssues.push(issuesArray[i]);
           }
         }
         this.setState({
-          filteredIssues: filteredIssues,
+          filteredIssues,
         });
       } else {
         this.setState({
-          filteredIssues: this.state.issues
+          filteredIssues: this.state.issues,
         });
       }
     });
@@ -194,7 +166,6 @@ class Home extends React.Component {
     this.setState(
       {
         currentCategories: newCategories,
-        // displayedIssues: this.state.displayedIssues.filter(issue => issue.categories.includes(category))
       }, () => {
         let noFilter = true;
         for (const category in newCategories) {
@@ -204,13 +175,11 @@ class Home extends React.Component {
           }
         }
 
-        const modifiedIssues = this.state.issues.filter((issue) => atLeastOneCategory(issue.categories) === true);
+        // filter out issues that doesnt match any of the current selected check boxes
+        const modifiedIssues = this.state.issues.filter((issue) => atLeastOneCategory(issue.categories));
+
         this.setState({
           filteredIssues: noFilter === true ? this.state.issues : modifiedIssues,
-        }, () => {
-          console.log(this.state.currentCategories);
-
-          console.log('this.state.filteredIssues: ', this.state.filteredIssues);
         });
       },
     );
@@ -218,7 +187,7 @@ class Home extends React.Component {
 
   render() {
     const {
-      issues,user, location, categories, initialLoad, filteredIssues, view,
+      issues, user, location, categories, initialLoad, filteredIssues, view,
     } = this.state;
     return (
       <div id="homeContainer" className={styles.homeContainer}>
@@ -232,7 +201,7 @@ class Home extends React.Component {
             filterWatchedIssues={this.filterWatchedIssues}
           />
           <div id="mainContainer" className={styles.mainContainer}>
-          <CreateIssue user={user} location={location}/>
+            <CreateIssue user={user} location={location} />
             <Main
               view={view}
               displayedIssues={initialLoad ? issues : filteredIssues}
