@@ -125,6 +125,7 @@ class IssueForm extends React.Component {
 
   render() {
     const { address, reps } = this.state;
+    console.log(reps);
     return (
       <div id="issueForm">
         <form style={{ display: 'flex', flexDirection: 'column' }} onSubmit={this.handleSubmit}>
