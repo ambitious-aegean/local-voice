@@ -34,7 +34,6 @@ class IssueForm extends React.Component {
   componentDidMount() {
     const { location } = this.props;
     this.setAddressFromCoordinates(location);
-    this.setReps(location);
   }
 
   handleChange(event) {
@@ -52,13 +51,12 @@ class IssueForm extends React.Component {
   }
 
   setLocation() {
-    const { address, location } = this.state;
-    this.setCoordinatesFromAddress(address, this.setReps);
+    const { address } = this.state;
+    this.setCoordinatesFromAddress(address);
   }
 
   setReps(location) {
     const { lat, lng } = location;
-    console.log('set reps', lat, lng);
     axios.get('/reps', {
       params: {
         lat,
@@ -81,11 +79,12 @@ class IssueForm extends React.Component {
     })
       .then((resp) => {
         this.setState({ address: resp.data });
+        this.setReps(location);
       })
       .catch((err) => { throw err; });
   }
 
-  setCoordinatesFromAddress(address, callback) {
+  setCoordinatesFromAddress(address) {
     axios.get('/location', {
       params: {
         address,
@@ -93,9 +92,14 @@ class IssueForm extends React.Component {
     })
       .then((resp) => {
         this.setState({ location: resp.data });
-        callback(resp.data);
+        this.setReps(resp.data);
       })
       .catch((err) => { throw err; });
+  }
+
+  // property that holds an arrow function to ensure that the this keyword inside this method always keeps the context of the component
+  fileSelectedHandler(event) {
+    console.log(event);
   }
 
   render() {
@@ -130,7 +134,7 @@ class IssueForm extends React.Component {
           </label>
           <label htmlFor="photos">
             Photos
-            <input type="file" onChange={this.handleChange} required id="photos" />
+            <input type="file" onChange={this.fileSelectedHandler} required id="photo" />
           </label>
           <label htmlFor="reps">
             Choose a Rep
@@ -153,5 +157,7 @@ IssueForm.propTypes = {
   user: PropTypes.objectOf(PropTypes.any).isRequired,
   location: PropTypes.objectOf(PropTypes.number).isRequired,
 };
+
+
 
 export default IssueForm;
