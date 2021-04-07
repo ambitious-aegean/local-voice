@@ -8,7 +8,7 @@ module.exports = {
   extends: [
     'plugin:react/recommended',
     'airbnb',
-    'jest-enzyme'
+    'jest-enzyme',
   ],
   globals: {
     Atomics: 'readonly',
