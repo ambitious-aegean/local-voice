@@ -33,13 +33,17 @@ class AddComment extends React.Component {
     })
       .then((resp) => console.log(resp.data))
       .catch((err) => console.log(err));
+    this.setState({
+      text: '',
+    });
   }
 
   render() {
+    const { text } = this.state;
     return (
       <div id="addComment">
         <form onSubmit={this.postComment}>
-          <input id="text" type="text" onChange={this.handleChange} />
+          <input id="text" type="text" value={text} onChange={this.handleChange} />
           <input type="submit" value="comment" />
         </form>
       </div>
