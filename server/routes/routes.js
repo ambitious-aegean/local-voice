@@ -6,7 +6,7 @@ const { allIssues } = require('../controllers/issuesControllers.js');
 
 const { getReps } = require('../controllers/repsController.js');
 const { getAddress, getLocation } = require('../controllers/locAddController.js');
-const issuesMetaRouter = require('./routes/issuesMetaRouter.js');
+const issuesMetaRouter = require('./issuesMetaRouter.js');
 
 const router = express.Router();
 
