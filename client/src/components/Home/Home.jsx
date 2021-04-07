@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import React from 'react';
 import axios from 'axios';
 
@@ -65,7 +66,6 @@ class Home extends React.Component {
   }
 
   getIssues(user_id, lat, lng) {
-    console.log('hi');
     // query database for the issues based on the user location
     axios.get('/allIssues', {
       params: {
@@ -79,8 +79,8 @@ class Home extends React.Component {
           issues: response.data.issues,
           watched: response.data.watched,
         }, () => {
-          console.log('this.state.issues: ', this.state.issues);
-          console.log('this.state.watched: ', this.state.watched);
+          // console.log('this.state.issues: ', this.state.issues);
+          // console.log('this.state.watched: ', this.state.watched);
         });
       })
       .catch((err) => { throw err; });
