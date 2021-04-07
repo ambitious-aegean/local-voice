@@ -1,0 +1,22 @@
+.leftSideBar {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.userBanner {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid black;
+}
+
+.userName {
+  flex: 1;
+  border: 1px solid black;
+}
+
+.profilePic {
+  flex: 1;
+  border: 1px solid black;
+}

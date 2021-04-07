@@ -240,6 +240,12 @@ FIELDS TERMINATED BY ','
 LINES TERMINATED BY '\r'
 IGNORE 1 ROWS;
 
+LOAD DATA LOCAL INFILE './sample_data/watched_issues.csv'
+INTO TABLE watched_issues
+FIELDS TERMINATED BY ','
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
+
 -- ---
 -- Table Properties
 -- ---

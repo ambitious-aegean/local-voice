@@ -1,0 +1,13 @@
+.title {
+  font-size: 50px;
+}
+
+.toggle {
+  font-size: 35px;
+}
+
+.headerContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

@@ -1,7 +1,3 @@
-const express = require('express');
-
-const discussionRoutes = express.Router;
-
 const db = require('../../db/index.js');
 
 const getComments = (req, res) => {

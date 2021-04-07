@@ -1,0 +1,20 @@
+.filterOptions {
+  display: flex;
+  flex-direction: column;
+  /* border: 1px solid black; */
+  padding: 10px;
+}
+
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.checkbox {
+  /* margin-left: 10px; */
+}
+
+.labels {
+  margin-left: 5px;
+}

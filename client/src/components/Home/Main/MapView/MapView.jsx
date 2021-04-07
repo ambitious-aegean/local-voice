@@ -11,8 +11,14 @@ import MapIssueModal from './MapIssueModal/MapIssueModal.jsx';
 // import API_TOKEN from './mapConfig.js';
 
 const mapStyles = {
-  width: '50%',
-  height: '400px',
+  width: '60%',
+  height: '93%',
+};
+
+const infoWindowStyles = {
+  width: 100,
+  height: 100,
+
 };
 
 class MapView extends React.Component {
@@ -22,7 +28,7 @@ class MapView extends React.Component {
     this.state = {
       location,
       showingInfoWindow: false,
-      showingIssueModal: false,
+      // showingIssueModal: false,
       activeMarker: null,
       selectedIssue: {},
     };
@@ -30,6 +36,7 @@ class MapView extends React.Component {
     this.onClose = this.onClose.bind(this);
     this.displayMarkers = this.displayMarkers.bind(this);
     this.displayInfoWindow = this.displayInfoWindow.bind(this);
+    this.onMapDragEnd = this.onMapDragEnd.bind(this);
     this.getUserLocation = this.getUserLocation.bind(this);
   }
 
@@ -55,6 +62,18 @@ class MapView extends React.Component {
     }, this.displayInfoWindow);
   }
 
+  onMapDragEnd(mapProps, map) {
+    const { getLoc } = this.props;
+    const lat = map.getCenter().lat();
+    const lng = map.getCenter().lng();
+    const location = { lat, lng };
+    console.log(location);
+    this.setState({
+      location,
+    });
+    getLoc(location);
+  }
+
   getUserLocation() {
     const { getLoc } = this.props;
     if (navigator.geolocation) {
@@ -78,7 +97,7 @@ class MapView extends React.Component {
         title={issue.title}
         text={issue.text}
         url={issue.photos[0]}
-        onMouseover={this.onMarkerClick}
+        onClick={this.onMarkerClick}
         position={{
           lat: issue.lat,
           lng: issue.lng,
@@ -91,8 +110,10 @@ class MapView extends React.Component {
     return (
       <InfoWindow
         marker={this.state.activeMarker}
+        onOpen={this.onOpen}
         onClose={this.onClose}
         visible={this.state.showingInfoWindow}
+        style={infoWindowStyles}
       >
         <div>
           Info Window
@@ -103,9 +124,7 @@ class MapView extends React.Component {
             {this.state.selectedIssue.text}
           </h4>
           <img src={this.state.selectedIssue.url} alt="" />
-          <div role="button" tabIndex={0}>
-            See more ...
-          </div>
+          {/* <MapIssueModal issue={this.state.selectedIssue} /> */}
         </div>
       </InfoWindow>
     );
@@ -128,11 +147,12 @@ class MapView extends React.Component {
       <div id="mapView">
         <Map
           google={this.props.google}
-          zoom={12}
+          zoom={14}
           style={mapStyles}
           initialCenter={{ lat, lng }} // based on user location
           displayedIssues={displayedIssues}
-          draggable={false}
+          // draggable={true}
+          onDragend={(mapProps, map) => this.onMapDragEnd(mapProps, map)}
         >
           {this.displayMarkers()}
           {this.displayInfoWindow()}
