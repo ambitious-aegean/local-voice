@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --coverage",
     "start": "nodemon server/server.js",
     "webpack": "webpack --watch",
     "lint": "./node_modules/.bin/eslint",
@@ -24,23 +24,24 @@
     "@auth0/auth0-react": "^1.4.0",
     "@babel/plugin-transform-modules-commonjs": "^7.13.8",
     "axios": "^0.21.1",
-    "babel-jest": "^26.6.3",
     "css-loader": "^5.2.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "google-maps-react": "^2.0.6",
-    "jest": "^26.6.3",
-    "jest-enzyme": "^7.1.2",
+    "jest-environment-enzyme": "^7.1.2",
     "mysql": "^2.18.1",
     "prop-types": "^15.7.2",
-    "react": "^16.0.2",
+    "react": "^16.14.0",
     "react-dom": "^16.14.0",
+    "react-test-renderer": "^16.14.0",
     "style-loader": "^2.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.13.14",
+    "@babel/plugin-transform-modules-commonjs": "^7.13.8",
     "@babel/preset-env": "^7.13.12",
     "@babel/preset-react": "^7.13.13",
+    "babel-jest": "^26.6.3",
     "babel-loader": "^8.2.2",
     "dotenv-webpack": "^7.0.2",
     "enzyme": "^3.11.0",
@@ -51,14 +52,24 @@
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.23.1",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "jest": "^26.6.3",
     "jest-css-modules": "^2.1.0",
+    "jest-enzyme": "^7.1.2",
+    "jsdom": "^16.5.2",
     "nodemon": "^2.0.7",
+    "regenerator-runtime": "^0.13.7",
+    "supertest": "^6.1.3",
     "webpack": "^5.30.0",
     "webpack-cli": "^4.6.0"
   },
   "jest": {
+    "setupFilesAfterEnv": [
+      "jest-enzyme"
+    ],
+    "testEnvironment": "enzyme",
     "moduleNameMapper": {
-      "\\.(css|less|scss|sss|styl)$": "<rootDir>/node_modules/jest-css-modules"
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|less|scss|sass)$": "identity-obj-proxy"
     }
   }
 }
