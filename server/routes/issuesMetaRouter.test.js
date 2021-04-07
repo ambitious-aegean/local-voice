@@ -17,15 +17,4 @@ test('PUT /allIssues/down_vote', () => {
     .put('/allIssues/down_vote')
     .expect(204)
   expServer.server.close();
-})
-
-// test('GET /products/styles', () => {
-//   supertest(expServer.app)
-//     .get('/styles')
-//     .expect(200)
-//     .then((res) => {
-//       expect(typeof res.data).toBe('object');
-//       expect(typeof res.data.results[0]).toBe('object');
-//     });
-//   expServer.server.close();
-// });
+});
