@@ -67,7 +67,6 @@ class MapView extends React.Component {
     const lat = map.getCenter().lat();
     const lng = map.getCenter().lng();
     const location = { lat, lng };
-    console.log(location);
     this.setState({
       location,
     });

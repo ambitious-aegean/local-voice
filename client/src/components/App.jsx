@@ -4,6 +4,7 @@ import styles from './styles.module.css';
 import Home from './Home/Home.jsx';
 import LogIn from './LogIn/LogIn.jsx';
 
+
 // sends user to either LogIn page or Home
 class App extends React.Component {
   constructor(props) {
@@ -14,12 +15,11 @@ class App extends React.Component {
   }
 
   render() {
-    const { loggedIn } = this.state;
+
     return (
-      <div id="app" className={styles.app}>
-        {!loggedIn
-          ? <Home />
-          : <LogIn />}
+      <div id="app">
+        <LogIn />
+
       </div>
     );
   }

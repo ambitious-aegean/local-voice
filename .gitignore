@@ -1,5 +1,8 @@
 node_modules
+coverage/
 db/index.js
 client/public/bundle.js
 client/src/components/Home/dummydata/
 .env
+/Users/samuelberston/Desktop/BO/local-voice/coverage
+

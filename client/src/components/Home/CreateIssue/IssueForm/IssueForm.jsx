@@ -1,3 +1,5 @@
+/* eslint-disable react/button-has-type */
+/* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/no-unused-prop-types */
@@ -16,11 +18,12 @@ class IssueForm extends React.Component {
     this.state = {
       address: '',
       location,
-      category: '',
+      categories: [],
       title: '',
       text: '',
       photos: [],
       reps: [],
+      selectedRep: {},
     };
 
     this.setAddressFromCoordinates = this.setAddressFromCoordinates.bind(this);
@@ -28,6 +31,8 @@ class IssueForm extends React.Component {
     this.setLocation = this.setLocation.bind(this);
     this.setReps = this.setReps.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.addCategory = this.addCategory.bind(this);
+    this.handleRepSelect = this.handleRepSelect.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.postIssue = this.postIssue.bind(this);
   }
@@ -39,11 +44,15 @@ class IssueForm extends React.Component {
 
   handleChange(event) {
     const {
-      address, categories, text, photos, reps,
+      address, title, text,
     } = this.state;
     const { id, value } = event.target;
     if (id === 'address') {
       this.setState({ address: value });
+    } else if (id === 'title') {
+      this.setState({ title: value });
+    } else if (id === 'text') {
+      this.setState({ text: value });
     }
   }
 
@@ -74,23 +83,10 @@ class IssueForm extends React.Component {
     })
   }
 
-  setLocation() {
-    const { address } = this.state;
-    this.setCoordinatesFromAddress(address);
-  }
-
-  setReps(location) {
-    const { lat, lng } = location;
-    axios.get('/reps', {
-      params: {
-        lat,
-        lng,
-      },
-    })
-      .then((resp) => {
-        this.setState({ reps: resp.data });
-      })
-      .catch((err) => console.log(err));
+  handleRepSelect(event) {
+    const { value } = event.target;
+    const { reps } = this.state;
+    this.setState({ selectedRep: reps[value] });
   }
 
   setAddressFromCoordinates(location) {
@@ -108,6 +104,25 @@ class IssueForm extends React.Component {
       .catch((err) => { throw err; });
   }
 
+  setReps(location) {
+    const { lat, lng } = location;
+    axios.get('/reps', {
+      params: {
+        lat,
+        lng,
+      },
+    })
+      .then((resp) => {
+        this.setState({ reps: resp.data });
+      })
+      .catch((err) => console.log(err));
+  }
+
+  setLocation() {
+    const { address } = this.state;
+    this.setCoordinatesFromAddress(address);
+  }
+
   setCoordinatesFromAddress(address) {
     axios.get('/location', {
       params: {
@@ -121,9 +136,15 @@ class IssueForm extends React.Component {
       .catch((err) => { throw err; });
   }
 
-  // property that holds an arrow function to ensure that the this keyword inside this method always keeps the context of the component
   fileSelectedHandler(event) {
-    console.log(event);
+    this.setState({ photos: event.target.files });
+  }
+
+  addCategory(event) {
+    const { categories } = this.state;
+    const { value } = event.target;
+    categories.push(value);
+    this.setState({ categories });
   }
 
   render() {
@@ -136,18 +157,23 @@ class IssueForm extends React.Component {
             <input style={{ width: '300px' }} type="text" value={address} onChange={this.handleChange} required id="address" />
           </label>
           <button style={{ width: '100px' }} type="button" id="setLocation" onClick={this.setLocation}>set location</button>
-          <label htmlFor="category">
+          <div>
             Categories
-            <select name="category" id="category">
-              <option value="nuisance">nuisance</option>
-              <option value="public agencies">public angencies</option>
-              <option value="infrastructure">infrastructure</option>
-              <option value="safety">safety</option>
-              <option value="waste">waste</option>
-              <option value="permits">permits</option>
-              <option value="stolen mail">stolen mail</option>
-            </select>
-          </label>
+            <input onChange={this.addCategory} type="checkbox" id="nuisance" value="nuisance" />
+            <label htmlFor="nuisance"> nuisance</label>
+            <input onChange={this.addCategory} type="checkbox" id="public-agencies" value="public agencies" />
+            <label htmlFor="public-agencies">public agencies</label>
+            <input onChange={this.addCategory} type="checkbox" id="infrastructure" value="infrastructure" />
+            <label htmlFor="infrastructure">infrastructure</label>
+            <input onChange={this.addCategory} type="checkbox" id="safety" value="safety" />
+            <label htmlFor="safety"> safety</label>
+            <input onChange={this.addCategory} type="checkbox" id="waste" value="waste" />
+            <label htmlFor="waste">waste</label>
+            <input onChange={this.addCategory} type="checkbox" id="permits" value="permits" />
+            <label htmlFor="permits">permits</label>
+            <input onChange={this.addCategory} type="checkbox" id="stolen-mail" value="stolen mail" />
+            <label htmlFor="stolen-mail"> stolen mail</label>
+          </div>
           <label htmlFor="title">
             title
             <input type="text" onChange={this.handleChange} required id="title" />
@@ -158,13 +184,14 @@ class IssueForm extends React.Component {
           </label>
           <label htmlFor="photos">
             Photos
-            <input type="file" onChange={this.fileSelectedHandler} required id="photo" />
+            <input type="file" onChange={this.fileSelectedHandler} required id="photos" multiple />
+            <button onClick={this.fileUploadHandler}>upload photos</button>
           </label>
           <label htmlFor="reps">
             Choose a Rep
-            <select name="rep" id="rep">
-              {reps.map((rep) => (
-                <option key={rep.name}>
+            <select onChange={this.handleRepSelect} name="rep" id="rep">
+              {reps.map((rep, index) => (
+                <option value={index} key={rep.name}>
                   {rep.name} ({rep.title})
                 </option>
               ))}
@@ -181,7 +208,5 @@ IssueForm.propTypes = {
   user: PropTypes.objectOf(PropTypes.any).isRequired,
   location: PropTypes.objectOf(PropTypes.number).isRequired,
 };
-
-
 
 export default IssueForm;
