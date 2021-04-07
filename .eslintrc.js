@@ -24,4 +24,7 @@ module.exports = {
   rules: {
     'import/extensions': [1, { jsx: 'always', js: 'always' }],
   },
+  extends: [
+    'jest-enzyme'
+  ]
 };
