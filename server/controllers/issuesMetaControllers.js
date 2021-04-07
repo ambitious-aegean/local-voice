@@ -112,6 +112,30 @@ const unwatch = (req, res) => {
   });
 }
 
+const resolve = (req, res) => {
+  const { issue_id } = req.query;
+  const query = `UPDATE issues
+  SET resolved = 1
+  WHERE issue_id = ${issue_id}`
+
+  db.query(query, (err, response) => {
+    if (err) { throw err; }
+    res.status(204).send(response);
+  })
+}
+
+const unresolve = (req, res) => {
+  const { issue_id } = req.query;
+  const query = `UPDATE issues
+  SET resolved = 0
+  WHERE issue_id = ${issue_id}`
+
+  db.query(query, (err, response) => {
+    if (err) { throw err; }
+    res.status(204).send(response);
+  })
+}
+
 module.exports = {
   up_vote,
   flag,
@@ -119,4 +143,6 @@ module.exports = {
   unflag,
   watch,
   unwatch,
+  resolve,
+  unresolve
 }

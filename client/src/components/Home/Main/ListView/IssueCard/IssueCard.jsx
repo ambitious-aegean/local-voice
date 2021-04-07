@@ -19,15 +19,28 @@ class IssueCard extends React.Component {
       voted: false,
       flagged: false,
       watched: false,
+      markedResolved: false,
     };
     this.watch = this.watch.bind(this);
     this.up_vote = this.up_vote.bind(this);
     this.flag = this.flag.bind(this);
+    this.resolve = this.resolve.bind(this);
     this.unwatch = this.unwatch.bind(this);
     this.down_vote = this.down_vote.bind(this);
     this.unflag = this.unflag.bind(this);
+    this.unresolve = this.unresolve.bind(this);
     this.getDiscussionData = this.getDiscussionData.bind(this);
     this.closeDiscussion = this.closeDiscussion.bind(this);
+  }
+
+  componentDidMount() {
+    const { issue } = this.props;
+    const { resolved } = issue;
+    if (resolved !== 0) {
+      this.setState({
+        markedResolved: true,
+      })
+    }
   }
 
   handleViewDiscussionClick() {
@@ -116,9 +129,29 @@ class IssueCard extends React.Component {
       .catch((err) => { throw err; });
   }
 
+  resolve() {
+    this.setState({
+      markedResolved: true,
+    })
+    const { issue } = this.props;
+    const { issue_id, user_id } = issue;
+    axios.put(`/allIssues/resolve/?issue_id=${issue_id}`)
+      .catch((err) => { throw err; });
+  }
+
+  unresolve() {
+    this.setState({
+      markedResolved: false,
+    })
+    const { issue } = this.props;
+    const { issue_id, user_id } = issue;
+    axios.put(`/allIssues/unresolve/?issue_id=${issue_id}`)
+      .catch((err) => { throw err; });
+  }
+
   render() {
     const {
-      voted, flagged, watched, viewDiscussion, discussionData
+      voted, flagged, watched, viewDiscussion, discussionData, markedResolved
     } = this.state;
     const { issue, user } = this.props;
     const {
@@ -187,6 +220,22 @@ class IssueCard extends React.Component {
               </button>
             </div>
           )}
+          {user_id === user.user_id
+            ? (!markedResolved
+            ? (
+              <div>
+                <button type="button" onClick={this.resolve}>
+                  <span> mark as resolved </span>
+                </button>
+              </div>
+            ) : (
+              <div>
+                <button type="button" onClick={this.unresolve}>
+                  <span> un-resolve </span>
+                </button>
+              </div>
+            ))
+            : <></>}
         <button id="viewDiscussion" type="button" onClick={() => this.handleViewDiscussionClick()} onKeyPress={() => {}} tabIndex={0}>
           View Discussion
           {viewDiscussion
