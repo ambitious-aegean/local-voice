@@ -1,11 +1,6 @@
-/* eslint-disable camelcase */
-const express = require('express');
-
 const db = require('../../db/index.js');
 
-const issuesMetaRouter = express.Router();
-
-issuesMetaRouter.put('/up_vote', (req, res) => {
+const up_vote = (req, res) => {
   const { issue_id, user_id } = req.query;
   const query1 = `SELECT *
   FROM user_up_vote
@@ -30,9 +25,9 @@ issuesMetaRouter.put('/up_vote', (req, res) => {
       });
     }
   });
-});
+}
 
-issuesMetaRouter.put('/flag', (req, res) => {
+const flag = (req, res) => {
   const { issue_id, user_id } = req.query;
   const query1 = `SELECT *
   FROM watched_issues
@@ -54,9 +49,9 @@ issuesMetaRouter.put('/flag', (req, res) => {
       });
     }
   });
-});
+}
 
-issuesMetaRouter.put('/down_vote', (req, res) => {
+const down_vote = (req, res) => {
   const { issue_id, user_id } = req.query;
   db.query(`UPDATE issues
         SET up_vote = up_vote - 1
@@ -70,9 +65,9 @@ issuesMetaRouter.put('/down_vote', (req, res) => {
       res.status(204).send(data);
     });
   });
-});
+}
 
-issuesMetaRouter.put('/unflag', (req, res) => {
+const unflag = (req, res) => {
   const { issue_id, user_id } = req.query;
   db.query(`UPDATE issues
         SET flag_count = flag_count - 1
@@ -86,9 +81,9 @@ issuesMetaRouter.put('/unflag', (req, res) => {
       res.status(204).send(data);
     });
   });
-});
+}
 
-issuesMetaRouter.put('/watch', (req, res) => {
+const watch = (req, res) => {
   const { issue_id, user_id } = req.query;
   const query1 = `SELECT *
   FROM watched_issues
@@ -107,14 +102,21 @@ issuesMetaRouter.put('/watch', (req, res) => {
       });
     }
   });
-});
+}
 
-issuesMetaRouter.delete('/unwatch', (req, res) => {
+const unwatch = (req, res) => {
   const { issue_id, user_id } = req.query;
   db.query(`DELETE FROM watched_issues WHERE user_id=${user_id} AND issue_id=${issue_id}`, (err, response) => {
     if (err) { throw err; }
     res.status(204).send(response);
   });
-});
+}
 
-module.exports = issuesMetaRouter;
+module.exports = {
+  up_vote,
+  flag,
+  down_vote,
+  unflag,
+  watch,
+  unwatch,
+}
