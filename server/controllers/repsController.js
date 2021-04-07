@@ -11,19 +11,23 @@ const getReps = (req, res) => {
     params: {
       key,
       address,
-      levels: 'locality',
     },
   }).then((resp) => {
+    const levels = ['locality', 'administrativeArea2'];
     const { offices, officials } = resp.data;
     const response = [];
     for (const office of offices) {
-      const official = officials[office.officialIndices];
-      response.push({
-        name: official.name,
-        title: office.name,
-        email: official.emails[0],
-        photoUrl: official.photoUrl || 'noPhoto',
-      });
+      for (const index of office.officialIndices) {
+        if (levels.includes(office.levels[0])) {
+          const official = officials[index];
+          response.push({
+            name: official.name,
+            title: office.name,
+            email: official.emails || official.phones,
+            photoUrl: official.photoUrl || 'noPhoto',
+          });
+        }
+      }
     }
     res.send(response);
   })
