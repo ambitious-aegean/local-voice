@@ -6,6 +6,7 @@ const { allIssues } = require('../controllers/issuesControllers.js');
 
 const { getReps } = require('../controllers/repsController.js');
 const { getAddress, getLocation } = require('../controllers/locAddController.js');
+const issuesMetaRouter = require('./routes/issuesMetaRouter.js');
 
 const router = express.Router();
 
@@ -18,5 +19,7 @@ router.get('/reps', getReps);
 router.get('/address', getAddress);
 router.get('/location', getLocation);
 router.get('/allIssues', allIssues);
+
+router.use('/allIssues', issuesMetaRouter);
 
 module.exports = router;
