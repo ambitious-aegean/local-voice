@@ -6,7 +6,7 @@ import Adapter from 'enzyme-adapter-react-16';
 configure({ adapter: new Adapter() });
 
 import App from './App.jsx';
-import LogIn from './LogIn/LogIn.jsx';
+import Home from './Home/Home.jsx';
 
 describe('test App component', () => {
   const wrapper = shallow(<App />);
@@ -20,13 +20,14 @@ describe('test App component', () => {
     expect(app.exists()).toBe(true);
   });
 
+  it('should display the Home page', () => {
+    const home = wrapper.find(Home)
+    expect(home.exists()).toBe(true);
+  });
+
   it('should have a default state of loggedIn set to false', () => {
     const instance = wrapper.instance();
     expect(instance.state.loggedIn).toBe(false);
   });
 
-  // it('should display the LogIn page', () => {
-  //   const logIn = wrapper.find(LogIn)
-  //   expect(LogIn.exists()).toBe(true);
-  // });
 });
