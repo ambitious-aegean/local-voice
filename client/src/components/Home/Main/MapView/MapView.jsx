@@ -11,13 +11,14 @@ import MapIssueModal from './MapIssueModal/MapIssueModal.jsx';
 // import API_TOKEN from './mapConfig.js';
 
 const mapStyles = {
-  width: '75%',
-  height: '700px',
+  width: '60%',
+  height: '93%',
 };
 
 const infoWindowStyles = {
   width: 100,
   height: 100,
+
 };
 
 class MapView extends React.Component {

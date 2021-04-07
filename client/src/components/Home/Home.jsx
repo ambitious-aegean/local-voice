@@ -6,6 +6,7 @@ import LeftSideBar from './LeftSideBar/LeftSideBar.jsx';
 import RightSideBar from './RightSideBar/RightSideBar.jsx';
 import CreateIssue from './CreateIssue/CreateIssue.jsx';
 import Main from './Main/Main.jsx';
+import styles from './home.module.css';
 
 class Home extends React.Component {
   constructor(props) {
@@ -19,21 +20,32 @@ class Home extends React.Component {
         lat: 37.7749,
         lng: -122.4194,
       },
-      issues: [],
-      categories: ['theft', 'crime', 'for sale'],
-      displayedIssues: [
+      issues: [
         {
-          name: 'important issue',
-          description: 'my car was stolen with all of my things in it',
-          photos: [
-            'https://magazine.northeast.aaa.com/wp-content/uploads/2017/10/how-to-report-a-stolen-car-1-640x423.jpg',
-          ],
           loc: {
-            lat: 37.7749,
-            lng: -122.4194,
+            lat: 100,
+            lng: 100,
           },
         },
       ],
+      currentCategories: {
+        theft: false,
+        crime: false,
+        'for sale': false,
+        infrastructure: false,
+        nuisance: false,
+        'public agencies': false,
+        safety: false,
+        waste: false,
+        permits: false,
+        'stolen mail': false,
+      },
+      initialLoad: true,
+      filteredIssues: [],
+      myIssuesFilter: false,
+      watchedIssuesFilter: false,
+      categories: ['theft', 'crime', 'for sale', 'infrastructure', 'nuisance', 'public agencies', 'safety', 'waste',
+        'permits', 'stolen mail'],
       watched: [],
       view: 0, // 0 = map view
     };
@@ -42,6 +54,8 @@ class Home extends React.Component {
     this.getIssues = this.getIssues.bind(this);
     this.toggle = this.toggle.bind(this);
     this.filterIssues = this.filterIssues.bind(this);
+    this.filterMyIssues = this.filterMyIssues.bind(this);
+    this.filterWatchedIssues = this.filterWatchedIssues.bind(this);
   }
 
   componentDidMount() {
@@ -64,6 +78,9 @@ class Home extends React.Component {
         this.setState({
           issues: response.data.issues,
           watched: response.data.watched,
+        }, () => {
+          console.log('this.state.issues: ', this.state.issues);
+          console.log('this.state.watched: ', this.state.watched);
         });
       })
       .catch((err) => { throw err; });
@@ -77,6 +94,49 @@ class Home extends React.Component {
     this.getIssues(user.user_id, location.lat, location.lng);
   }
 
+  // function to filter issues for user's issues
+  filterMyIssues() {
+    this.setState({
+      initialLoad: false,
+      myIssuesFilter: !this.state.myIssuesFilter,
+    }, () => {
+      if (this.state.myIssuesFilter) {
+        this.setState({
+          filteredIssues: this.state.issues.filter((issue) => issue.username === this.state.user.username),
+        });
+      } else {
+        this.setState({
+          filteredIssues: this.state.issues,
+        });
+      }
+    });
+  }
+
+  // function to filter issues for user's watched issues
+  filterWatchedIssues() {
+    this.setState({
+      initialLoad: false,
+      watchedIssuesFilter: !this.state.watchedIssuesFilter,
+    }, () => {
+      if (this.state.watchedIssuesFilter) {
+        const issuesArray = this.state.issues;
+        const filteredIssues = [];
+        for (let i = 0; i < issuesArray.length; i++) {
+          if (this.state.watched.includes(issuesArray[i].issue_id)) {
+            filteredIssues.push(issuesArray[i]);
+          }
+        }
+        this.setState({
+          filteredIssues,
+        });
+      } else {
+        this.setState({
+          filteredIssues: this.state.issues,
+        });
+      }
+    });
+  }
+
   toggle() {
     const { view } = this.state;
     this.setState({
@@ -84,34 +144,75 @@ class Home extends React.Component {
     });
   }
 
-  filterIssues() {
-    // filtering algorithm
+  filterIssues(e) {
+    // change intialLoad to false
     this.setState({
-      displayedIssues: 'result of filtering algorithm',
+      initialLoad: false,
     });
+
+    // return true if at least one of the issue's categories matched one of the currently checked categories
+    const atLeastOneCategory = (categories) => {
+      // one or more matching return true
+      for (let i = 0; i < categories.length; i++) {
+        if (this.state.currentCategories[categories[i]]) {
+          return true;
+        }
+      }
+      // zero matching return false
+      return false;
+    };
+
+    // change state on which box is checked
+    const newCategories = this.state.currentCategories;
+    newCategories[e.target.name] = !this.state.currentCategories[e.target.name];
+
+    this.setState(
+      {
+        currentCategories: newCategories,
+      }, () => {
+        let noFilter = true;
+        for (const category in newCategories) {
+          if (newCategories[category] === true) {
+            noFilter = false;
+            break;
+          }
+        }
+
+        // filter out issues that doesnt match any of the current selected check boxes
+        const modifiedIssues = this.state.issues.filter((issue) => atLeastOneCategory(issue.categories));
+
+        this.setState({
+          filteredIssues: noFilter === true ? this.state.issues : modifiedIssues,
+        });
+      },
+    );
   }
 
   render() {
     const {
-      user, location, categories, issues, displayedIssues, view,
+      issues, user, location, categories, initialLoad, filteredIssues, view,
     } = this.state;
     return (
-      <div id="homeContainer">
-        <div id="home">
-          <Header toggle={this.toggle} />
+      <div id="homeContainer" className={styles.homeContainer}>
+        <Header toggle={this.toggle} />
+        <div id="flexContainer" className={styles.flexContainer}>
           <LeftSideBar
             user={user}
             categories={categories}
             filterIssues={this.filterIssues}
+            filterMyIssues={this.filterMyIssues}
+            filterWatchedIssues={this.filterWatchedIssues}
           />
-          <CreateIssue user={user} location={location} />
-          <Main
-            view={view}
-            displayedIssues={issues}
-            user={user}
-            location={location}
-            getLoc={this.getLoc}
-          />
+          <div id="mainContainer" className={styles.mainContainer}>
+            <CreateIssue user={user} location={location} />
+            <Main
+              view={view}
+              displayedIssues={initialLoad ? issues : filteredIssues}
+              user={user}
+              location={location}
+              getLoc={this.getLoc}
+            />
+          </div>
           <RightSideBar />
         </div>
       </div>
