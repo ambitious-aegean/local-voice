@@ -1,11 +1,15 @@
 import React from 'react';
-import { mount } from 'enzyme';
+
+import { configure, mount, shallow } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+
+configure({ adapter: new Adapter() });
 
 import App from './App.jsx';
 import LogIn from './LogIn/LogIn.jsx';
 
 describe('test App component', () => {
-  const wrapper = mount(<App />);
+  const wrapper = shallow(<App />);
   wrapper.setState({
     loggedIn: false,
   });
@@ -14,18 +18,15 @@ describe('test App component', () => {
   it('should exist', () => {
     const app = wrapper.find('#app');
     expect(app.exists()).toBe(true);
-    const LogIn = wrapper.find(LogIn);
-    expect(LogIn.exists()).toBe(true);
   });
 
-  it('should have a default state of productId being 14931', () => {
+  it('should have a default state of loggedIn set to false', () => {
     const instance = wrapper.instance();
-    expect(instance.state.productId).toBe(14931);
+    expect(instance.state.loggedIn).toBe(false);
   });
 
-  it('should get the productName', () => {
-    const wrapper = mount(<App />);
-    const instance = wrapper.instance();
-    expect(instance.state.productName).toBe('Manuela Pants');
-  });
+  // it('should display the LogIn page', () => {
+  //   const logIn = wrapper.find(LogIn)
+  //   expect(LogIn.exists()).toBe(true);
+  // });
 });

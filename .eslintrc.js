@@ -2,10 +2,13 @@ module.exports = {
   env: {
     browser: true,
     es6: true,
+    node: true,
+    jest: true,
   },
   extends: [
     'plugin:react/recommended',
     'airbnb',
+    'jest-enzyme'
   ],
   globals: {
     Atomics: 'readonly',
@@ -15,7 +18,7 @@ module.exports = {
     ecmaFeatures: {
       jsx: true,
     },
-    ecmaVersion: 2018,
+    ecmaVersion: 12,
     sourceType: 'module',
   },
   plugins: [
@@ -24,7 +27,4 @@ module.exports = {
   rules: {
     'import/extensions': [1, { jsx: 'always', js: 'always' }],
   },
-  extends: [
-    'jest-enzyme'
-  ]
 };
