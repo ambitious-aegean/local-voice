@@ -11,13 +11,14 @@ import MapIssueModal from './MapIssueModal/MapIssueModal.jsx';
 // import API_TOKEN from './mapConfig.js';
 
 const mapStyles = {
-  width: '75%',
-  height: '700px',
+  width: '60%',
+  height: '93%',
 };
 
 const infoWindowStyles = {
   width: 100,
   height: 100,
+
 };
 
 class MapView extends React.Component {
@@ -35,6 +36,7 @@ class MapView extends React.Component {
     this.onClose = this.onClose.bind(this);
     this.displayMarkers = this.displayMarkers.bind(this);
     this.displayInfoWindow = this.displayInfoWindow.bind(this);
+    this.onMapDragEnd = this.onMapDragEnd.bind(this);
     this.getUserLocation = this.getUserLocation.bind(this);
   }
 
@@ -58,6 +60,18 @@ class MapView extends React.Component {
       activeMarker: marker,
       showingInfoWindow: true,
     }, this.displayInfoWindow);
+  }
+
+  onMapDragEnd(mapProps, map) {
+    const { getLoc } = this.props;
+    const lat = map.getCenter().lat();
+    const lng = map.getCenter().lng();
+    const location = { lat, lng };
+    console.log(location);
+    this.setState({
+      location,
+    });
+    getLoc(location);
   }
 
   getUserLocation() {
@@ -133,11 +147,12 @@ class MapView extends React.Component {
       <div id="mapView">
         <Map
           google={this.props.google}
-          zoom={12}
+          zoom={14}
           style={mapStyles}
           initialCenter={{ lat, lng }} // based on user location
           displayedIssues={displayedIssues}
-          draggable={true}
+          // draggable={true}
+          onDragend={(mapProps, map) => this.onMapDragEnd(mapProps, map)}
         >
           {this.displayMarkers()}
           {this.displayInfoWindow()}

@@ -1,5 +1,5 @@
 import React from 'react';
-// import styles from './styles.module.css';
+import styles from './styles.module.css';
 
 import Home from './Home/Home.jsx';
 import LogIn from './LogIn/LogIn.jsx';
@@ -16,7 +16,7 @@ class App extends React.Component {
   render() {
     const { loggedIn } = this.state;
     return (
-      <div id="app">
+      <div id="app" className={styles.app}>
         {!loggedIn
           ? <Home />
           : <LogIn />}

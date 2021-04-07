@@ -1,0 +1,13 @@
+.homeContainer {
+  height: 100%;
+}
+
+.flexContainer {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+
+.mainContainer {
+  flex: 6;
+}
