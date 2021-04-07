@@ -10,6 +10,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import * as Buffer from 'Buffer';
 
 class IssueForm extends React.Component {
   constructor(props) {
@@ -33,6 +34,8 @@ class IssueForm extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.addCategory = this.addCategory.bind(this);
     this.handleRepSelect = this.handleRepSelect.bind(this);
+    this.fileSelectedHandler = this.fileSelectedHandler.bind(this);
+    this.fileUploadHandler = this.fileUploadHandler.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -116,6 +119,16 @@ class IssueForm extends React.Component {
     this.setState({ photos: event.target.files });
   }
 
+  fileUploadHandler(event) {
+    const { photos } = this.state;
+    const photo = photos[0];
+    const formData = new FormData();
+    formData.append('photo', photo);
+    axios.post('/photo', formData)
+      .then((resp) => console.log(resp.data))
+      .catch((err) => console.log(err));
+  }
+
   addCategory(event) {
     const { categories } = this.state;
     const { value } = event.target;
@@ -125,7 +138,6 @@ class IssueForm extends React.Component {
 
   render() {
     const { address, reps } = this.state;
-    console.log(reps);
     return (
       <div id="issueForm">
         <form style={{ display: 'flex', flexDirection: 'column' }} onSubmit={this.handleSubmit}>
