@@ -2,27 +2,50 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import FilterOptions from './FilterOptions/FilterOptions.jsx';
 import styles from './styles/leftBar.module.css';
+import {useState} from 'react';
 
 const LeftSideBar = ({ user, categories, filterIssues, filterMyIssues, filterWatchedIssues }) => {
+  const [myIssuesFilter, toggleMyIssues] = useState(false);
+  const [watchedIssuesFilter, toggleWatchedIssues] = useState(false);
+
   const handleMyIssuesClick = () => {
     filterMyIssues();
+    toggleMyIssues(!myIssuesFilter);
   };
 
   const handleWatchedIssuesClick = () => {
     filterWatchedIssues();
+    toggleWatchedIssues(!watchedIssuesFilter);
   };
 
   return (
     <div className={styles.leftSideBar}>
-      Left Side Bar
-      <div className={styles.userBanner}>
-        <div className={styles.profilePic}>profile pic</div>
-        <div className={styles.userName}>
-          {user.username}
+      <div className={styles.welcomeBanner}>
+        <div className={styles.welcomeBannerVerticalLayout}>
+          <div className={styles.welcomeTagPadding}>
+            <p className={styles.welcomeTag}>Welcome {user.username}!</p>
           </div>
+        </div>
       </div>
-      <div onClick={handleMyIssuesClick}>My Issues</div>
-      <div onClick={handleWatchedIssuesClick}>Watched Issues</div>
+      <div className={styles.personalFiltersContainer}>
+        <div className={styles.personalFiltersVerticalLayout}>
+          <div className={styles.personalFiltersPadding}>
+            <p className={styles.personalFiltersLabel}>Personal Filters</p>
+          </div>
+          <div className={styles.filterToggleSet}>
+            <div className={styles.myIssuesFilterContainer}>
+              <button className={myIssuesFilter ? styles.myIssuesFilterOn : styles.myIssuesFilterOff} onClick={handleMyIssuesClick}>
+                <span className={styles.myIssuesLabel}>My Issues</span>
+              </button>
+            </div>
+            <div className={styles.watchedIssuesFilterContainer}>
+              <button className={watchedIssuesFilter ? styles.watchedIssuesFilterOn : styles.watchedIssuesFilterOff} onClick={handleWatchedIssuesClick}>
+                <span className={styles.watchedIssuesLabel}>Watched Issues</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
       <FilterOptions categories={categories} filterIssues={filterIssues} />
     </div>
   );

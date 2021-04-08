@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import css from './ListView.module.css';
+
 import IssueCard from './IssueCard/IssueCard.jsx';
 
 const ListView = ({ user, displayedIssues }) => (
-  <div id="listView">
-    List View
-    <div id="issues">
-      Issues
+  <div id="listView" className={css.listView}>
+    <div id="issues" className={css.issues}>
       {displayedIssues.map((issue) => (
         <IssueCard key={issue.issue_id} issue={issue} user={user} />
       ))}

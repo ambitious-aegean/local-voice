@@ -2,12 +2,12 @@ const db = require('../../db/index.js');
 
 const postIssue = (req, res) => {
     const {
-        categories,
+        categories, // array
         title,
         text,
         lat,
         lng,
-        photos,
+        photos, // array
         rep_name,
         // rep_title,
         rep_email,

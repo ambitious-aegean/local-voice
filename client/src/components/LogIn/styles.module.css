@@ -1,0 +1,44 @@
+
+.maindiv{
+  display: flex;
+  background-image: url('https://community-local-voice.s3-us-west-1.amazonaws.com/blue+buildings+outline1.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  /* margin: 0 200px; */
+}
+
+.heading {
+  font-size: 55px;
+  font-family: 'Courgette', cursive;
+  letter-spacing: .3em;
+  color: #1f7a8c;
+  padding-top: 175px;
+  margin-left: 45px;
+}
+
+.subheading {
+  margin-left: 55px;
+  font-size: 24px;
+  font-family: 'Montserrat', sans-serif;
+  /* letter-spacing: .5em; */
+
+}
+
+.button {
+
+  background-color: #f2dfd7;
+  border: 1px solid #1f7a8c;
+  font-size: 23px;
+  margin-left: 300px;
+  padding: 15px;
+  height: 55px;
+  width: 175px;
+  margin-top: 250px;
+  border-radius: 7px;
+  color:  #1f7a8c
+}
+.button:hover {
+  background:  #1f7a8c;
+  background-image: linear-gradient(to right,#f2dfd7, #BFDBF7);
+}
+

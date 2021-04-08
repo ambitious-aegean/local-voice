@@ -1,20 +1,38 @@
 .filterOptions {
+  margin-top: 50px;
   display: flex;
   flex-direction: column;
   /* border: 1px solid black; */
   padding: 10px;
 }
 
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.filterHeader {
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+.checkbox{
+  height: 25px;
+  width: 25px;
+}
+
+.check:hover{
+  background-color: 'blue';
+}
 
 .formContainer {
   display: flex;
   flex-direction: column;
 }
 
-.checkbox {
-  /* margin-left: 10px; */
-}
 
 .labels {
-  margin-left: 5px;
+  margin-left: 8px;
+  vertical-align: center;
 }

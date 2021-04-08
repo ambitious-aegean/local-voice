@@ -10,18 +10,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import * as Buffer from 'buffer';
+import styles from '../styles/issueForm.module.css';
 
 class IssueForm extends React.Component {
   constructor(props) {
     super(props);
-    const { location } = this.props;
+    const { location, user } = this.props;
     this.state = {
       address: '',
       location,
+      user,
       categories: [],
       title: '',
       text: '',
-      photos: [],
+      imgSrc: '',
+      photoFiles: [],
+      photoURLs: [],
       reps: [],
       selectedRep: {},
     };
@@ -33,25 +38,33 @@ class IssueForm extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.addCategory = this.addCategory.bind(this);
     this.handleRepSelect = this.handleRepSelect.bind(this);
+    this.fileSelectedHandler = this.fileSelectedHandler.bind(this);
+    this.fileUploadHandler = this.fileUploadHandler.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.postIssue = this.postIssue.bind(this);
+    this.escFunction = this.escFunction.bind(this);
   }
 
   componentDidMount() {
     const { location } = this.props;
     this.setAddressFromCoordinates(location);
+    document.addEventListener('keydown', this.escFunction, false);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.escFunction, false);
   }
 
   handleChange(event) {
     const {
       address, title, text,
     } = this.state;
-    const { id, value } = event.target;
-    if (id === 'address') {
+    const { name, value } = event.target;
+    if (name === 'address') {
       this.setState({ address: value });
-    } else if (id === 'title') {
+    } else if (name === 'title') {
       this.setState({ title: value });
-    } else if (id === 'text') {
+    } else if (name === 'text') {
       this.setState({ text: value });
     }
   }
@@ -59,28 +72,6 @@ class IssueForm extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     this.postIssue();
-  }
-
-  postIssue() {
-    const { location, categories, title, text, photos, selectedRep } = this.state;
-    axios.post('/issues', {
-      lat: location.lat,
-      lng: location.lng,
-      categories: categories,
-      title: title,
-      text: text,
-      photos: photos,
-      rep_name: selectedRep.name,
-      rep_email: selectedRep.email,
-      rep_photo_url: selectedRep.photoUrl, 
-      date: new Date(),
-    })
-    .then((response) => {
-      console.log(response.data);
-    })
-    .catch((error) => {
-      console.log(error);
-    })
   }
 
   handleRepSelect(event) {
@@ -136,8 +127,54 @@ class IssueForm extends React.Component {
       .catch((err) => { throw err; });
   }
 
+  postIssue() {
+    const {
+      location, categories, title, text, photos, selectedRep,
+    } = this.state;
+
+    axios.post('/issues', {
+      lat: location.lat,
+      lng: location.lng,
+      categories,
+      title,
+      text,
+      photos,
+      rep_name: selectedRep.name,
+      rep_email: selectedRep.email,
+      rep_photo_url: selectedRep.photoUrl,
+      date: new Date(),
+    })
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  escFunction(event) {
+    const { closeForm } = this.props;
+    if (event.keyCode === 27) {
+      closeForm();
+    }
+  }
+
   fileSelectedHandler(event) {
-    this.setState({ photos: event.target.files });
+    this.setState({ photoFiles: event.target.files });
+  }
+
+  fileUploadHandler(event) {
+    const { photoFiles, user } = this.state;
+    const photo = photoFiles[0];
+    const formData = new FormData();
+    formData.append('photo', photo);
+    axios.post('/photo', formData)
+      .then((resp) => {
+        const { photoURLs } = this.state;
+        photoURLs.push(resp.data.toString());
+        this.setState({ photoURLs });
+      })
+      .catch((err) => console.log(err));
   }
 
   addCategory(event) {
@@ -148,57 +185,56 @@ class IssueForm extends React.Component {
   }
 
   render() {
-    const { address, reps } = this.state;
+    const { address, reps, photoURLs } = this.state;
+    const { closeForm } = this.props;
+    const categories = ['infrastructure', 'nuisance', 'theft', 'safety', 'waste', 'permits', 'crime'];
     return (
-      <div id="issueForm">
-        <form style={{ display: 'flex', flexDirection: 'column' }} onSubmit={this.handleSubmit}>
-          <label htmlFor="address">
-            Address
-            <input style={{ width: '300px' }} type="text" value={address} onChange={this.handleChange} required id="address" />
-          </label>
-          <button style={{ width: '100px' }} type="button" id="setLocation" onClick={this.setLocation}>set location</button>
-          <div>
-            Categories
-            <input onChange={this.addCategory} type="checkbox" id="nuisance" value="2" />
-            <label htmlFor="nuisance"> nuisance</label>
-            <input onChange={this.addCategory} type="checkbox" id="public-agencies" value="3" />
-            <label htmlFor="public-agencies">public agencies</label>
-            <input onChange={this.addCategory} type="checkbox" id="infrastructure" value="1" />
-            <label htmlFor="infrastructure">infrastructure</label>
-            <input onChange={this.addCategory} type="checkbox" id="safety" value="4" />
-            <label htmlFor="safety"> safety</label>
-            <input onChange={this.addCategory} type="checkbox" id="waste" value="5" />
-            <label htmlFor="waste">waste</label>
-            <input onChange={this.addCategory} type="checkbox" id="permits" value="6" />
-            <label htmlFor="permits">permits</label>
-            <input onChange={this.addCategory} type="checkbox" id="stolen-mail" value="7" />
-            <label htmlFor="stolen-mail"> stolen mail</label>
+      <div id={styles.formBackground}>
+        <div id={styles.issueForm}>
+          <div className={styles.icon} onClick={closeForm}>
+            <img src="icons/close.png" alt="close" />
           </div>
-          <label htmlFor="title">
-            title
-            <input type="text" onChange={this.handleChange} required id="title" />
-          </label>
-          <label htmlFor="text">
-            text
-            <input type="text" onChange={this.handleChange} required id="text" />
-          </label>
-          <label htmlFor="photos">
-            Photos
-            <input type="file" onChange={this.fileSelectedHandler} required id="photos" multiple />
-            <button onClick={this.fileUploadHandler}>upload photos</button>
-          </label>
-          <label htmlFor="reps">
-            Choose a Rep
-            <select onChange={this.handleRepSelect} name="rep" id="rep">
-              {reps.map((rep, index) => (
-                <option value={index} key={rep.name}>
-                  {rep.name} ({rep.title})
-                </option>
+          <form style={{ display: 'flex', flexDirection: 'column' }} onSubmit={this.handleSubmit}>
+            <label htmlFor="address">
+              Address
+              <input style={{ width: '300px' }} type="text" value={address} onChange={this.handleChange} required name="address" />
+            </label>
+            <button style={{ width: '100px' }} type="button" name="setLocation" onClick={this.setLocation}>set location</button>
+            <div>
+              Categories
+              {categories.map((category, index) => (
+                <div>
+                  <input onChange={this.addCategory} type="checkbox" value={index + 1} />
+                  <label htmlFor={category}>{category}</label>
+                </div>
               ))}
-            </select>
-          </label>
-          <input style={{ width: '100px' }} type="submit" value="submit issue" />
-        </form>
+            </div>
+            <label htmlFor="title">
+              title
+              <input id={styles.title} type="text" onChange={this.handleChange} required name="title" />
+            </label>
+            <label htmlFor="text">
+              text
+              <input id={styles.text} type="text" onChange={this.handleChange} required name="text" />
+            </label>
+            <label htmlFor="photos">
+              Photos
+              <input type="file" onChange={this.fileSelectedHandler} name="photos" multiple />
+              <button onClick={this.fileUploadHandler}>upload photos</button>
+            </label>
+            <label htmlFor="reps">
+              Choose a Rep
+              <select onChange={this.handleRepSelect} name="rep">
+                {reps.map((rep, index) => (
+                  <option value={index} key={rep.name}>
+                    {rep.name} ({rep.title})
+                  </option>
+                ))}
+              </select>
+            </label>
+            <input style={{ width: '100px' }} type="submit" value="submit issue" />
+          </form>
+        </div>
       </div>
     );
   }
@@ -207,6 +243,7 @@ class IssueForm extends React.Component {
 IssueForm.propTypes = {
   user: PropTypes.objectOf(PropTypes.any).isRequired,
   location: PropTypes.objectOf(PropTypes.number).isRequired,
+  closeForm: PropTypes.func.isRequired,
 };
 
 export default IssueForm;

@@ -3,10 +3,11 @@ import React from 'react';
 import { configure, mount, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
-configure({ adapter: new Adapter() });
-
 import App from './App.jsx';
 import Home from './Home/Home.jsx';
+// import LogIn from './LogIn/LogIn.jsx';
+
+configure({ adapter: new Adapter() });
 
 describe('test App component', () => {
   const wrapper = shallow(<App />);
@@ -21,7 +22,7 @@ describe('test App component', () => {
   });
 
   it('should display the Home page', () => {
-    const home = wrapper.find(Home)
+    const home = wrapper.find(Home);
     expect(home.exists()).toBe(true);
   });
 
@@ -29,5 +30,4 @@ describe('test App component', () => {
     const instance = wrapper.instance();
     expect(instance.state.loggedIn).toBe(false);
   });
-
 });
