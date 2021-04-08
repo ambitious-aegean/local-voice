@@ -9,6 +9,7 @@ const BUCKET_NAME = 'local-voice';
 require('dotenv').config();
 
 const uploadPhotos = (req, res) => {
+  console.log(req);
   var photo = Buffer.alloc(0);
   req.on('data', (chunk) => {
     photo = Buffer.concat([photo, chunk]);
@@ -20,8 +21,8 @@ const uploadPhotos = (req, res) => {
       if (err) {
         res.send(err);
       } else {
-    */
-        //const fileContent = fs.readFileSync(path.join(__dirname, '.', 'photo.jpg'));
+        const fileContent = fs.readFileSync(path.join(__dirname, '.', 'photo.jpg'));
+      */
         const fileContent = newPhoto.data;
         const s3 = new AWS.S3({
           accessKeyId: ID,
@@ -29,7 +30,7 @@ const uploadPhotos = (req, res) => {
         });
         const params = {
           Bucket: BUCKET_NAME,
-          Key: 'photo.jpg',
+          Key: `${Math.random().toString(36).slice(2)}.jpg`,
           Body: fileContent
         };
 
@@ -41,8 +42,7 @@ const uploadPhotos = (req, res) => {
           }
         })
       }
-    //})
-  //}
+    //})}
   )
 }
 
