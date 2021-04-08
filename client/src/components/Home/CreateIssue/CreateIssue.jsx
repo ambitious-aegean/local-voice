@@ -2,28 +2,36 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import IssueForm from './IssueForm/IssueForm.jsx';
+import styles from './styles/createIssue.module.css';
 
 class CreateIssue extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      clicked: false,
+      formOpen: false,
     };
-    this.handleClick = this.handleClick.bind(this);
+    this.openForm = this.openForm.bind(this);
+    this.closeForm = this.closeForm.bind(this);
   }
 
-  handleClick() {
-    this.setState({ clicked: true });
+  openForm() {
+    this.setState({ formOpen: true });
+  }
+
+  closeForm() {
+    this.setState({ formOpen: false });
   }
 
   render() {
-    const { clicked } = this.state;
+    const { formOpen } = this.state;
     const { user, location } = this.props;
     return (
-      <div id="createIssue" onClick={this.handleClick}>
-        report an issue
-        {clicked
-          ? <IssueForm user={user} location={location} />
+      <div>
+        <button type="button" id={styles.createIssue} onClick={this.openForm}>
+          report an issue
+        </button>
+        { formOpen
+          ? <IssueForm user={user} location={location} closeForm={this.closeForm} />
           : ''}
       </div>
     );
