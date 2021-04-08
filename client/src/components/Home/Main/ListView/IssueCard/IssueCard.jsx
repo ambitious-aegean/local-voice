@@ -21,6 +21,7 @@ class IssueCard extends React.Component {
       watched: false,
       markedResolved: false,
       resolver: 0,
+      voteCount: 0
     };
     this.watch = this.watch.bind(this);
     this.up_vote = this.up_vote.bind(this);
@@ -36,8 +37,11 @@ class IssueCard extends React.Component {
 
   componentDidMount() {
     const { issue, user } = this.props;
-    const { resolved, resolver, issue_id } = issue;
+    const { resolved, resolver, issue_id, up_vote } = issue;
     const { user_id } = user;
+    this.setState({
+      voteCount: up_vote
+    })
     if (resolved !== 0) {
       this.setState({
         markedResolved: true,
@@ -91,8 +95,11 @@ class IssueCard extends React.Component {
   }
 
   up_vote() {
+    let { voteCount } = this.state;
+    voteCount += 1;
     this.setState({
       voted: true,
+      voteCount: voteCount
     });
 
     const { issue, user } = this.props;
@@ -103,8 +110,11 @@ class IssueCard extends React.Component {
   }
 
   down_vote() {
+    let { voteCount } = this.state;
+    voteCount -= 1;
     this.setState({
       voted: false,
+      voteCount: voteCount
     });
 
     const { issue, user } = this.props;
@@ -188,7 +198,7 @@ class IssueCard extends React.Component {
 
   render() {
     const {
-      voted, flagged, watched, viewDiscussion, discussionData, markedResolved, resolver
+      voted, flagged, watched, viewDiscussion, discussionData, markedResolved, resolver, voteCount
     } = this.state;
     const { issue, user } = this.props;
     const {
@@ -233,14 +243,14 @@ class IssueCard extends React.Component {
               <button type="button" onClick={this.up_vote}>
                 <span> up icon </span>
               </button>
-              {up_vote} upvotes
+              {voteCount} upvotes
             </div>
           ) : (
             <div>
               <button type="button" onClick={this.down_vote}>
                 <span> down icon </span>
               </button>
-              {up_vote + 1} upvotes
+              {voteCount} upvotes
             </div>
           )}
         {!flagged
