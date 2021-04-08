@@ -103,7 +103,7 @@ textarea {
 #formSubmit {
   font-family: 'Montserrat', sans-serif;
   background-color: #BFDBF7;
-  border: 1px solid black;
+  border: none;
   padding: 10px;
   border-radius: 20px;
   cursor: pointer;
