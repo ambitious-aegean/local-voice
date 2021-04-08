@@ -6,11 +6,11 @@ const { allIssues } = require('../controllers/issuesControllers.js');
 
 const { getReps } = require('../controllers/repsController.js');
 const { getAddress, getLocation } = require('../controllers/locAddController.js');
-<<<<<<< HEAD
+
 const { postIssue } = require('../controllers/postIssueController.js');
-=======
+
 const issuesMetaRouter = require('./issuesMetaRouter.js');
->>>>>>> 3dac8af7aec8310f646b32acbae762f001041b22
+
 
 const router = express.Router();
 

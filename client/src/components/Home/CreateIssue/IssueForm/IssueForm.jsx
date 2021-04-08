@@ -71,7 +71,7 @@ class IssueForm extends React.Component {
       text: text,
       photos: photos,
       rep_name: selectedRep.name,
-      // rep_title: selectedRep.title,
+      rep_email: selectedRep.email,
       rep_photo_url: selectedRep.photoUrl, 
       date: new Date(),
     })
@@ -159,19 +159,19 @@ class IssueForm extends React.Component {
           <button style={{ width: '100px' }} type="button" id="setLocation" onClick={this.setLocation}>set location</button>
           <div>
             Categories
-            <input onChange={this.addCategory} type="checkbox" id="nuisance" value="nuisance" />
+            <input onChange={this.addCategory} type="checkbox" id="nuisance" value="2" />
             <label htmlFor="nuisance"> nuisance</label>
-            <input onChange={this.addCategory} type="checkbox" id="public-agencies" value="public agencies" />
+            <input onChange={this.addCategory} type="checkbox" id="public-agencies" value="3" />
             <label htmlFor="public-agencies">public agencies</label>
-            <input onChange={this.addCategory} type="checkbox" id="infrastructure" value="infrastructure" />
+            <input onChange={this.addCategory} type="checkbox" id="infrastructure" value="1" />
             <label htmlFor="infrastructure">infrastructure</label>
-            <input onChange={this.addCategory} type="checkbox" id="safety" value="safety" />
+            <input onChange={this.addCategory} type="checkbox" id="safety" value="4" />
             <label htmlFor="safety"> safety</label>
-            <input onChange={this.addCategory} type="checkbox" id="waste" value="waste" />
+            <input onChange={this.addCategory} type="checkbox" id="waste" value="5" />
             <label htmlFor="waste">waste</label>
-            <input onChange={this.addCategory} type="checkbox" id="permits" value="permits" />
+            <input onChange={this.addCategory} type="checkbox" id="permits" value="6" />
             <label htmlFor="permits">permits</label>
-            <input onChange={this.addCategory} type="checkbox" id="stolen-mail" value="stolen mail" />
+            <input onChange={this.addCategory} type="checkbox" id="stolen-mail" value="7" />
             <label htmlFor="stolen-mail"> stolen mail</label>
           </div>
           <label htmlFor="title">

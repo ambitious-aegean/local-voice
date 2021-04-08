@@ -2,20 +2,12 @@
 import React from 'react';
 import axios from 'axios';
 
-<<<<<<< HEAD
-import Header from "./Header/Header.jsx";
-import LeftSideBar from "./LeftSideBar/LeftSideBar.jsx";
-import RightSideBar from "./RightSideBar/RightSideBar.jsx";
-import CreateIssue from "./CreateIssue/CreateIssue.jsx";
-import Main from "./Main/Main.jsx";
-=======
 import Header from './Header/Header.jsx';
 import LeftSideBar from './LeftSideBar/LeftSideBar.jsx';
 import RightSideBar from './RightSideBar/RightSideBar.jsx';
 import CreateIssue from './CreateIssue/CreateIssue.jsx';
 import Main from './Main/Main.jsx';
 import styles from './home.module.css';
->>>>>>> 3c3ffd0346ff36ef0a018a6f54189a6b5125c02a
 
 class Home extends React.Component {
   constructor(props) {
