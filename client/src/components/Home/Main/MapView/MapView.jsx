@@ -2,7 +2,7 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { 
+import {
   Map, GoogleApiWrapper, Marker, InfoWindow,
 } from 'google-maps-react';
 import PropTypes from 'prop-types';
@@ -90,19 +90,22 @@ class MapView extends React.Component {
   }
 
   displayMarkers() {
-    return this.props.displayedIssues.map((issue, i) => (
-      <Marker
-        key={i}
-        title={issue.title}
-        text={issue.text}
-        url={issue.photos[0]}
-        onClick={this.onMarkerClick}
-        position={{
-          lat: issue.lat,
-          lng: issue.lng,
-        }}
-      />
-    ));
+    const { displayedIssues } = this.props;
+    if (displayedIssues) {
+      return displayedIssues.map((issue, i) => (
+        <Marker
+          key={i}
+          title={issue.title}
+          text={issue.text}
+          url={issue.photos[0]}
+          onClick={this.onMarkerClick}
+          position={{
+            lat: issue.lat,
+            lng: issue.lng,
+          }}
+        />
+      ));
+    }
   }
 
   displayInfoWindow() {
