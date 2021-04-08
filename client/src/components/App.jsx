@@ -18,8 +18,8 @@ class App extends React.Component {
 
     return (
       <div id="app">
-        <LogIn />
-
+        {/* <LogIn /> */}
+        <Home/>
       </div>
     );
   }

@@ -20,3 +20,133 @@
   flex: 1;
   border: 1px solid black;
 }
+
+.personalFiltersContainer {
+  border-color: white;
+  border-bottom: 1px solid white;
+  padding-bottom: 16px;
+  padding-top: 16px;
+}
+
+.personalFiltersVerticalLayout {
+  width: 100%;
+  border-color: white;
+  display: inline-block;
+  vertical-align: baseline;
+}
+
+.personalFiltersPadding {
+  padding-bottom:8px;
+}
+
+.personalFiltersLabel {
+  font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: bold;
+  color: rgba(43,39,60,1);
+  text-align: left;
+}
+
+.filterToggleSet {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -4px;
+  border-color: white;
+}
+
+.myIssuesFilterContainer {
+  display: block;
+  border-color: white;
+}
+
+.myIssuesFilter {
+  cursor: pointer;
+  display: inline-block;
+  border: 1px solid#bbbac0;
+  border-radius: 16px;
+  background: #fff;
+  padding: 6px 12px;
+  outline: none;
+  color: #2b273c;
+  transition: background-color .4s,border-color .4s,color .4s,clip-path .45s,transform .4s,-webkit-clip-path .45s;
+  vertical-align: baseline;
+  font: inherit;
+  font-size: 100%;
+  position: relative;
+  margin: 4px;
+  appearance: auto;
+  -webkit-writing-mode: horizontal-tb !important;
+  text-rendering: auto;
+  letter-spacing: normal;
+  word-spacing: normal;
+  text-transform: none;
+  text-indent: 0px;
+  text-shadow: none;
+  text-align: center;
+  align-items: flex-start;
+}
+
+.myIssuesLabel {
+  font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 600;
+  color: inherit;
+  text-align: left;
+}
+
+.myIssuesFilter:hover {
+  background-color:#e6e6e6
+}
+
+.myIssuesFilter:active {
+  color: #00838f;
+  border-color: #00838f;
+  background: #e7f2f3;
+}
+
+.watchedIssuesFilterContainer {
+  display: block;
+  border-color: white;
+}
+
+.watchedIssuesFilter {
+  cursor: pointer;
+  display: inline-block;
+  border: 1px solid#bbbac0;
+  border-radius: 16px;
+  background: #fff;
+  padding: 6px 12px;
+  outline: none;
+  color: #2b273c;
+  transition: background-color .4s,border-color .4s,color .4s,clip-path .45s,transform .4s,-webkit-clip-path .45s;
+  vertical-align: baseline;
+  font: inherit;
+  font-size: 100%;
+  position: relative;
+  margin: 4px;
+  appearance: auto;
+  -webkit-writing-mode: horizontal-tb !important;
+  text-rendering: auto;
+  letter-spacing: normal;
+  word-spacing: normal;
+  text-transform: none;
+  text-indent: 0px;
+  text-shadow: none;
+  text-align: center;
+  align-items: flex-start;
+}
+
+.watchedIssuesLabel {
+  font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 600;
+  color: inherit;
+  text-align: left;
+}
+
+.watchedIssuesFilter:hover {
+  background-color:#e6e6e6
+}
