@@ -120,7 +120,7 @@ class IssueCard extends React.Component {
 
   render() {
     const {
-      voted, flagged, watched, viewDiscussion, discussionData
+      voted, flagged, watched, viewDiscussion, discussionData,
     } = this.state;
     const { issue, user } = this.props;
     const {
@@ -129,72 +129,86 @@ class IssueCard extends React.Component {
     } = issue;
     return (
       <div id="issueCard" className={css.issueCard}>
-        <div>{user.username}</div>
-        <div>{date}</div>
-        <div id="issueCard-categories" className={css.categories}>
-          {categories.map((category) => (
-            <div key={category}>
-              #{category}
+        <div className={css.header}>
+          <div className={css.user}>
+            {user.username}
+          </div>
+          <div className={css.dateCategories}>
+            <div className={css.date}>
+              {date}
             </div>
-          ))}
+            <div id="issueCard-categories" className={css.categories}>
+              {categories.map((category) => (
+                <div key={category}>
+                  #{category} &nbsp;
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
-        <div>{title}</div>
-        <div>{text}</div>
-        <div id="issueCard-photos" className={css.photos}>
-          {photos.map((photo, index) => (
-            <img key={index} alt={issue.title} src={photo} />
-          ))}
+        <div className={css.content}>
+          <div>{title}</div>
+          <div>{text}</div>
+          <div id="issueCard-photos" className={css.photos}>
+            {photos.map((photo, index) => (
+              <img key={index} className={css.photos} alt={issue.title} src={photo} />
+            ))}
+          </div>
         </div>
-        {!watched
-          ? (
-            <div>
-              <button type="button" onClick={this.watch}>
-                <span> watch icon </span>
-              </button>
-            </div>
-          ) : (
-            <div>
-              <button type="button" onClick={this.unwatch}>
-                <span> unwatch icon </span>
-              </button>
-            </div>
-          )}
-        {!voted
-          ? (
-            <div>
-              <button type="button" onClick={this.up_vote}>
-                <span> up icon </span>
-              </button>
-              {up_vote} upvotes
-            </div>
-          ) : (
-            <div>
-              <button type="button" onClick={this.down_vote}>
-                <span> down icon </span>
-              </button>
-              {up_vote + 1} upvotes
-            </div>
-          )}
-        {!flagged
-          ? (
-            <div>
-              <button type="button" onClick={this.flag}>
-                <span> (empty) flag icon </span>
-              </button>
-            </div>
-          ) : (
-            <div>
-              <button type="button" onClick={this.unflag}>
-                <span> flag icon </span>
-              </button>
-            </div>
-          )}
-        <button id="viewDiscussion" type="button" onClick={() => this.handleViewDiscussionClick()} onKeyPress={() => {}} tabIndex={0}>
-          View Discussion
-          {viewDiscussion
-            ? <Discussion discussionData={discussionData} issue={issue} user={user} />
-            : ''}
-        </button>
+        <div className={css.options}>
+          {!watched
+            ? (
+              <div>
+                <button type="button" onClick={this.watch}>
+                  <span> watch icon </span>
+                </button>
+              </div>
+            ) : (
+              <div>
+                <button type="button" onClick={this.unwatch}>
+                  <span> unwatch icon </span>
+                </button>
+              </div>
+            )}
+          {!voted
+            ? (
+              <div>
+                <button type="button" onClick={this.up_vote}>
+                  <span> up icon </span>
+                </button>
+                {up_vote} upvotes
+              </div>
+            ) : (
+              <div>
+                <button type="button" onClick={this.down_vote}>
+                  <span> down icon </span>
+                </button>
+                {up_vote + 1} upvotes
+              </div>
+            )}
+          {!flagged
+            ? (
+              <div>
+                <button type="button" onClick={this.flag}>
+                  <span> (empty) flag icon </span>
+                </button>
+              </div>
+            ) : (
+              <div>
+                <button type="button" onClick={this.unflag}>
+                  <span> flag icon </span>
+                </button>
+              </div>
+            )}
+        </div>
+        <div className={css.viewDiscussion}>
+          <button id="viewDiscussion" type="button" onClick={() => this.handleViewDiscussionClick()} onKeyPress={() => {}} tabIndex={0}>
+            View Discussion
+            {viewDiscussion
+              ? <Discussion discussionData={discussionData} issue={issue} user={user} />
+              : ''}
+          </button>
+        </div>
       </div>
     );
   }

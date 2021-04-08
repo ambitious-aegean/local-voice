@@ -14,45 +14,45 @@ configure({ adapter: new Adapter() });
 
 describe('testing the Home component', () => {
   const wrapper = shallow(<Home />);
-  // wrapper.setState({
-  //   user: {
-  //     username: 'someguy123',
-  //     user_id: 1,
-  //   },
-  //   location: {
-  //     lat: 37.7749,
-  //     lng: -122.4194,
-  //   },
-  //   issues: [
-  //     {
-  //       loc: {
-  //         lat: 100,
-  //         lng: 100,
-  //       },
-  //     },
-  //   ],
-  //   currentCategories: {
-  //     theft: false,
-  //     crime: false,
-  //     'for sale': false,
-  //     infrastructure: false,
-  //     nuisance: false,
-  //     'public agencies': false,
-  //     safety: false,
-  //     waste: false,
-  //     permits: false,
-  //     'stolen mail': false,
-  //   },
-  //   initialLoad: true,
-  //   filteredIssues: [],
-  //   myIssuesFilter: false,
-  //   watchedIssuesFilter: false,
-  //   categories: ['theft', 'crime', 'for sale', 'infrastructure', 'nuisance', 'public agencies', 'safety', 'waste',
-  //     'permits', 'stolen mail'],
-  //   watched: [],
-  //   view: 0, // 0 = map view
-  // });
-  // wrapper.update();
+  wrapper.setState({
+    user: {
+      username: 'someguy123',
+      user_id: 1,
+    },
+    location: {
+      lat: 37.7749,
+      lng: -122.4194,
+    },
+    issues: [
+      {
+        loc: {
+          lat: 100,
+          lng: 100,
+        },
+      },
+    ],
+    currentCategories: {
+      theft: false,
+      crime: false,
+      'for sale': false,
+      infrastructure: false,
+      nuisance: false,
+      'public agencies': false,
+      safety: false,
+      waste: false,
+      permits: false,
+      'stolen mail': false,
+    },
+    initialLoad: true,
+    filteredIssues: [],
+    myIssuesFilter: false,
+    watchedIssuesFilter: false,
+    categories: ['theft', 'crime', 'for sale', 'infrastructure', 'nuisance', 'public agencies', 'safety', 'waste',
+      'permits', 'stolen mail'],
+    watched: [],
+    view: 0, // 0 = map view
+  });
+  wrapper.update();
 
   it('should exist', () => {
     const home = wrapper.find('#homeContainer');

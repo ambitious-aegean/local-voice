@@ -3,6 +3,28 @@
   height: max-content;
 }
 
+.issueCard {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+}
+
+.issueCard .header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.header .dateCategories {
+  display: flex;
+  flex-direction: column;
+}
+
+.dateCategories .categories {
+  display: flex;
+  flex-direction: row;
+}
+
 .photos {
   max-height: 100px;
   max-width: 100px;;
