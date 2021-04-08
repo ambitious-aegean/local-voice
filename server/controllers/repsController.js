@@ -20,12 +20,14 @@ const getReps = (req, res) => {
       for (const index of office.officialIndices) {
         if (levels.includes(office.levels[0])) {
           const official = officials[index];
-          response.push({
-            name: official.name,
-            title: office.name,
-            email: official.emails || official.phones,
-            photoUrl: official.photoUrl || 'noPhoto',
-          });
+          if (official.emails) {
+            response.push({
+              name: official.name,
+              title: office.name,
+              email: official.emails[0],
+              photoUrl: official.photoUrl || 'noPhoto',
+            });
+          }
         }
       }
     }

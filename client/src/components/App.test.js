@@ -7,6 +7,7 @@ configure({ adapter: new Adapter() });
 
 import App from './App.jsx';
 import Home from './Home/Home.jsx';
+import LogIn from './LogIn/LogIn.jsx'
 
 describe('test App component', () => {
   const wrapper = shallow(<App />);
@@ -21,8 +22,8 @@ describe('test App component', () => {
   });
 
   it('should display the Home page', () => {
-    const home = wrapper.find(Home)
-    expect(home.exists()).toBe(true);
+    const logIn = wrapper.find(LogIn)
+    expect(logIn.exists()).toBe(true);
   });
 
   it('should have a default state of loggedIn set to false', () => {
