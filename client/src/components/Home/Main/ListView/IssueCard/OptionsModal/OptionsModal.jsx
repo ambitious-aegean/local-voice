@@ -182,16 +182,18 @@ class OptionsModal extends React.Component {
           {!markedResolved
             ? (
               <div className={css.resolve}>
+                mark as resolved
                 <button type="button" onClick={this.resolve}>
-                  <span> mark as resolved </span>
+                  <span className="fa fa-check-circle" />
                 </button>
               </div>
             ) : (
               resolver === user.user_id || user_id === user.user_id
                 ? (
                   <div className={css.resolve}>
+                    mark as unresolved
                     <button type="button" onClick={this.unresolve}>
-                      <span> mark as unresolved </span>
+                      <span className="fa fa-times-circle" />
                     </button>
                   </div>
                 ) : (

@@ -102,6 +102,21 @@
   flex-direction: row;
 }
 
+.watch button, .flag button, .resolve button {
+  background-color: white;
+  font-size: 18px;
+  border: none;
+  border-radius: 50%;
+}
+
+.watch button:hover, .flag button:hover, .resolve button:hover {
+  background-color: rgba(163, 163, 163, 0.514);
+}
+
+.watch button:focus, .flag button:focus, .resolve button:focus {
+  outline: none;
+}
+
 .content {
   margin: 5px;
   padding: 5px;
