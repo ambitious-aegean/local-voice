@@ -1,3 +1,25 @@
 .rightContainer {
-  flex:2;
+  flex: 2;
+}
+
+.adBanner {
+  border-bottom: 1px solid #eeeeef;
+  padding: 10px;
+}
+
+.adBannerVerticalLayout {
+  width: 100%;
+  border-color: white;
+  display: inline-block;
+  vertical-align: baseline;
+}
+
+.adBannerPadding {
+  padding-bottom: 8px;
+}
+
+.adImage {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }

@@ -16,8 +16,8 @@ class FilterOptions extends React.Component {
         <form className={styles.formContainer}>
           <span className={styles.filterHeader}>Search Filter Options</span>
           {categories.map((category, index) => (
-            <div className={styles.checkboxContainer} key={index}>
-              <input className={styles.checkbox} name={category} value={category} id="category" type="checkbox" onChange={filterIssues} />
+            <div className={styles.container} key={index}>
+              <input className={styles.checkbox} name={category} value={category} type="checkbox" onChange={filterIssues} />
               <label className={styles.labels} key={category}>
                 {category}
               </label>
