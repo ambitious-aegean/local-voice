@@ -13,8 +13,8 @@
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-  width: 50%;
-  height: auto;
+  width: 600px;
+  height: 700px;
   padding: 20px;
   border-radius: 20px;
   border: none;
@@ -67,6 +67,8 @@
 }
 
 #categories {
+  display: grid;
+  grid-template: repeat(2, 1fr) / repeat(4, 1fr);
 }
 
 .category {
@@ -80,7 +82,7 @@
 
 textarea {
   width: 400px;
-  height: 100px;
+  height: 300px;
 }
 
 #text {
@@ -94,6 +96,7 @@ textarea {
 #repSelector {
   font-family: 'Montserrat', sans-serif;
   align-self: center;
+  margin: 0 auto;
 }
 
 .repOption {
@@ -107,7 +110,6 @@ textarea {
   padding: 10px;
   border-radius: 20px;
   cursor: pointer;
-  margin-bottom: 10px;
+  margin: 10px auto;
   outline: none;
-  align-self: center;
 }
