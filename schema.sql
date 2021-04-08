@@ -34,6 +34,7 @@ CREATE TABLE `issues` (
   `date` VARCHAR(50) NULL DEFAULT NULL,
   `up_vote` INTEGER NULL DEFAULT NULL,
   `flag_count` INTEGER NULL DEFAULT NULL,
+  `resolver` INTEGER NULL DEFAULT NULL,
   PRIMARY KEY (`issue_id`)
 );
 
