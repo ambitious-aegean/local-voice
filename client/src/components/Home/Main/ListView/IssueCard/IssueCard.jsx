@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable camelcase */
@@ -76,6 +77,10 @@ class IssueCard extends React.Component {
       .catch((err) => { throw err; });
   }
 
+  closeDiscussion() {
+    this.setState({ viewDiscussion: false });
+  }
+
   checkVote(issue_id, user_id) {
     axios.get(`/allIssues/checkVote/?issue_id=${issue_id}`)
       .then((resp) => {
@@ -107,10 +112,6 @@ class IssueCard extends React.Component {
           });
         }
       });
-  }
-
-  closeDiscussion() {
-    this.setState({ viewDiscussion: false });
   }
 
   up_vote() {
@@ -234,20 +235,26 @@ class IssueCard extends React.Component {
               {date}
             </div>
           </div>
-          <div id="issueCard-categories" className={css.categories}>
-            {categories.map((category) => (
-              <div key={category}>
-                #{category} &nbsp;
-              </div>
-            ))}
+          <div className={css.dotsCategories}>
+            <div className={css.dots}>
+              <i className={`${css.dotsIcon} fa fa-ellipsis-h`} />
+            </div>
+            <div id="issueCard-categories" className={css.categories}>
+              {categories.map((category) => (
+                <div key={category}>
+                  #{category} &nbsp;
+                </div>
+              ))}
+            </div>
           </div>
         </div>
         <div className={css.content}>
           <div className={css.title}>
             {title}
-          </div>
-          <div className={css.text}>
-            {text}
+            &nbsp;
+            <div className={css.text}>
+              {text}
+            </div>
           </div>
           <div id="issueCard-photos" className={css.photos}>
             {photos.map((photo, index) => (
@@ -269,24 +276,6 @@ class IssueCard extends React.Component {
                   <button type="button" onClick={this.unwatch}>
                     <span className="far fa-eye-slash" />
                   </button>
-                </div>
-              )}
-          </div>
-          <div className={css.vote}>
-            {!voted
-              ? (
-                <div>
-                  <button type="button" onClick={this.up_vote}>
-                    <span className="fa fa-chevron-up" />
-                  </button>
-                  {voteCount} upvotes
-                </div>
-              ) : (
-                <div>
-                  <button type="button" onClick={this.down_vote}>
-                    <span className="fa fa-chevron-down" />
-                  </button>
-                  {voteCount} upvotes
                 </div>
               )}
           </div>
@@ -322,8 +311,7 @@ class IssueCard extends React.Component {
                         <span> un-resolve </span>
                       </button>
                     </div>
-                  )
-                  : (
+                  ) : (
                     <div>
                       <span>Resolved</span>
                     </div>
@@ -331,13 +319,33 @@ class IssueCard extends React.Component {
               )}
           </div>
         </div>
-        <div className={css.discussion}>
-          <button id="viewDiscussion" type="button" onClick={() => this.handleViewDiscussionClick()} onKeyPress={() => {}} tabIndex={0}>
-            View Discussion
-          </button>
-          {viewDiscussion
-            ? <Discussion discussionData={discussionData} issue={issue} user={user} />
-            : ''}
+        <div className={css.voteDiscussion}>
+          <div className={css.vote}>
+            {!voted
+              ? (
+                <div>
+                  <button type="button" onClick={this.up_vote}>
+                    <span className="fa fa-chevron-up" />
+                  </button>
+                  {voteCount} upvotes
+                </div>
+              ) : (
+                <div>
+                  <button type="button" onClick={this.down_vote}>
+                    <span className="fa fa-chevron-down" />
+                  </button>
+                  {voteCount} upvotes
+                </div>
+              )}
+          </div>
+          <div className={css.discussion}>
+            <button id="viewDiscussion" type="button" onClick={() => this.handleViewDiscussionClick()} onKeyPress={() => {}} tabIndex={0}>
+              View Discussion
+            </button>
+            {viewDiscussion
+              ? <Discussion discussionData={discussionData} issue={issue} user={user} />
+              : ''}
+          </div>
         </div>
       </div>
     );

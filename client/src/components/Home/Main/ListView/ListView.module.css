@@ -13,6 +13,7 @@
   display: flex;
   flex-direction: column;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);  margin: 7px;
+  border-radius: 12px;
   padding: 3px;
 }
 
@@ -22,43 +23,83 @@
   justify-content: space-between;
   margin: 5px;
   padding: 5px;
-  border: 1px solid black;
+  background-color: whitesmoke;
+  border-radius: 8px;
 }
 
 .header .userDate {
   display: flex;
   flex-direction: column;
-  border: 1px solid black;
 }
 
-.header .categories {
+.header .dotsCategories {
   display: flex;
-  flex-direction: row;
+  justify-content: flex-end;
+  flex-direction: column;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
   font-weight: 700;
-  border: 1px solid black;
+}
+
+.dotsCategories .dots {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 25px;
+  color: rgb(58, 58, 58);
+  position: relative;
+  right: 3px;
+  bottom: 4px;
+}
+
+.dotsIcon {
+  margin: 2px;
+  padding: 5px;
+}
+
+.dotsIcon:hover {
+  color: rgb(82, 82, 82);
+  background-color: rgba(187, 187, 187, 0.521);
+  border-radius: 50%;
+}
+
+.dotsCategories .categories {
+  display: flex;
+  flex-direction: row;
 }
 
 .content {
-  border: 1px solid black;
   margin: 5px;
   padding: 5px;
+  background-color: whitesmoke;
+  border-radius: 8px;
 }
 
 .content .title {
-  font-size: 22px;
-  font-weight: 600;
+  margin: 5px;
   padding: 5px;
+  font-size: 18px;
+  font-weight: 600;
+  display: flex;
+  justify-self: flex-start;
+  align-items: center;
+  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(19, 19, 19);
 }
 
 .content .text {
+  margin: 5px;
   padding: 5px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 300;
+  color: rgb(29, 29, 29);
 }
 
 .photos {
   display: flex;
   flex-direction: row;
+  margin: 5px;
+  padding: 5px;
 }
 
 .photos .photo {
@@ -75,6 +116,17 @@
   padding: 5px;
 }
 
+.voteDiscussion {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border-top: rgb(224, 224, 224) 2px solid;
+  margin: 5px;
+  padding: 5px;
+
+}
+
 .discussion {
   display: flex;
   flex-direction: column;
@@ -82,21 +134,25 @@
   align-items: center;
   margin: 5px;
   padding: 5px;
-  border-top: grey 1px solid;
-}
+ }
 
 .discussion button {
+  margin: 2px;
+  padding: 2px;
   border: none;
-  background-color: whitesmoke;
-  width: 75%;
+  border-bottom: 2px solid rgb(233, 233, 233);
+  background-color: rgb(241, 241, 241);
+  height: 40px;
+  width: 300px;
   height: max-content;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
   color: rgb(14, 14, 14);
+  transition: all 0.2s ease;
 }
 
 .discussion button:hover {
-  background-color: rgb(238, 238, 238);
+  border-bottom: 2px solid rgb(94, 94, 94);
 }
 
 .discussion button:focus {
