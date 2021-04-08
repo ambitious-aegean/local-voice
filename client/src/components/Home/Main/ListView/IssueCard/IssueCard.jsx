@@ -244,9 +244,10 @@ class IssueCard extends React.Component {
         <div className={css.content}>
           <div className={css.title}>
             {title}
-          </div>
-          <div className={css.text}>
-            {text}
+            &nbsp;
+            <div className={css.text}>
+              {text}
+            </div>
           </div>
           <div id="issueCard-photos" className={css.photos}>
             {photos.map((photo, index) => (
