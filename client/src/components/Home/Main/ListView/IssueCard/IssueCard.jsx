@@ -8,6 +8,8 @@ import PropTypes from 'prop-types';
 
 import axios from 'axios';
 
+import css from '../ListView.module.css';
+
 import Discussion from './Discussion/Discussion.jsx';
 
 class IssueCard extends React.Component {
@@ -126,10 +128,10 @@ class IssueCard extends React.Component {
       rep_photo_url, resolved, text, title, up_vote, user_id, username,
     } = issue;
     return (
-      <div id="issueCard">
+      <div id="issueCard" className={css.issueCard}>
         <div>{user.username}</div>
         <div>{date}</div>
-        <div id="issueCard-categories">
+        <div id="issueCard-categories" className={css.categories}>
           {categories.map((category) => (
             <div key={category}>
               #{category}
@@ -138,7 +140,7 @@ class IssueCard extends React.Component {
         </div>
         <div>{title}</div>
         <div>{text}</div>
-        <div id="issueCard-photos">
+        <div id="issueCard-photos" className={css.photos}>
           {photos.map((photo, index) => (
             <img key={index} alt={issue.title} src={photo} />
           ))}

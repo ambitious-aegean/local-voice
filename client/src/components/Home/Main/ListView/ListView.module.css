@@ -1,0 +1,9 @@
+.listView {
+  width: 100%;
+  height: max-content;
+}
+
+.photos {
+  max-height: 100px;
+  max-width: 100px;;
+}
