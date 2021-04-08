@@ -6,11 +6,13 @@ import AddComment from './AddComment/AddComment.jsx';
 import css from './Discussion.module.css';
 
 const Discussion = ({ discussionData, issue, user }) => (
-  <div id="discussion">
+  <div id="discussion" className={css.discussionMain}>
     <div id="comments">
-      {discussionData.map((comment) => (
-        <CommentCard key={comment.comment_id} comment={comment} user={user} />
-      ))}
+      <div className={css.commentCardList}>
+        {discussionData.map((comment) => (
+          <CommentCard key={comment.comment_id} comment={comment} user={user} />
+        ))}
+      </div>
       <AddComment issue={issue} user={user} />
     </div>
   </div>
