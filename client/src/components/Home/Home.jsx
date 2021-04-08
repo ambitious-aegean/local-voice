@@ -16,6 +16,7 @@ class Home extends React.Component {
       user: {
         username: 'someguy123',
         user_id: 1,
+        watched: [],
       },
       location: {
         lat: 37.7749,
@@ -47,7 +48,6 @@ class Home extends React.Component {
       watchedIssuesFilter: false,
       categories: ['Theft', 'Crime', 'For Sale', 'Infrastructure', 'Nuisance', 'Public Agencies', 'Safety', 'Waste',
         'Permits', 'Stolen Mail'],
-      watched: [],
       view: 0, // 0 = map view
     };
     this.getIssues = this.getIssues.bind(this);
@@ -77,7 +77,11 @@ class Home extends React.Component {
       .then((response) => {
         this.setState({
           issues: response.data.issues,
-          watched: response.data.watched,
+          user: {
+            username: 'someguy123',
+            user_id: 1,
+            watched: response.data.watched,
+          },
         }, () => {
           // console.log('this.state.issues: ', this.state.issues);
           // console.log('this.state.watched: ', this.state.watched);
