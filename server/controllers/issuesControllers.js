@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 const db = require('../../db/index.js');
 
 // .015 a mile for lat
@@ -47,12 +48,19 @@ const allIssues = (req, res) => {
     const watchedQuery = `SELECT issue_id FROM watched_issues WHERE user_id = ${user_id}`;
     db.query(watchedQuery, (err2, data2) => {
       if (err2) { throw err2; }
-      const updatedData2 = data2.map((row) => row.issue_id);
-      const sendObj = {
-        issues: issueArr,
-        watched: updatedData2,
-      };
-      res.send(sendObj);
+      const watchedData = data2.map((row) => row.issue_id);
+
+      const upVoteQuery = `SELECT issue_id FROM user_up_vote WHERE user_id = ${user_id}`;
+      db.query(upVoteQuery, (err3, data3) => {
+        if (err3) { throw err3; }
+        const votedData = data3.map((row) => row.issue_id);
+        const sendObj = {
+          issues: issueArr,
+          watchedList: watchedData,
+          votedList: votedData,
+        };
+        res.send(sendObj);
+      });
     });
   });
 };
