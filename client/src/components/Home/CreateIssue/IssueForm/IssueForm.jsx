@@ -15,14 +15,17 @@ import * as Buffer from 'Buffer';
 class IssueForm extends React.Component {
   constructor(props) {
     super(props);
-    const { location } = this.props;
+    const { location, user } = this.props;
     this.state = {
       address: '',
       location,
+      user,
       categories: [],
       title: '',
       text: '',
+      imgSrc: '',
       photos: [],
+      photoURLs: [],
       reps: [],
       selectedRep: {},
     };
@@ -37,6 +40,7 @@ class IssueForm extends React.Component {
     this.fileSelectedHandler = this.fileSelectedHandler.bind(this);
     this.fileUploadHandler = this.fileUploadHandler.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.randomString = this.randomString.bind(this);
   }
 
   componentDidMount() {
@@ -119,13 +123,26 @@ class IssueForm extends React.Component {
     this.setState({ photos: event.target.files });
   }
 
+  randomString() {
+    let string = '';
+    for (let i = 0; i < 20; i ++) {
+      string += Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5);
+    }
+    return string;
+  }
+
   fileUploadHandler(event) {
-    const { photos } = this.state;
+    const { photos, user } = this.state;
     const photo = photos[0];
+    const filename = user.user_id + this.randomString();
     const formData = new FormData();
-    formData.append('photo', photo);
+    formData.append(filename, photo);
     axios.post('/photo', formData)
-      .then((resp) => console.log(resp.data))
+      .then((resp) => {
+        const { photoURLs } = this.state;
+        photoURLs.push(resp.data.toString());
+        this.setState({ photoURLs });
+      })
       .catch((err) => console.log(err));
   }
 
@@ -137,7 +154,7 @@ class IssueForm extends React.Component {
   }
 
   render() {
-    const { address, reps } = this.state;
+    const { address, reps, photoURLs } = this.state;
     return (
       <div id="issueForm">
         <form style={{ display: 'flex', flexDirection: 'column' }} onSubmit={this.handleSubmit}>
@@ -187,6 +204,7 @@ class IssueForm extends React.Component {
             </select>
           </label>
           <input style={{ width: '100px' }} type="submit" value="submit issue" />
+          <img src={photoURLs[0]} />
         </form>
       </div>
     );
