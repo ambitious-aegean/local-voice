@@ -184,15 +184,15 @@ class IssueForm extends React.Component {
             </div>
             <label htmlFor="title">
               title
-              <input type="text" onChange={this.handleChange} required name="title" />
+              <input id={styles.title} type="text" onChange={this.handleChange} required name="title" />
             </label>
             <label htmlFor="text">
               text
-              <input type="text" onChange={this.handleChange} required name="text" />
+              <input id={styles.text} type="text" onChange={this.handleChange} required name="text" />
             </label>
             <label htmlFor="photos">
               Photos
-              <input type="file" onChange={this.fileSelectedHandler} required name="photos" multiple />
+              <input type="file" onChange={this.fileSelectedHandler} name="photos" multiple />
               <button onClick={this.fileUploadHandler}>upload photos</button>
             </label>
             <label htmlFor="reps">
