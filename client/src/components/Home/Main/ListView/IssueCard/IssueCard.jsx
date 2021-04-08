@@ -46,7 +46,7 @@ class IssueCard extends React.Component {
     const {
       resolved, resolver, issue_id, up_vote,
     } = issue;
-    const { user_id, watched } = user;
+    const { user_id, watchedList, votedList } = user;
     this.setState({
       voteCount: up_vote,
     });
@@ -56,8 +56,8 @@ class IssueCard extends React.Component {
         resolver,
       });
     }
-    this.checkVote(issue_id, user_id);
-    this.checkWatched(issue_id, watched);
+    this.checkVote(issue_id, votedList);
+    this.checkWatched(issue_id, watchedList);
     this.checkFlag(issue_id, user_id);
   }
 
@@ -81,15 +81,12 @@ class IssueCard extends React.Component {
     this.setState({ viewDiscussion: false });
   }
 
-  checkVote(issue_id, user_id) {
-    axios.get(`/allIssues/checkVote/?issue_id=${issue_id}`)
-      .then((resp) => {
-        if (resp.data.indexOf(user_id) !== -1) {
-          this.setState({
-            voted: true,
-          });
-        }
+  checkVote(issue_id, votedList) {
+    if (votedList.indexOf(issue_id) !== -1) {
+      this.setState({
+        voted: true,
       });
+    }
   }
 
   checkWatched(issue_id, watched) {

@@ -16,7 +16,7 @@ class Home extends React.Component {
       user: {
         username: 'someguy123',
         user_id: 1,
-        watched: [],
+        watchedList: [],
       },
       location: {
         lat: 37.7749,
@@ -80,7 +80,8 @@ class Home extends React.Component {
           user: {
             username: 'someguy123',
             user_id: 1,
-            watched: response.data.watched,
+            watchedList: response.data.watchedList,
+            votedList: response.data.votedList,
           },
         }, () => {
           // console.log('this.state.issues: ', this.state.issues);
