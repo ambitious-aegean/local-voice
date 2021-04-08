@@ -165,14 +165,14 @@ class IssueCard extends React.Component {
               ? (
                 <div>
                   <button type="button" onClick={this.up_vote}>
-                    <span> up icon </span>
+                    <span className="fa fa-chevron-up" />
                   </button>
                   {up_vote} upvotes
                 </div>
               ) : (
                 <div>
                   <button type="button" onClick={this.down_vote}>
-                    <span> down icon </span>
+                    <span className="fa fa-chevron-down" />
                   </button>
                   {up_vote + 1} upvotes
                 </div>
@@ -183,13 +183,13 @@ class IssueCard extends React.Component {
               ? (
                 <div className={css.watch}>
                   <button type="button" onClick={this.watch}>
-                    <span> watch icon </span>
+                    <span className="far fa-eye" />
                   </button>
                 </div>
               ) : (
                 <div className={css.unwatch}>
                   <button type="button" onClick={this.unwatch}>
-                    <span> unwatch icon </span>
+                    <span className="far fa-eye-slash" />
                   </button>
                 </div>
               )}
@@ -199,13 +199,13 @@ class IssueCard extends React.Component {
               ? (
                 <div>
                   <button type="button" onClick={this.flag}>
-                    <span> (empty) flag icon </span>
+                    <span className="fa fa-flag" />
                   </button>
                 </div>
               ) : (
                 <div>
                   <button type="button" onClick={this.unflag}>
-                    <span> flag icon </span>
+                    unflag
                   </button>
                 </div>
               )}
