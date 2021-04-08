@@ -139,7 +139,6 @@ class MapView extends React.Component {
   }
 
   render() {
-    console.log(process.env.REACT_APP_MAP_API_KEY);
     const { displayedIssues } = this.props;
     const { location } = this.state;
     const { lat, lng } = location;

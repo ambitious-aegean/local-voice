@@ -4,7 +4,13 @@ import styles from './styles.module.css';
 
 const RightSideBar = () => (
   <div className={styles.rightContainer}>
-    RightSideBar
+    <div className={styles.adBanner}>
+      <div className={styles.adBannerVerticalLayout}>
+        <div className={styles.adBannerPadding}>
+          <img className={styles.adImage}src="https://i.ibb.co/sqBr23c/HR-Ad.png" alt="Open ad space"></img>
+        </div>
+      </div>
+    </div>
   </div>
 );
 
