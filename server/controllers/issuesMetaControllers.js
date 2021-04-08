@@ -30,7 +30,7 @@ const up_vote = (req, res) => {
 const flag = (req, res) => {
   const { issue_id, user_id } = req.query;
   const query1 = `SELECT *
-  FROM watched_issues
+  FROM user_flag
   WHERE user_id = ${user_id}
   AND issue_id = ${issue_id}`;
   db.query(query1, (err1, data) => {
@@ -169,6 +169,19 @@ const checkWatched = (req, res) => {
   })
 }
 
+const checkFlag = (req, res) => {
+  const { issue_id } = req.query;
+  const query = `SELECT user_id FROM user_flag WHERE issue_id=${issue_id}`;
+  db.query(query, (err, data) => {
+    if (err) { throw err; }
+    console.log(data)
+    const formattedData = data.map(row => {
+      return row.user_id;
+    })
+    res.send(formattedData);
+  })
+}
+
 module.exports = {
   up_vote,
   flag,
@@ -180,6 +193,7 @@ module.exports = {
   unresolve,
   checkVote,
   checkWatched,
+  checkFlag
 }
 
 

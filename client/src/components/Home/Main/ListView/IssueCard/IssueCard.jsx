@@ -52,14 +52,22 @@ class IssueCard extends React.Component {
           })
         }
       })
-      axios.get(`/allIssues/checkWatched/?issue_id=${issue_id}`)
-      .then(resp => {
-        if (resp.data.indexOf(user_id) !== -1) {
-          this.setState({
-            watched: true,
-          })
-        }
-      })
+    axios.get(`/allIssues/checkWatched/?issue_id=${issue_id}`)
+    .then(resp => {
+      if (resp.data.indexOf(user_id) !== -1) {
+        this.setState({
+          watched: true,
+        })
+      }
+    })
+    axios.get(`/allIssues/checkFlag/?issue_id=${issue_id}`)
+    .then(resp => {
+      if (resp.data.indexOf(user_id) !== -1) {
+        this.setState({
+          flagged: true,
+        })
+      }
+    })
   }
 
   handleViewDiscussionClick() {
@@ -239,13 +247,13 @@ class IssueCard extends React.Component {
           ? (
             <div>
               <button type="button" onClick={this.flag}>
-                <span> (empty) flag icon </span>
+                <span> down flag icon </span>
               </button>
             </div>
           ) : (
             <div>
               <button type="button" onClick={this.unflag}>
-                <span> flag icon </span>
+                <span> up flag icon </span>
               </button>
             </div>
           )}
