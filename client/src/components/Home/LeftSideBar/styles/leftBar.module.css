@@ -22,11 +22,14 @@
 }
 
 .welcomeTag {
-  font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+  /* font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+   */
+  /* font-family: 'Courgette', cursive; */
+  font-family: 'Montserrat', sans-serif;
   font-size: 14px;
   line-height: 20px;
-  font-weight: bold;
-  color: rgba(43,39,60,1);
+  font-weight: 600;
+  color: #252525;
   text-align: left;
 }
 
@@ -50,7 +53,9 @@
 }
 
 .personalFiltersLabel {
-  font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+  /* font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif; */
+  /* font-family: 'Courgette', cursive; */
+  font-family: 'Montserrat', sans-serif;
   font-size: 14px;
   line-height: 20px;
   font-weight: bold;
@@ -78,7 +83,7 @@
   background: #fff;
   padding: 6px 12px;
   outline: none;
-  color: #2b273c;
+  color: #252525;
   transition: background-color .4s,border-color .4s,color .4s,clip-path .45s,transform .4s,-webkit-clip-path .45s;
   vertical-align: baseline;
   font: inherit;
@@ -100,12 +105,12 @@
 .myIssuesFilterOn {
   cursor: pointer;
   display: inline-block;
-  border: 1px solid #00838f;
+  border: 1px solid #1F7A8C;
   border-radius: 16px;
   background: #e7f2f3;
   padding: 6px 12px;
   outline: none;
-  color: #00838f;
+  color: #1F7A8C;
   transition: background-color .4s,border-color .4s,color .4s,clip-path .45s,transform .4s,-webkit-clip-path .45s;
   vertical-align: baseline;
   font: inherit;
@@ -125,7 +130,9 @@
 }
 
 .myIssuesLabel {
-  font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+  /* font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif; */
+  /* font-family: 'Courgette', cursive; */
+  font-family: 'Montserrat', sans-serif;
   font-size: 12px;
   line-height: 18px;
   font-weight: 600;
@@ -150,7 +157,7 @@
   background: #fff;
   padding: 6px 12px;
   outline: none;
-  color: #2b273c;
+  color: #252525;
   transition: background-color .4s,border-color .4s,color .4s,clip-path .45s,transform .4s,-webkit-clip-path .45s;
   vertical-align: baseline;
   font: inherit;
@@ -172,12 +179,12 @@
 .watchedIssuesFilterOn {
   cursor: pointer;
   display: inline-block;
-  border: 1px solid #00838f;
+  border: 1px solid #1F7A8C;
   border-radius: 16px;
   background: #e7f2f3;
   padding: 6px 12px;
   outline: none;
-  color: #00838f;
+  color: #1F7A8C;
   transition: background-color .4s,border-color .4s,color .4s,clip-path .45s,transform .4s,-webkit-clip-path .45s;
   vertical-align: baseline;
   font: inherit;
@@ -197,7 +204,8 @@
 }
 
 .watchedIssuesLabel {
-  font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+  /* font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif; */
+  font-family: 'Montserrat', sans-serif;
   font-size: 12px;
   line-height: 18px;
   font-weight: 600;
