@@ -228,7 +228,7 @@ class IssueCard extends React.Component {
         <div className={css.header}>
           <div className={css.userDate}>
             <div className={css.user}>
-              {user.username}
+              {username}
             </div>
             <div className={css.date}>
               {date}
