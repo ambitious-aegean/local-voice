@@ -26,7 +26,7 @@ class IssueForm extends React.Component {
       text: '',
       imgSrc: '',
       photoFiles: [],
-      photoURLs: [],
+      photos: [],
       reps: [],
       selectedRep: {},
     };
@@ -71,7 +71,9 @@ class IssueForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.postIssue();
+    this.fileUploadHandler()
+      .then(() => this.postIssue())
+      .catch((err) => console.log(err));
   }
 
   handleRepSelect(event) {
@@ -129,10 +131,12 @@ class IssueForm extends React.Component {
 
   postIssue() {
     const {
-      location, categories, title, text, photos, selectedRep,
+      user, location, categories, title, text, photos, selectedRep,
     } = this.state;
+    const { closeForm } = this.props;
 
     axios.post('/issues', {
+      user_id: user.user_id,
       lat: location.lat,
       lng: location.lng,
       categories,
@@ -146,6 +150,7 @@ class IssueForm extends React.Component {
     })
       .then((response) => {
         console.log(response.data);
+        closeForm();
       })
       .catch((error) => {
         console.log(error);
@@ -163,16 +168,17 @@ class IssueForm extends React.Component {
     this.setState({ photoFiles: event.target.files });
   }
 
-  fileUploadHandler(event) {
+  fileUploadHandler() {
     const { photoFiles, user } = this.state;
     const photo = photoFiles[0];
     const formData = new FormData();
     formData.append('photo', photo);
-    axios.post('/photo', formData)
+    return axios.post('/photo', formData)
       .then((resp) => {
-        const { photoURLs } = this.state;
-        photoURLs.push(resp.data.toString());
-        this.setState({ photoURLs });
+        const { photos } = this.state;
+        console.log(resp.data);
+        photos.push(resp.data.toString());
+        this.setState({ photos });
       })
       .catch((err) => console.log(err));
   }
@@ -185,7 +191,7 @@ class IssueForm extends React.Component {
   }
 
   render() {
-    const { address, reps, photoURLs } = this.state;
+    const { address, reps, photos } = this.state;
     const { closeForm } = this.props;
     const categories = ['infrastructure', 'nuisance', 'theft', 'safety', 'waste', 'permits', 'crime'];
     return (
@@ -212,7 +218,7 @@ class IssueForm extends React.Component {
           <div id={styles.categories}>
             Check all that apply
             {categories.map((category, index) => (
-              <div className={styles.category}>
+              <div className={styles.category} key={category}>
                 <input onChange={this.addCategory} type="checkbox" value={index + 1} />
                 <label htmlFor={category}>{category}</label>
               </div>
