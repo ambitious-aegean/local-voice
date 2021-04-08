@@ -38,11 +38,11 @@ class IssueCard extends React.Component {
     const {
       resolved, resolver, issue_id, up_vote,
     } = issue;
-    const { user_id } = user;
+    const { user_id, watchedList, votedList } = user;
     this.setState({
       voteCount: up_vote,
     });
-    this.checkVote(issue_id, user_id);
+    this.checkVote(issue_id, votedList);
   }
 
   handleViewOptionsClick() {
@@ -70,15 +70,12 @@ class IssueCard extends React.Component {
     this.setState({ viewDiscussion: false });
   }
 
-  checkVote(issue_id, user_id) {
-    axios.get(`/allIssues/checkVote/?issue_id=${issue_id}`)
-      .then((resp) => {
-        if (resp.data.indexOf(user_id) !== -1) {
-          this.setState({
-            voted: true,
-          });
-        }
+  checkVote(issue_id, votedList) {
+    if (votedList.indexOf(issue_id) !== -1) {
+      this.setState({
+        voted: true,
       });
+    }
   }
 
   up_vote() {

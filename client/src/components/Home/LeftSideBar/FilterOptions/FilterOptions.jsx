@@ -2,8 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from '../styles/filterOptions.module.css';
 
-const categories = ['theft', 'crime', 'for sale', 'infrastructure', 'nuisance', 'public agencies', 'safety', 'waste',
-  'permits', 'stolen mail'];
+const categories = ['infrastructure', 'nuisance', 'theft', 'safety', 'waste', 'permits', 'crime'];
 
 const FilterOptions = ({ filterIssues }) => (
   <div className={styles.filterOptions}>
