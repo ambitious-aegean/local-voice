@@ -145,6 +145,13 @@ class MapView extends React.Component {
     const { displayedIssues } = this.props;
     const { location } = this.state;
     const { lat, lng } = location;
+    if (!displayedIssues || !location) {
+      return (
+        <div>
+          Loading
+        </div>
+      );
+    }
     return (
       <div id="mapView">
         <Map
