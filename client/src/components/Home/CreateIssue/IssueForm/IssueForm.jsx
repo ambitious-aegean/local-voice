@@ -163,51 +163,51 @@ class IssueForm extends React.Component {
     const categories = ['infrastructure', 'nuisance', 'theft', 'safety', 'waste', 'permits', 'crime'];
     return (
       <div id={styles.formBackground}>
-        <div id={styles.issueForm}>
-          <div className={styles.icon} onClick={closeForm}>
+        <form onSubmit={this.handleSubmit}>
+          <div id={styles.icon} onClick={closeForm}>
             <img src="icons/close.png" alt="close" />
           </div>
-          <form style={{ display: 'flex', flexDirection: 'column' }} onSubmit={this.handleSubmit}>
-            <label htmlFor="address">
-              Address
-              <input style={{ width: '300px' }} type="text" value={address} onChange={this.handleChange} required name="address" />
-            </label>
-            <button style={{ width: '100px' }} type="button" name="setLocation" onClick={this.setLocation}>set location</button>
-            <div>
-              Categories
-              {categories.map((category, index) => (
-                <div>
-                  <input onChange={this.addCategory} type="checkbox" value={index + 1} />
-                  <label htmlFor={category}>{category}</label>
-                </div>
+          <label htmlFor="address">
+            Location/Address
+            <input id={styles.address} type="text" value={address} onChange={this.handleChange} required name="address" />
+          </label>
+          <button id={styles.setLocation} type="button" name="setLocation" onClick={this.setLocation}>
+            set location
+          </button>
+          <label htmlFor="title">
+            Issue
+          </label>
+          <input id={styles.title} type="text" onChange={this.handleChange} required name="title" />
+          <label htmlFor="text">
+            Description
+          </label>
+          <textarea id={styles.text} type="text" onChange={this.handleChange} required name="text" />
+          <div id={styles.categories}>
+            Check all that apply
+            {categories.map((category, index) => (
+              <div className={styles.category}>
+                <input onChange={this.addCategory} type="checkbox" value={index + 1} />
+                <label htmlFor={category}>{category}</label>
+              </div>
+            ))}
+          </div>
+          <label htmlFor="photos">
+            Photos (optional)
+            <input id={styles.chooseFile} type="file" onChange={this.fileSelectedHandler} name="photos" multiple />
+            <button onClick={this.fileUploadHandler}>upload photos</button>
+          </label>
+          <label htmlFor="reps">
+            Choose a Rep
+            <select id={styles.repSelector} onChange={this.handleRepSelect} name="rep">
+              {reps.map((rep, index) => (
+                <option className={styles.repOption} value={index} key={rep.name}>
+                  {rep.name} ({rep.title})
+                </option>
               ))}
-            </div>
-            <label htmlFor="title">
-              title
-              <input id={styles.title} type="text" onChange={this.handleChange} required name="title" />
-            </label>
-            <label htmlFor="text">
-              text
-              <input id={styles.text} type="text" onChange={this.handleChange} required name="text" />
-            </label>
-            <label htmlFor="photos">
-              Photos
-              <input type="file" onChange={this.fileSelectedHandler} name="photos" multiple />
-              <button onClick={this.fileUploadHandler}>upload photos</button>
-            </label>
-            <label htmlFor="reps">
-              Choose a Rep
-              <select onChange={this.handleRepSelect} name="rep">
-                {reps.map((rep, index) => (
-                  <option value={index} key={rep.name}>
-                    {rep.name} ({rep.title})
-                  </option>
-                ))}
-              </select>
-            </label>
-            <input style={{ width: '100px' }} type="submit" value="submit issue" />
-          </form>
-        </div>
+            </select>
+          </label>
+          <input id={styles.formSubmit} type="submit" value="submit issue" />
+        </form>
       </div>
     );
   }
