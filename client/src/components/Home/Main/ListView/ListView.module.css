@@ -1,31 +1,60 @@
 .listView {
   width: 100%;
   height: max-content;
+  display: flex;
+  justify-content: center;
+}
+
+.issues {
+  width: 75%;
 }
 
 .issueCard {
   display: flex;
   flex-direction: column;
   border: 1px solid black;
+   margin: 7px;
+  padding: 7px;
 }
 
 .issueCard .header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  border: 1px solid black;
 }
 
-.header .dateCategories {
+.header .userDate {
   display: flex;
   flex-direction: column;
+  border: 1px solid black;
 }
 
-.dateCategories .categories {
+.header .categories {
+  display: flex;
+  flex-direction: row;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  border: 1px solid black;
+}
+
+.content {
+  border: 1px solid black;
+}
+
+.photos {
   display: flex;
   flex-direction: row;
 }
 
-.photos {
+.photos .photo {
   max-height: 100px;
-  max-width: 100px;;
+  max-width: 100px;
+  margin: 2px;
+}
+
+.options {
+  display: flex;
+  flex-direction: row;
 }
