@@ -21,8 +21,25 @@ const LeftSideBar = ({ user, categories, filterIssues, filterMyIssues, filterWat
           {user.username}
           </div>
       </div>
-      <div onClick={handleMyIssuesClick}>My Issues</div>
-      <div onClick={handleWatchedIssuesClick}>Watched Issues</div>
+      <div className={styles.personalFiltersContainer}>
+        <div className={styles.personalFiltersVerticalLayout}>
+          <div className={styles.personalFiltersPadding}>
+            <p className={styles.personalFiltersLabel}>Personal Filters</p>
+          </div>
+          <div className={styles.filterToggleSet}>
+            <div className={styles.myIssuesFilterContainer}>
+              <button className={styles.myIssuesFilter} onClick={handleMyIssuesClick}>
+                <span className={styles.myIssuesLabel}>My Issues</span>
+              </button>
+            </div>
+            <div className={styles.watchedIssuesFilterContainer}>
+              <button className={styles.watchedIssuesFilter} onClick={handleWatchedIssuesClick}>
+                <span className={styles.watchedIssuesLabel}>Watched Issues</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
       <FilterOptions categories={categories} filterIssues={filterIssues} />
     </div>
   );

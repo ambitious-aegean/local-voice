@@ -3,13 +3,6 @@ import PropTypes from 'prop-types';
 import styles from '../styles/filterOptions.module.css';
 
 class FilterOptions extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selected: {},
-    };
-  }
-
   // onChange(e) {
   //   this.setState({
   //     selected:
@@ -21,13 +14,13 @@ class FilterOptions extends React.Component {
     return (
       <div className={styles.filterOptions}>
         <form className={styles.formContainer}>
-          Search Filter Options
+          <span className={styles.filterHeader}>Search Filter Options</span>
           {categories.map((category, index) => (
-            <div key={index}>
-            <input className={styles.checkbox} name={category} value={category} id="category" type="checkbox" onChange={filterIssues} />
-            <label className={styles.labels} key={category}>
-              {category}
-            </label>
+            <div className={styles.checkboxContainer} key={index}>
+              <input className={styles.checkbox} name={category} value={category} id="category" type="checkbox" onChange={filterIssues} />
+              <label className={styles.labels} key={category}>
+                {category}
+              </label>
             </div>
           ))}
         </form>
