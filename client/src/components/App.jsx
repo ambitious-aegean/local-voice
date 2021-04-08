@@ -4,7 +4,6 @@ import styles from './styles.module.css';
 import Home from './Home/Home.jsx';
 import LogIn from './LogIn/LogIn.jsx';
 
-
 // sends user to either LogIn page or Home
 class App extends React.Component {
   constructor(props) {
@@ -15,7 +14,6 @@ class App extends React.Component {
   }
 
   render() {
-
     return (
       <div id={styles.app}>
         {/* <LogIn /> */}

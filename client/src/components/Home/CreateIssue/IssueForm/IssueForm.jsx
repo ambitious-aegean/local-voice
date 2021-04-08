@@ -58,12 +58,12 @@ class IssueForm extends React.Component {
     const {
       address, title, text,
     } = this.state;
-    const { id, value } = event.target;
-    if (id === 'address') {
+    const { name, value } = event.target;
+    if (name === 'address') {
       this.setState({ address: value });
-    } else if (id === 'title') {
+    } else if (name === 'title') {
       this.setState({ title: value });
-    } else if (id === 'text') {
+    } else if (name === 'text') {
       this.setState({ text: value });
     }
   }
@@ -160,6 +160,7 @@ class IssueForm extends React.Component {
   render() {
     const { address, reps, photoURLs } = this.state;
     const { closeForm } = this.props;
+    const categories = ['infrastructure', 'nuisance', 'theft', 'safety', 'waste', 'permits', 'crime'];
     return (
       <div id={styles.formBackground}>
         <div id={styles.issueForm}>
@@ -169,42 +170,34 @@ class IssueForm extends React.Component {
           <form style={{ display: 'flex', flexDirection: 'column' }} onSubmit={this.handleSubmit}>
             <label htmlFor="address">
               Address
-              <input style={{ width: '300px' }} type="text" value={address} onChange={this.handleChange} required id="address" />
+              <input style={{ width: '300px' }} type="text" value={address} onChange={this.handleChange} required name="address" />
             </label>
-            <button style={{ width: '100px' }} type="button" id="setLocation" onClick={this.setLocation}>set location</button>
+            <button style={{ width: '100px' }} type="button" name="setLocation" onClick={this.setLocation}>set location</button>
             <div>
               Categories
-              <input onChange={this.addCategory} type="checkbox" id="nuisance" value="nuisance" />
-              <label htmlFor="nuisance"> nuisance</label>
-              <input onChange={this.addCategory} type="checkbox" id="public-agencies" value="public agencies" />
-              <label htmlFor="public-agencies">public agencies</label>
-              <input onChange={this.addCategory} type="checkbox" id="infrastructure" value="infrastructure" />
-              <label htmlFor="infrastructure">infrastructure</label>
-              <input onChange={this.addCategory} type="checkbox" id="safety" value="safety" />
-              <label htmlFor="safety"> safety</label>
-              <input onChange={this.addCategory} type="checkbox" id="waste" value="waste" />
-              <label htmlFor="waste">waste</label>
-              <input onChange={this.addCategory} type="checkbox" id="permits" value="permits" />
-              <label htmlFor="permits">permits</label>
-              <input onChange={this.addCategory} type="checkbox" id="stolen-mail" value="stolen mail" />
-              <label htmlFor="stolen-mail"> stolen mail</label>
+              {categories.map((category, index) => (
+                <div>
+                  <input onChange={this.addCategory} type="checkbox" value={index + 1} />
+                  <label htmlFor={category}>{category}</label>
+                </div>
+              ))}
             </div>
             <label htmlFor="title">
               title
-              <input type="text" onChange={this.handleChange} required id="title" />
+              <input type="text" onChange={this.handleChange} required name="title" />
             </label>
             <label htmlFor="text">
               text
-              <input type="text" onChange={this.handleChange} required id="text" />
+              <input type="text" onChange={this.handleChange} required name="text" />
             </label>
             <label htmlFor="photos">
               Photos
-              <input type="file" onChange={this.fileSelectedHandler} required id="photos" multiple />
+              <input type="file" onChange={this.fileSelectedHandler} required name="photos" multiple />
               <button onClick={this.fileUploadHandler}>upload photos</button>
             </label>
             <label htmlFor="reps">
               Choose a Rep
-              <select onChange={this.handleRepSelect} name="rep" id="rep">
+              <select onChange={this.handleRepSelect} name="rep">
                 {reps.map((rep, index) => (
                   <option value={index} key={rep.name}>
                     {rep.name} ({rep.title})
