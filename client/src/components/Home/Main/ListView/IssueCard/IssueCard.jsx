@@ -11,6 +11,7 @@ import axios from 'axios';
 
 import css from '../ListView.module.css';
 
+import OptionsModal from './OptionsModal/OptionsModal.jsx';
 import Discussion from './Discussion/Discussion.jsx';
 
 class IssueCard extends React.Component {
@@ -18,6 +19,7 @@ class IssueCard extends React.Component {
     super(props);
     this.state = {
       viewDiscussion: false,
+      viewOptions: false,
       discussionData: [],
       voted: false,
       flagged: false,
@@ -26,19 +28,21 @@ class IssueCard extends React.Component {
       resolver: 0,
       voteCount: 0,
     };
-    this.watch = this.watch.bind(this);
+    this.handleViewOptionsClick = this.handleViewOptionsClick.bind(this);
+    this.handleViewDiscussionClick = this.handleViewDiscussionClick.bind(this);
+    this.checkVote = this.checkVote.bind(this);
     this.up_vote = this.up_vote.bind(this);
-    this.flag = this.flag.bind(this);
-    this.resolve = this.resolve.bind(this);
-    this.unwatch = this.unwatch.bind(this);
     this.down_vote = this.down_vote.bind(this);
+    this.checkFlag = this.checkFlag.bind(this);
+    this.flag = this.flag.bind(this);
     this.unflag = this.unflag.bind(this);
+    this.watch = this.watch.bind(this);
+    this.checkWatched = this.checkWatched.bind(this);
+    this.unwatch = this.unwatch.bind(this);
+    this.resolve = this.resolve.bind(this);
     this.unresolve = this.unresolve.bind(this);
     this.getDiscussionData = this.getDiscussionData.bind(this);
     this.closeDiscussion = this.closeDiscussion.bind(this);
-    this.checkVote = this.checkVote.bind(this);
-    this.checkWatched = this.checkWatched.bind(this);
-    this.checkFlag = this.checkFlag.bind(this);
   }
 
   componentDidMount() {
@@ -59,6 +63,11 @@ class IssueCard extends React.Component {
     this.checkVote(issue_id, user_id);
     this.checkWatched(issue_id, user_id);
     this.checkFlag(issue_id, user_id);
+  }
+
+  handleViewOptionsClick() {
+    const { viewOptions } = this.state;
+    this.setState({ viewOptions: !viewOptions });
   }
 
   handleViewDiscussionClick() {
@@ -217,7 +226,9 @@ class IssueCard extends React.Component {
 
   render() {
     const {
-      voted, flagged, watched, viewDiscussion, discussionData, markedResolved, resolver, voteCount,
+      voted,
+      flagged,
+      watched, viewOptions, viewDiscussion, discussionData, markedResolved, resolver, voteCount,
     } = this.state;
     const { issue, user } = this.props;
     const {
@@ -236,7 +247,7 @@ class IssueCard extends React.Component {
             </div>
           </div>
           <div className={css.dotsCategories}>
-            <div className={css.dots}>
+            <div role="button" className={css.dots} onClick={this.handleViewOptionsClick} onKeyPress={this.handleViewOptionsClick} tabIndex={0}>
               <i className={`${css.dotsIcon} fa fa-ellipsis-h`} />
             </div>
             <div id="issueCard-categories" className={css.categories}>
@@ -247,6 +258,10 @@ class IssueCard extends React.Component {
               ))}
             </div>
           </div>
+          {viewOptions
+            ? (
+              <OptionsModal issue={issue} user={user} />
+            ) : ''}
         </div>
         <div className={css.content}>
           <div className={css.title}>

@@ -15,6 +15,52 @@ class OptionsModal extends React.Component {
       markedResolved: false,
       resolver: 0,
     };
+    this.checkFlag = this.checkFlag.bind(this);
+    this.flag = this.flag.bind(this);
+    this.unflag = this.unflag.bind(this);
+    this.watch = this.watch.bind(this);
+    this.checkWatched = this.checkWatched.bind(this);
+    this.unwatch = this.unwatch.bind(this);
+    this.resolve = this.resolve.bind(this);
+    this.unresolve = this.unresolve.bind(this);
+  }
+
+  componentDidMount() {
+    const { issue, user } = this.props;
+    const {
+      resolved, resolver, issue_id,
+    } = issue;
+    const { user_id } = user;
+    if (resolved !== 0) {
+      this.setState({
+        markedResolved: true,
+        resolver,
+      });
+    }
+    this.checkWatched(issue_id, user_id);
+    this.checkFlag(issue_id, user_id);
+  }
+
+  checkWatched(issue_id, user_id) {
+    axios.get(`/allIssues/checkWatched/?issue_id=${issue_id}`)
+      .then((resp) => {
+        if (resp.data.indexOf(user_id) !== -1) {
+          this.setState({
+            watched: true,
+          });
+        }
+      });
+  }
+
+  checkFlag(issue_id, user_id) {
+    axios.get(`/allIssues/checkFlag/?issue_id=${issue_id}`)
+      .then((resp) => {
+        if (resp.data.indexOf(user_id) !== -1) {
+          this.setState({
+            flagged: true,
+          });
+        }
+      });
   }
 
   flag() {

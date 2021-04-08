@@ -51,6 +51,10 @@
   bottom: 4px;
 }
 
+.dots:focus {
+  outline: none;
+}
+
 .dotsIcon {
   margin: 2px;
   padding: 5px;
