@@ -2,6 +2,7 @@ const db = require('../../db/index.js');
 
 const postIssue = (req, res) => {
   const {
+    user_id,
     categories, // array
     title,
     text,
@@ -14,7 +15,7 @@ const postIssue = (req, res) => {
     rep_photo_url,
     date,
   } = req.body;
-  const issuesQuery = `INSERT INTO issues (title, text, lat, lng, rep_name, rep_email, rep_photo_url, date) VALUES ('${title}', '${text}', ${lat}, ${lng}, '${rep_name}', '${rep_email}', '${rep_photo_url}',' ${date}');`;
+  const issuesQuery = `INSERT INTO issues (user_id, title, text, lat, lng, rep_name, rep_email, rep_photo_url, date) VALUES (${user_id}, '${title}', '${text}', ${lat}, ${lng}, '${rep_name}', '${rep_email}', '${rep_photo_url}',' ${date}');`;
   db.query(issuesQuery, (issueErr) => {
     if (issueErr) {
       console.log(issueErr);
