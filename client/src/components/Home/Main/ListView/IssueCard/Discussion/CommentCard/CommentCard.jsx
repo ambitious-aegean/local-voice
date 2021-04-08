@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import css from './CommentCard.module.css';
 
 const CommentCard = ({ comment, user }) => (
   <div id="comment">

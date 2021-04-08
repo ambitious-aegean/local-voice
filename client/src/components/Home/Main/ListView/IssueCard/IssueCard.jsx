@@ -161,34 +161,34 @@ class IssueCard extends React.Component {
             ))}
           </div>
         </div>
-        <div className={css.voteDiscussion}>
-          <div className={css.vote}>
-            {!voted
-              ? (
-                <div>
-                  <button type="button" onClick={this.up_vote}>
-                    <span className="fa fa-chevron-up" />
-                  </button>
-                  {voteCount} upvotes
-                </div>
-              ) : (
-                <div>
-                  <button type="button" onClick={this.down_vote}>
-                    <span className="fa fa-chevron-down" />
-                  </button>
-                  {voteCount} upvotes
-                </div>
-              )}
-          </div>
-          <div className={css.discussion}>
-            <button id="viewDiscussion" type="button" onClick={() => this.handleViewDiscussionClick()} onKeyPress={() => {}} tabIndex={0}>
-              View Discussion
-            </button>
-            {viewDiscussion
-              ? <Discussion discussionData={discussionData} issue={issue} user={user} />
-              : ''}
-          </div>
+        <div className={css.vote}>
+          {!voted
+            ? (
+              <div>
+                <button type="button" onClick={this.up_vote}>
+                  <span className="fa fa-chevron-up" />
+                </button>
+                {voteCount} upvotes
+              </div>
+            ) : (
+              <div>
+                <button type="button" onClick={this.down_vote}>
+                  <span className="fa fa-chevron-down" />
+                </button>
+                {voteCount} upvotes
+              </div>
+            )}
         </div>
+        {/* <div className={css.voteDiscussion}> */}
+        <div className={css.discussion}>
+          <button id="viewDiscussion" type="button" onClick={() => this.handleViewDiscussionClick()} onKeyPress={() => {}} tabIndex={0}>
+            View Discussion
+          </button>
+          {viewDiscussion
+            ? <Discussion discussionData={discussionData} issue={issue} user={user} />
+            : ''}
+        </div>
+        {/* </div> */}
       </div>
     );
   }

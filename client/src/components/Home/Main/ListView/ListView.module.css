@@ -175,16 +175,17 @@
   border-top: rgb(224, 224, 224) 2px solid;
   margin: 5px;
   padding: 5px;
-
+  width: 100%;
 }
 
 .discussion {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   margin: 5px;
   padding: 5px;
+  width: 100%;
  }
 
 .discussion button {

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import CommentCard from './CommentCard/CommentCard.jsx';
 import AddComment from './AddComment/AddComment.jsx';
+import css from './Discussion.module.css';
 
 const Discussion = ({ discussionData, issue, user }) => (
   <div id="discussion">
