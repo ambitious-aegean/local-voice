@@ -24,7 +24,7 @@ class IssueForm extends React.Component {
       title: '',
       text: '',
       imgSrc: '',
-      photos: [],
+      photoFiles: [],
       photoURLs: [],
       reps: [],
       selectedRep: {},
@@ -40,7 +40,6 @@ class IssueForm extends React.Component {
     this.fileSelectedHandler = this.fileSelectedHandler.bind(this);
     this.fileUploadHandler = this.fileUploadHandler.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.randomString = this.randomString.bind(this);
   }
 
   componentDidMount() {
@@ -120,26 +119,18 @@ class IssueForm extends React.Component {
   }
 
   fileSelectedHandler(event) {
-    this.setState({ photos: event.target.files });
-  }
-
-  randomString() {
-    let string = '';
-    for (let i = 0; i < 20; i ++) {
-      string += Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5);
-    }
-    return string;
+    this.setState({ photoFiles: event.target.files });
   }
 
   fileUploadHandler(event) {
-    const { photos, user } = this.state;
-    const photo = photos[0];
-    const filename = user.user_id + this.randomString();
+    const { photoFiles, user } = this.state;
+    const photo = photoFiles[0];
     const formData = new FormData();
-    formData.append(filename, photo);
+    formData.append('photo', photo);
     axios.post('/photo', formData)
       .then((resp) => {
         const { photoURLs } = this.state;
+        console.log(resp.data);
         photoURLs.push(resp.data.toString());
         this.setState({ photoURLs });
       })
@@ -204,7 +195,6 @@ class IssueForm extends React.Component {
             </select>
           </label>
           <input style={{ width: '100px' }} type="submit" value="submit issue" />
-          <img src={photoURLs[0]} />
         </form>
       </div>
     );
