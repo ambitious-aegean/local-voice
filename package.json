@@ -23,9 +23,10 @@
   "dependencies": {
     "@auth0/auth0-react": "^1.4.0",
     "@babel/plugin-transform-modules-commonjs": "^7.13.8",
-    "Buffer": "0.0.0",
+    "@fortawesome/fontawesome-free": "^5.15.3",
     "aws-sdk": "^2.882.0",
     "axios": "^0.21.1",
+    "Buffer": "0.0.0",
     "css-loader": "^5.2.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",

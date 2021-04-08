@@ -1,0 +1,104 @@
+.listView {
+  width: 100%;
+  height: max-content;
+  display: flex;
+  justify-content: center;
+}
+
+.issues {
+  width: 75%;
+}
+
+.issueCard {
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);  margin: 7px;
+  padding: 3px;
+}
+
+.issueCard .header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 5px;
+  padding: 5px;
+  border: 1px solid black;
+}
+
+.header .userDate {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+}
+
+.header .categories {
+  display: flex;
+  flex-direction: row;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  border: 1px solid black;
+}
+
+.content {
+  border: 1px solid black;
+  margin: 5px;
+  padding: 5px;
+}
+
+.content .title {
+  font-size: 22px;
+  font-weight: 600;
+  padding: 5px;
+}
+
+.content .text {
+  padding: 5px;
+}
+
+.photos {
+  display: flex;
+  flex-direction: row;
+}
+
+.photos .photo {
+  max-height: 100px;
+  max-width: 100px;
+  margin: 2px;
+}
+
+.options {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin: 5px;
+  padding: 5px;
+}
+
+.discussion {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 5px;
+  padding: 5px;
+  border-top: grey 1px solid;
+}
+
+.discussion button {
+  border: none;
+  background-color: whitesmoke;
+  width: 75%;
+  height: max-content;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  color: rgb(14, 14, 14);
+}
+
+.discussion button:hover {
+  background-color: rgb(238, 238, 238);
+}
+
+.discussion button:focus {
+  outline: none;
+}
