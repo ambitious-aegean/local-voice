@@ -184,11 +184,10 @@ class IssueCard extends React.Component {
     this.setState({
       watched: false,
     });
-
     const { issue, user } = this.props;
     const { issue_id } = issue;
     const { user_id } = user;
-    axios.put(`/allIssues/unwatch/?user_id=${user_id}&issue_id=${issue_id}`)
+    axios.delete(`/allIssues/unwatch/?user_id=${user_id}&issue_id=${issue_id}`)
       .catch((err) => { throw err; });
   }
 
@@ -230,7 +229,7 @@ class IssueCard extends React.Component {
         <div className={css.header}>
           <div className={css.userDate}>
             <div className={css.user}>
-              {user.username}
+              {username}
             </div>
             <div className={css.date}>
               {date}

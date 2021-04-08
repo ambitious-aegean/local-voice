@@ -1,7 +1,11 @@
 /* eslint-disable camelcase */
 const express = require('express');
 
-const { up_vote, flag, down_vote, unflag, watch, unwatch, resolve, unresolve, checkVote, checkWatched, checkFlag } = require('../controllers/issuesMetaControllers.js');
+const {
+  up_vote, flag, down_vote, unflag,
+  watch, unwatch, resolve, unresolve,
+  checkVote, checkWatched, checkFlag,
+} = require('../controllers/issuesMetaControllers.js');
 
 const issuesMetaRouter = express.Router();
 
