@@ -12,7 +12,7 @@ const up_vote = (req, res) => {
       res.send('already voted');
     } else {
       db.query(`UPDATE issues
-        SET up_vote =  up_vote + 1
+        SET up_vote = up_vote + 1
         WHERE issue_id = ${issue_id}`,
       (err2, result) => {
         if (err2) { throw err2; }
@@ -113,26 +113,59 @@ const unwatch = (req, res) => {
 }
 
 const resolve = (req, res) => {
-  const { issue_id } = req.query;
-  const query = `UPDATE issues
-  SET resolved = 1
-  WHERE issue_id = ${issue_id}`
-
-  db.query(query, (err, response) => {
-    if (err) { throw err; }
-    res.status(204).send(response);
-  })
+  const { issue_id, user_id } = req.query;
+  const query1 = `SELECT *
+  FROM issues
+  WHERE resolved = 1
+  AND issue_id = ${issue_id}`;
+  db.query(query1, (err1, data) => {
+    if (err1) { throw err1; }
+    if (data.length) {
+      res.send('already marked resolved');
+    } else {
+      db.query(`UPDATE issues SET resolved = 1, resolver = ${user_id} WHERE issue_id = ${issue_id}`, (err2, result) => {
+        if (err2) { throw err2; }
+        res.status(200).send(result);
+      });
+    }
+  });
 }
 
 const unresolve = (req, res) => {
   const { issue_id } = req.query;
-  const query = `UPDATE issues
-  SET resolved = 0
-  WHERE issue_id = ${issue_id}`
+  db.query(`UPDATE issues
+        SET resolved = 0,
+        resolver = 0
+        WHERE issue_id = ${issue_id}`,
+    (err, result) => {
+      if (err) { throw err; }
+      res.status(204).send('marked unresolved');
+  });
+}
 
-  db.query(query, (err, response) => {
+const checkVote = (req, res) => {
+  const { issue_id } = req.query;
+  const query = `SELECT user_id FROM user_up_vote WHERE issue_id=${issue_id}`;
+  db.query(query, (err, data) => {
     if (err) { throw err; }
-    res.status(204).send(response);
+    console.log(data)
+    const formattedData = data.map(row => {
+      return row.user_id;
+    })
+    res.send(formattedData);
+  })
+}
+
+const checkWatched = (req, res) => {
+  const { issue_id } = req.query;
+  const query = `SELECT user_id FROM watched_issues WHERE issue_id=${issue_id}`;
+  db.query(query, (err, data) => {
+    if (err) { throw err; }
+    console.log(data)
+    const formattedData = data.map(row => {
+      return row.user_id;
+    })
+    res.send(formattedData);
   })
 }
 
@@ -144,5 +177,32 @@ module.exports = {
   watch,
   unwatch,
   resolve,
-  unresolve
+  unresolve,
+  checkVote,
+  checkWatched,
 }
+
+
+// const resolve = (req, res) => {
+//   const { issue_id, user_id } = req.query;
+//   const query1 = `SELECT *
+//   FROM user_resolved
+//   WHERE user_id = ${user_id}
+//   AND issue_id = ${issue_id}`;
+//   db.query(query1, (err1, data) => {
+//     if (err1) { throw err1; }
+//     if (data.length) {
+//       res.send('already marked resolved');
+//     } else {
+//       db.query(`UPDATE issues SET resolved = 1, resolver = ${user_id} WHERE issue_id = ${issue_id}`, (err2, result) => {
+//         if (err2) { throw err2; }
+//         const query3 = `INSERT INTO user_resolved(user_id, issue_id)
+//         VALUES(${user_id}, ${issue_id})`;
+//         db.query(query3, (err3, data2) => {
+//           if (err3) { throw err3; }
+//           res.status(200).send(result);
+//         });
+//       });
+//     }
+//   });
+// }

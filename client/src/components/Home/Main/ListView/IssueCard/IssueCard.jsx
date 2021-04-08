@@ -20,6 +20,7 @@ class IssueCard extends React.Component {
       flagged: false,
       watched: false,
       markedResolved: false,
+      resolver: 0,
     };
     this.watch = this.watch.bind(this);
     this.up_vote = this.up_vote.bind(this);
@@ -34,13 +35,31 @@ class IssueCard extends React.Component {
   }
 
   componentDidMount() {
-    const { issue } = this.props;
-    const { resolved } = issue;
+    const { issue, user } = this.props;
+    const { resolved, resolver, issue_id } = issue;
+    const { user_id } = user;
     if (resolved !== 0) {
       this.setState({
         markedResolved: true,
+        resolver: resolver,
       })
     }
+    axios.get(`/allIssues/checkVote/?issue_id=${issue_id}`)
+      .then(resp => {
+        if (resp.data.indexOf(user_id) !== -1) {
+          this.setState({
+            voted: true,
+          })
+        }
+      })
+      axios.get(`/allIssues/checkWatched/?issue_id=${issue_id}`)
+      .then(resp => {
+        if (resp.data.indexOf(user_id) !== -1) {
+          this.setState({
+            watched: true,
+          })
+        }
+      })
   }
 
   handleViewDiscussionClick() {
@@ -68,8 +87,9 @@ class IssueCard extends React.Component {
       voted: true,
     });
 
-    const { issue } = this.props;
-    const { issue_id, user_id } = issue;
+    const { issue, user } = this.props;
+    const { issue_id } = issue;
+    const { user_id } = user;
     axios.put(`/allIssues/up_vote/?issue_id=${issue_id}&user_id=${user_id}`)
       .catch((err) => { throw err; });
   }
@@ -79,8 +99,9 @@ class IssueCard extends React.Component {
       voted: false,
     });
 
-    const { issue } = this.props;
-    const { issue_id, user_id } = issue;
+    const { issue, user } = this.props;
+    const { issue_id } = issue;
+    const { user_id } = user;
     axios.put(`/allIssues/down_vote/?issue_id=${issue_id}&user_id=${user_id}`)
       .catch((err) => { throw err; });
   }
@@ -90,8 +111,9 @@ class IssueCard extends React.Component {
       flagged: true,
     });
 
-    const { issue } = this.props;
-    const { issue_id, user_id } = issue;
+    const { issue, user } = this.props;
+    const { issue_id } = issue;
+    const { user_id } = user;
     axios.put(`/allIssues/flag/?issue_id=${issue_id}&user_id=${user_id}`)
       .catch((err) => { throw err; });
   }
@@ -101,8 +123,9 @@ class IssueCard extends React.Component {
       flagged: false,
     });
 
-    const { issue } = this.props;
-    const { issue_id, user_id } = issue;
+    const { issue, user } = this.props;
+    const { issue_id } = issue;
+    const { user_id } = user;
     axios.put(`/allIssues/unflag/?issue_id=${issue_id}&user_id=${user_id}`)
       .catch((err) => { throw err; });
   }
@@ -112,8 +135,9 @@ class IssueCard extends React.Component {
       watched: true,
     });
 
-    const { issue } = this.props;
-    const { issue_id, user_id } = issue;
+    const { issue, user } = this.props;
+    const { issue_id } = issue;
+    const { user_id } = user;
     axios.put(`/allIssues/watch/?user_id=${user_id}&issue_id=${issue_id}`)
       .catch((err) => { throw err; });
   }
@@ -123,35 +147,40 @@ class IssueCard extends React.Component {
       watched: false,
     });
 
-    const { issue } = this.props;
-    const { issue_id, user_id } = issue;
+    const { issue, user } = this.props;
+    const { issue_id } = issue;
+    const { user_id } = user;
     axios.put(`/allIssues/unwatch/?user_id=${user_id}&issue_id=${issue_id}`)
       .catch((err) => { throw err; });
   }
 
   resolve() {
+    const { issue, user } = this.props;
+    const { issue_id } = issue;
+    const { user_id } = user;
     this.setState({
       markedResolved: true,
+      resolver: user_id,
     })
-    const { issue } = this.props;
-    const { issue_id, user_id } = issue;
-    axios.put(`/allIssues/resolve/?issue_id=${issue_id}`)
+    axios.put(`/allIssues/resolve/?user_id=${user_id}&issue_id=${issue_id}`)
       .catch((err) => { throw err; });
   }
 
   unresolve() {
+    const { issue, user } = this.props;
+    const { issue_id } = issue;
+    const { user_id } = user;
     this.setState({
       markedResolved: false,
+      resolver: 0,
     })
-    const { issue } = this.props;
-    const { issue_id, user_id } = issue;
-    axios.put(`/allIssues/unresolve/?issue_id=${issue_id}`)
+    axios.put(`/allIssues/unresolve/?user_id=${user_id}&issue_id=${issue_id}`)
       .catch((err) => { throw err; });
   }
 
   render() {
     const {
-      voted, flagged, watched, viewDiscussion, discussionData, markedResolved
+      voted, flagged, watched, viewDiscussion, discussionData, markedResolved, resolver
     } = this.state;
     const { issue, user } = this.props;
     const {
@@ -220,8 +249,7 @@ class IssueCard extends React.Component {
               </button>
             </div>
           )}
-          {user_id === user.user_id
-            ? (!markedResolved
+          {!markedResolved
             ? (
               <div>
                 <button type="button" onClick={this.resolve}>
@@ -229,13 +257,16 @@ class IssueCard extends React.Component {
                 </button>
               </div>
             ) : (
-              <div>
-                <button type="button" onClick={this.unresolve}>
-                  <span> un-resolve </span>
-                </button>
-              </div>
-            ))
-            : <></>}
+              resolver === user.user_id  || user_id === user.user_id
+              ? <div>
+                 <button type="button" onClick={this.unresolve}>
+                   <span> un-resolve </span>
+                 </button>
+                </div>
+              : <div>
+                  <span>Resolved</span>
+                </div>
+            )}
         <button id="viewDiscussion" type="button" onClick={() => this.handleViewDiscussionClick()} onKeyPress={() => {}} tabIndex={0}>
           View Discussion
           {viewDiscussion
