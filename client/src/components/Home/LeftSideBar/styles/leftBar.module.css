@@ -5,27 +5,37 @@
   height: 100%;
 }
 
-.userBanner {
-  display: flex;
-  flex-direction: row;
-  border: 1px solid black;
+.welcomeBanner {
+  border-bottom: 1px solid #eeeeef;
+  padding: 10px;
 }
 
-.userName {
-  flex: 1;
-  border: 1px solid black;
+.welcomeBannerVerticalLayout {
+  width: 100%;
+  border-color: white;
+  display: inline-block;
+  vertical-align: baseline;
 }
 
-.profilePic {
-  flex: 1;
-  border: 1px solid black;
+.welcomeTagPadding {
+  padding-bottom: 8px;
+}
+
+.welcomeTag {
+  font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: bold;
+  color: rgba(43,39,60,1);
+  text-align: left;
 }
 
 .personalFiltersContainer {
-  border-color: white;
-  border-bottom: 1px solid white;
-  padding-bottom: 16px;
-  padding-top: 16px;
+  /* border-color: white; */
+  border-bottom: 1px solid #eeeeef;
+  /* padding-bottom: 16px;
+  padding-top: 16px; */
+  padding: 10px;
 }
 
 .personalFiltersVerticalLayout {
@@ -36,7 +46,7 @@
 }
 
 .personalFiltersPadding {
-  padding-bottom:8px;
+  padding-bottom: 8px;
 }
 
 .personalFiltersLabel {
@@ -60,7 +70,7 @@
   border-color: white;
 }
 
-.myIssuesFilter {
+.myIssuesFilterOff {
   cursor: pointer;
   display: inline-block;
   border: 1px solid#bbbac0;
@@ -69,6 +79,33 @@
   padding: 6px 12px;
   outline: none;
   color: #2b273c;
+  transition: background-color .4s,border-color .4s,color .4s,clip-path .45s,transform .4s,-webkit-clip-path .45s;
+  vertical-align: baseline;
+  font: inherit;
+  font-size: 100%;
+  position: relative;
+  margin: 4px;
+  appearance: auto;
+  -webkit-writing-mode: horizontal-tb !important;
+  text-rendering: auto;
+  letter-spacing: normal;
+  word-spacing: normal;
+  text-transform: none;
+  text-indent: 0px;
+  text-shadow: none;
+  text-align: center;
+  align-items: flex-start;
+}
+
+.myIssuesFilterOn {
+  cursor: pointer;
+  display: inline-block;
+  border: 1px solid #00838f;
+  border-radius: 16px;
+  background: #e7f2f3;
+  padding: 6px 12px;
+  outline: none;
+  color: #00838f;
   transition: background-color .4s,border-color .4s,color .4s,clip-path .45s,transform .4s,-webkit-clip-path .45s;
   vertical-align: baseline;
   font: inherit;
@@ -100,18 +137,12 @@
   background-color:#e6e6e6
 }
 
-.myIssuesFilter:active {
-  color: #00838f;
-  border-color: #00838f;
-  background: #e7f2f3;
-}
-
 .watchedIssuesFilterContainer {
   display: block;
   border-color: white;
 }
 
-.watchedIssuesFilter {
+.watchedIssuesFilterOff {
   cursor: pointer;
   display: inline-block;
   border: 1px solid#bbbac0;
@@ -120,6 +151,33 @@
   padding: 6px 12px;
   outline: none;
   color: #2b273c;
+  transition: background-color .4s,border-color .4s,color .4s,clip-path .45s,transform .4s,-webkit-clip-path .45s;
+  vertical-align: baseline;
+  font: inherit;
+  font-size: 100%;
+  position: relative;
+  margin: 4px;
+  appearance: auto;
+  -webkit-writing-mode: horizontal-tb !important;
+  text-rendering: auto;
+  letter-spacing: normal;
+  word-spacing: normal;
+  text-transform: none;
+  text-indent: 0px;
+  text-shadow: none;
+  text-align: center;
+  align-items: flex-start;
+}
+
+.watchedIssuesFilterOn {
+  cursor: pointer;
+  display: inline-block;
+  border: 1px solid #00838f;
+  border-radius: 16px;
+  background: #e7f2f3;
+  padding: 6px 12px;
+  outline: none;
+  color: #00838f;
   transition: background-color .4s,border-color .4s,color .4s,clip-path .45s,transform .4s,-webkit-clip-path .45s;
   vertical-align: baseline;
   font: inherit;

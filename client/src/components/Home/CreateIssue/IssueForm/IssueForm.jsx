@@ -15,14 +15,17 @@ import * as Buffer from 'Buffer';
 class IssueForm extends React.Component {
   constructor(props) {
     super(props);
-    const { location } = this.props;
+    const { location, user } = this.props;
     this.state = {
       address: '',
       location,
+      user,
       categories: [],
       title: '',
       text: '',
-      photos: [],
+      imgSrc: '',
+      photoFiles: [],
+      photoURLs: [],
       reps: [],
       selectedRep: {},
     };
@@ -116,16 +119,21 @@ class IssueForm extends React.Component {
   }
 
   fileSelectedHandler(event) {
-    this.setState({ photos: event.target.files });
+    this.setState({ photoFiles: event.target.files });
   }
 
   fileUploadHandler(event) {
-    const { photos } = this.state;
-    const photo = photos[0];
+    const { photoFiles, user } = this.state;
+    const photo = photoFiles[0];
     const formData = new FormData();
     formData.append('photo', photo);
     axios.post('/photo', formData)
-      .then((resp) => console.log(resp.data))
+      .then((resp) => {
+        const { photoURLs } = this.state;
+        console.log(resp.data);
+        photoURLs.push(resp.data.toString());
+        this.setState({ photoURLs });
+      })
       .catch((err) => console.log(err));
   }
 
@@ -137,7 +145,7 @@ class IssueForm extends React.Component {
   }
 
   render() {
-    const { address, reps } = this.state;
+    const { address, reps, photoURLs } = this.state;
     return (
       <div id="issueForm">
         <form style={{ display: 'flex', flexDirection: 'column' }} onSubmit={this.handleSubmit}>

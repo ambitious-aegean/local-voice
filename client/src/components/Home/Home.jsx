@@ -45,8 +45,8 @@ class Home extends React.Component {
       filteredIssues: [],
       myIssuesFilter: false,
       watchedIssuesFilter: false,
-      categories: ['theft', 'crime', 'for sale', 'infrastructure', 'nuisance', 'public agencies', 'safety', 'waste',
-        'permits', 'stolen mail'],
+      categories: ['Theft', 'Crime', 'For Sale', 'Infrastructure', 'Nuisance', 'Public Agencies', 'Safety', 'Waste',
+        'Permits', 'Stolen Mail'],
       watched: [],
       view: 0, // 0 = map view
     };

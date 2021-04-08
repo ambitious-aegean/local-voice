@@ -34,7 +34,7 @@ class IssueCard extends React.Component {
 
   handleViewDiscussionClick() {
     const { viewDiscussion } = this.state;
-    this.setState({ viewDiscussion: true });
+    this.setState({ viewDiscussion: !viewDiscussion });
     this.getDiscussionData();
   }
 
@@ -211,13 +211,13 @@ class IssueCard extends React.Component {
               )}
           </div>
         </div>
-        <div className={css.viewDiscussion}>
-          <button id="viewDiscussion" type="button" onClick={() => this.handleViewDiscussionClick()} onKeyPress={() => {}} tabIndex={0}>
+        <div className={css.discussion}>
+          <button id="viewDiscussion" className={css.viewDiscussion} type="button" onClick={() => this.handleViewDiscussionClick()} onKeyPress={() => {}} tabIndex={0}>
             View Discussion
-            {viewDiscussion
-              ? <Discussion discussionData={discussionData} issue={issue} user={user} />
-              : ''}
           </button>
+          {viewDiscussion
+            ? <Discussion discussionData={discussionData} issue={issue} user={user} />
+            : ''}
         </div>
       </div>
     );
