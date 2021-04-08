@@ -1,9 +1,10 @@
 .filterOptions {
-  margin-top: 50px;
+  /* margin-top: 50px; */
   display: flex;
   flex-direction: column;
   /* border: 1px solid black; */
   padding: 10px;
+  margin-top: 16px;
 }
 
 .container {
@@ -13,8 +14,11 @@
 }
 
 .filterHeader {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
   font-weight: bold;
-  margin-bottom: 30px;
+  margin-bottom: 25px;
+  color: rgba(43,39,60,1);
 }
 
 .checkbox{
@@ -22,9 +26,14 @@
   width: 25px;
 }
 
-.check:hover{
-  background-color: 'blue';
+.checkbox:checked + label {
+  color: #1F7A8C;
 }
+
+
+/* .checkbox:hover{
+  background-color: 'blue';
+} */
 
 .formContainer {
   display: flex;
@@ -35,4 +44,8 @@
 .labels {
   margin-left: 8px;
   vertical-align: center;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  color: rgba(43,39,60,1);
 }
