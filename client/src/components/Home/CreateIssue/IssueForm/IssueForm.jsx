@@ -219,10 +219,6 @@ class IssueForm extends React.Component {
             Location/Address
             <input id={styles.address} type="text" value={address} onChange={this.locationChange} required name="address" />
           </label>
-          {/* <button id={styles.setLocation} type="button" name="setLocation"
-          onClick={this.setLocation}>
-            set location
-          </button> */}
           <label htmlFor="title">
             Issue
           </label>
