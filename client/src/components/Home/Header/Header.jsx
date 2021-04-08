@@ -8,11 +8,12 @@ const Header = ({ toggle }) => (
   <div className={styles.headerContainer}>
     <div className={styles.title}>Local Voice</div>
     <div className={styles.toggleContainer} >
-      <span className={styles.toggle}>Toggle List</span>
+      <span className={styles.mapViewLabel}>Map View</span>
       <label className={styles.switch}>
         <input onClick={toggle} type='checkbox'></input>
         <span className={styles.sliderRound}></span>
       </label>
+      <span className={styles.listViewLabel}>List View</span>
     </div>
   </div>
 );
