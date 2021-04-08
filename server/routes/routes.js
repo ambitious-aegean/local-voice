@@ -6,6 +6,8 @@ const { allIssues } = require('../controllers/issuesControllers.js');
 
 const { getReps } = require('../controllers/repsController.js');
 const { getAddress, getLocation } = require('../controllers/locAddController.js');
+
+const { uploadPhotos } = require('../controllers/photoUploadController.js');
 const issuesMetaRouter = require('./issuesMetaRouter.js');
 
 const router = express.Router();
@@ -15,6 +17,8 @@ router.get('/comments', getComments);
 router.post('/comments', postComment);
 
 router.get('/reps', getReps);
+
+router.post('/photo', uploadPhotos);
 
 router.get('/address', getAddress);
 router.get('/location', getLocation);
