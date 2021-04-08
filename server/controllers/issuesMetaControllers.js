@@ -36,7 +36,7 @@ const flag = (req, res) => {
   db.query(query1, (err1, data) => {
     if (err1) { throw err1; }
     if (data.length) {
-      res.send('already watched');
+      res.send('already flagged');
     } else {
       db.query(`UPDATE issues SET flag_count = flag_count + 1 WHERE issue_id = ${issue_id}`, (err2, result) => {
         if (err2) { throw err2; }
