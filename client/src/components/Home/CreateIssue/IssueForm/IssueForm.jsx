@@ -33,9 +33,10 @@ class IssueForm extends React.Component {
 
     this.setAddressFromCoordinates = this.setAddressFromCoordinates.bind(this);
     this.setCoordinatesFromAddress = this.setCoordinatesFromAddress.bind(this);
-    this.setLocation = this.setLocation.bind(this);
     this.setReps = this.setReps.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.debounce = this.debounce.bind(this);
+    this.locationChange = this.locationChange.bind(this);
     this.addCategory = this.addCategory.bind(this);
     this.handleRepSelect = this.handleRepSelect.bind(this);
     this.fileSelectedHandler = this.fileSelectedHandler.bind(this);
@@ -56,13 +57,9 @@ class IssueForm extends React.Component {
   }
 
   handleChange(event) {
-    const {
-      address, title, text,
-    } = this.state;
+    const { title, text } = this.state;
     const { name, value } = event.target;
-    if (name === 'address') {
-      this.setState({ address: value });
-    } else if (name === 'title') {
+    if (name === 'title') {
       this.setState({ title: value });
     } else if (name === 'text') {
       this.setState({ text: value });
@@ -111,13 +108,8 @@ class IssueForm extends React.Component {
       .catch((err) => console.log(err));
   }
 
-  setLocation() {
-    const { address } = this.state;
-    this.setCoordinatesFromAddress(address);
-  }
-
   setCoordinatesFromAddress(address) {
-    axios.get('/location', {
+    return axios.get('/location', {
       params: {
         address,
       },
@@ -127,6 +119,29 @@ class IssueForm extends React.Component {
         this.setReps(resp.data);
       })
       .catch((err) => { throw err; });
+  }
+
+  locationChange(event) {
+    const { value } = event.target;
+    this.setState({ address: value });
+    this.setCoordinatesFromAddress(value)
+      .then(() => {
+        const { location } = this.state;
+        this.debounce(this.setReps(location));
+      })
+      .catch((err) => console.log(err));
+  }
+
+  debounce(func, delay = 200000) {
+    let timeoutId;
+    return (...args) => {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+      timeoutId = setTimeout(() => {
+        func(...args);
+      }, delay);
+    };
   }
 
   postIssue() {
@@ -196,17 +211,18 @@ class IssueForm extends React.Component {
     const categories = ['infrastructure', 'nuisance', 'theft', 'safety', 'waste', 'permits', 'crime'];
     return (
       <div id={styles.formBackground}>
-        <form onSubmit={this.handleSubmit}>
+        <form id={styles.issueForm} onSubmit={this.handleSubmit}>
           <div id={styles.icon} onClick={closeForm}>
             <img src="icons/close.png" alt="close" />
           </div>
           <label htmlFor="address">
             Location/Address
-            <input id={styles.address} type="text" value={address} onChange={this.handleChange} required name="address" />
+            <input id={styles.address} type="text" value={address} onChange={this.locationChange} required name="address" />
           </label>
-          <button id={styles.setLocation} type="button" name="setLocation" onClick={this.setLocation}>
+          {/* <button id={styles.setLocation} type="button" name="setLocation"
+          onClick={this.setLocation}>
             set location
-          </button>
+          </button> */}
           <label htmlFor="title">
             Issue
           </label>
@@ -227,7 +243,7 @@ class IssueForm extends React.Component {
           <label htmlFor="photos">
             Photos (optional)
             <input id={styles.chooseFile} type="file" onChange={this.fileSelectedHandler} name="photos" multiple />
-            <button onClick={this.fileUploadHandler}>upload photos</button>
+            {/* <button onClick={this.fileUploadHandler}>upload photos</button> */}
           </label>
           <label htmlFor="reps">
             Choose a Rep
