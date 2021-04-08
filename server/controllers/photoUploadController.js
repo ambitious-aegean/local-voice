@@ -9,7 +9,6 @@ const BUCKET_NAME = 'local-voice';
 require('dotenv').config();
 
 const uploadPhotos = (req, res) => {
-  console.log(req);
   var photo = Buffer.alloc(0);
   req.on('data', (chunk) => {
     photo = Buffer.concat([photo, chunk]);

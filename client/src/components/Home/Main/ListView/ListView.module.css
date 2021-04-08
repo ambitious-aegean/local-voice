@@ -51,6 +51,10 @@
   bottom: 4px;
 }
 
+.dots:focus {
+  outline: none;
+}
+
 .dotsIcon {
   margin: 2px;
   padding: 5px;
@@ -65,6 +69,52 @@
 .dotsCategories .categories {
   display: flex;
   flex-direction: row;
+}
+
+.modalContainer {
+  position: relative;
+  right: 24%;
+  bottom: 40px;
+  align-self: flex-end;
+  transition: all 0.2s ease-in-out;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.modalContainer .optionsModal {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-self: flex-end;
+  margin: 3px;
+  padding: 5px;
+  height: max-content;
+  width: 120px;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);  margin: 7px;
+  border-radius: 7px;
+  position: absolute;
+}
+
+.watch, .flag, .resolve {
+  margin: 3px;
+  padding: 3px;
+  display: flex;
+  flex-direction: row;
+}
+
+.watch button, .flag button, .resolve button {
+  background-color: white;
+  font-size: 18px;
+  border: none;
+  border-radius: 50%;
+}
+
+.watch button:hover, .flag button:hover, .resolve button:hover {
+  background-color: rgba(163, 163, 163, 0.514);
+}
+
+.watch button:focus, .flag button:focus, .resolve button:focus {
+  outline: none;
 }
 
 .content {

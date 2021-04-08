@@ -1,13 +1,13 @@
-issue_id  ,user_id ,title,text,lat  ,lng  ,rep_name,rep_email,rep_photo_url  ,resolved  ,date,up_vote  ,flag_count, resolver
-1,1,pothole,there is a pothole,37.756,-122.421,,,,0,2021/03/01,0,0,0
-2,1,street light out,the street light is out by my house,37.756073,122.4915,,,,0,2021/03/02,0,0,0
-3,2,car break-in,my car was broken into,37.784211,-122.4308,,,,0,2021/03/03,0,0,0
-4,2,graffiti,someone graffitied on my wall,37.780704,-122.442,,,,0,2021/03/04,0,0,0
-5,3,driving too fast,people are driving too fast on my street,37.749051,-122.414,,,,0,2021/03/05,0,0,0
-6,3,trashcan,the public trashcan is broken,37.764077,-122.4543,,,,0,2021/03/06,0,0,0
-7,4,running stop,people are running the stop sign by my house,37.760329,-122.5014,,,,0,2021/03/07,0,0,0
-8,4,dog poop,people aren't picking up after their dogs at the park,37.76435,-122.3996,,,,0,2021/03/08,0,0,0
-9,1,broken waterfountain,the waterfountain is broken at the park,37.796702,-122.4098,,,,0,2021/03/09,0,0,0
-10,2,swere blocked up,the sewer drain backs up when it rains,37.737348,-122.4607,,,,0,2021/03/09,0,0,0
-11,3,shifty people,there is a shifty person walking up to houses at nihgt,37.794023,-122.4411,,,,0,2021/03/10,0,0,0
-12,4,stolen packages,my neighbor's and i have had a few packages taken,37.778135,-122.48712,,,,0,2021/03/11,0,0,0
+issue_id  ,user_id ,title,text,lat  ,lng  ,rep_name,rep_email,rep_photo_url  ,resolved  ,date,up_vote  ,flag_count
+1,1,pothole,there is a pothole,37.756,-122.421,,,,0,2021/03/01,0,0
+2,1,street light out,the street light is out by my house,37.756073,122.4915,,,,0,2021/03/02,0,0
+3,2,car break-in,my car was broken into,37.784211,-122.4308,,,,0,2021/03/03,0,0
+4,2,graffiti,someone graffitied on my wall,37.780704,-122.442,,,,0,2021/03/04,0,0
+5,3,driving too fast,people are driving too fast on my street,37.749051,-122.414,,,,0,2021/03/05,0,0
+6,3,trashcan,the public trashcan is broken,37.764077,-122.4543,,,,0,2021/03/06,0,0
+7,4,running stop,people are running the stop sign by my house,37.760329,-122.5014,,,,0,2021/03/07,0,0
+8,4,dog poop,people aren't picking up after their dogs at the park,37.76435,-122.3996,,,,0,2021/03/08,0,0
+9,1,broken waterfountain,the waterfountain is broken at the park,37.796702,-122.4098,,,,0,2021/03/09,0,0
+10,2,swere blocked up,the sewer drain backs up when it rains,37.737348,-122.4607,,,,0,2021/03/09,0,0
+11,3,shifty people,there is a shifty person walking up to houses at nihgt,37.794023,-122.4411,,,,0,2021/03/10,0,0
+12,4,stolen packages,my neighbor's and i have had a few packages taken,37.778135,-122.48712,,,,0,2021/03/11,0,0

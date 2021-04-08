@@ -4,7 +4,7 @@ import FilterOptions from './FilterOptions/FilterOptions.jsx';
 import styles from './styles/leftBar.module.css';
 import {useState} from 'react';
 
-const LeftSideBar = ({ user, categories, filterIssues, filterMyIssues, filterWatchedIssues }) => {
+const LeftSideBar = ({ user, filterIssues, filterMyIssues, filterWatchedIssues }) => {
   const [myIssuesFilter, toggleMyIssues] = useState(false);
   const [watchedIssuesFilter, toggleWatchedIssues] = useState(false);
 
@@ -46,14 +46,13 @@ const LeftSideBar = ({ user, categories, filterIssues, filterMyIssues, filterWat
           </div>
         </div>
       </div>
-      <FilterOptions categories={categories} filterIssues={filterIssues} />
+      <FilterOptions filterIssues={filterIssues} />
     </div>
   );
 };
 
 LeftSideBar.propTypes = {
   user: PropTypes.objectOf(PropTypes.any).isRequired,
-  categories: PropTypes.arrayOf(PropTypes.string).isRequired,
   filterIssues: PropTypes.func.isRequired,
 };
 

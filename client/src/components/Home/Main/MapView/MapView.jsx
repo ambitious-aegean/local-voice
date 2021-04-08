@@ -2,7 +2,7 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
 import React from 'react';
-import {
+import { 
   Map, GoogleApiWrapper, Marker, InfoWindow,
 } from 'google-maps-react';
 import PropTypes from 'prop-types';
@@ -11,8 +11,8 @@ import MapIssueModal from './MapIssueModal/MapIssueModal.jsx';
 // import API_TOKEN from './mapConfig.js';
 
 const mapStyles = {
-  width: '60%',
-  height: '93%',
+  width: '58%',
+  height: '90%',
 };
 
 const infoWindowStyles = {

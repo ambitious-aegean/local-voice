@@ -11,6 +11,7 @@ import axios from 'axios';
 
 import css from '../ListView.module.css';
 
+import OptionsModal from './OptionsModal/OptionsModal.jsx';
 import Discussion from './Discussion/Discussion.jsx';
 
 class IssueCard extends React.Component {
@@ -18,27 +19,18 @@ class IssueCard extends React.Component {
     super(props);
     this.state = {
       viewDiscussion: false,
+      viewOptions: false,
       discussionData: [],
       voted: false,
-      flagged: false,
-      watched: false,
-      markedResolved: false,
-      resolver: 0,
       voteCount: 0,
     };
-    this.watch = this.watch.bind(this);
+    this.handleViewOptionsClick = this.handleViewOptionsClick.bind(this);
+    this.handleViewDiscussionClick = this.handleViewDiscussionClick.bind(this);
+    this.checkVote = this.checkVote.bind(this);
     this.up_vote = this.up_vote.bind(this);
-    this.flag = this.flag.bind(this);
-    this.resolve = this.resolve.bind(this);
-    this.unwatch = this.unwatch.bind(this);
     this.down_vote = this.down_vote.bind(this);
-    this.unflag = this.unflag.bind(this);
-    this.unresolve = this.unresolve.bind(this);
     this.getDiscussionData = this.getDiscussionData.bind(this);
     this.closeDiscussion = this.closeDiscussion.bind(this);
-    this.checkVote = this.checkVote.bind(this);
-    this.checkWatched = this.checkWatched.bind(this);
-    this.checkFlag = this.checkFlag.bind(this);
   }
 
   componentDidMount() {
@@ -50,15 +42,12 @@ class IssueCard extends React.Component {
     this.setState({
       voteCount: up_vote,
     });
-    if (resolved !== 0) {
-      this.setState({
-        markedResolved: true,
-        resolver,
-      });
-    }
     this.checkVote(issue_id, votedList);
-    this.checkWatched(issue_id, watchedList);
-    this.checkFlag(issue_id, user_id);
+  }
+
+  handleViewOptionsClick() {
+    const { viewOptions } = this.state;
+    this.setState({ viewOptions: !viewOptions });
   }
 
   handleViewDiscussionClick() {
@@ -87,25 +76,6 @@ class IssueCard extends React.Component {
         voted: true,
       });
     }
-  }
-
-  checkWatched(issue_id, watched) {
-    if (watched.indexOf(issue_id) !== -1) {
-      this.setState({
-        watched: true,
-      });
-    }
-  }
-
-  checkFlag(issue_id, user_id) {
-    axios.get(`/allIssues/checkFlag/?issue_id=${issue_id}`)
-      .then((resp) => {
-        if (resp.data.indexOf(user_id) !== -1) {
-          this.setState({
-            flagged: true,
-          });
-        }
-      });
   }
 
   up_vote() {
@@ -138,80 +108,9 @@ class IssueCard extends React.Component {
       .catch((err) => { throw err; });
   }
 
-  flag() {
-    this.setState({
-      flagged: true,
-    });
-
-    const { issue, user } = this.props;
-    const { issue_id } = issue;
-    const { user_id } = user;
-    axios.put(`/allIssues/flag/?issue_id=${issue_id}&user_id=${user_id}`)
-      .catch((err) => { throw err; });
-  }
-
-  unflag() {
-    this.setState({
-      flagged: false,
-    });
-
-    const { issue, user } = this.props;
-    const { issue_id } = issue;
-    const { user_id } = user;
-    axios.put(`/allIssues/unflag/?issue_id=${issue_id}&user_id=${user_id}`)
-      .catch((err) => { throw err; });
-  }
-
-  watch() {
-    this.setState({
-      watched: true,
-    });
-
-    const { issue, user } = this.props;
-    const { issue_id } = issue;
-    const { user_id } = user;
-    axios.put(`/allIssues/watch/?user_id=${user_id}&issue_id=${issue_id}`)
-      .catch((err) => { throw err; });
-  }
-
-  unwatch() {
-    this.setState({
-      watched: false,
-    });
-    const { issue, user } = this.props;
-    const { issue_id } = issue;
-    const { user_id } = user;
-    axios.delete(`/allIssues/unwatch/?user_id=${user_id}&issue_id=${issue_id}`)
-      .catch((err) => { throw err; });
-  }
-
-  resolve() {
-    const { issue, user } = this.props;
-    const { issue_id } = issue;
-    const { user_id } = user;
-    this.setState({
-      markedResolved: true,
-      resolver: user_id,
-    });
-    axios.put(`/allIssues/resolve/?user_id=${user_id}&issue_id=${issue_id}`)
-      .catch((err) => { throw err; });
-  }
-
-  unresolve() {
-    const { issue, user } = this.props;
-    const { issue_id } = issue;
-    const { user_id } = user;
-    this.setState({
-      markedResolved: false,
-      resolver: 0,
-    });
-    axios.put(`/allIssues/unresolve/?user_id=${user_id}&issue_id=${issue_id}`)
-      .catch((err) => { throw err; });
-  }
-
   render() {
     const {
-      voted, flagged, watched, viewDiscussion, discussionData, markedResolved, resolver, voteCount,
+      voted, viewOptions, viewDiscussion, discussionData, voteCount,
     } = this.state;
     const { issue, user } = this.props;
     const {
@@ -230,7 +129,7 @@ class IssueCard extends React.Component {
             </div>
           </div>
           <div className={css.dotsCategories}>
-            <div className={css.dots}>
+            <div role="button" className={css.dots} onClick={this.handleViewOptionsClick} onKeyPress={this.handleViewOptionsClick} tabIndex={0}>
               <i className={`${css.dotsIcon} fa fa-ellipsis-h`} />
             </div>
             <div id="issueCard-categories" className={css.categories}>
@@ -241,6 +140,12 @@ class IssueCard extends React.Component {
               ))}
             </div>
           </div>
+        </div>
+        <div className={css.modalContainer}>
+          {viewOptions
+            ? (
+              <OptionsModal issue={issue} user={user} />
+            ) : ''}
         </div>
         <div className={css.content}>
           <div className={css.title}>
@@ -254,63 +159,6 @@ class IssueCard extends React.Component {
             {photos.map((photo, index) => (
               <img key={index} className={css.photo} alt={issue.title} src={photo} />
             ))}
-          </div>
-        </div>
-        <div className={css.options}>
-          <div className={css.watch}>
-            {!watched
-              ? (
-                <div>
-                  <button type="button" onClick={this.watch}>
-                    <span className="far fa-eye" />
-                  </button>
-                </div>
-              ) : (
-                <div>
-                  <button type="button" onClick={this.unwatch}>
-                    <span className="far fa-eye-slash" />
-                  </button>
-                </div>
-              )}
-          </div>
-          <div className={css.flag}>
-            {!flagged
-              ? (
-                <div>
-                  <button type="button" onClick={this.flag}>
-                    <span className="fa fa-flag" />
-                  </button>
-                </div>
-              ) : (
-                <div>
-                  <button type="button" onClick={this.unflag}>
-                    <span> unflag </span>
-                  </button>
-                </div>
-              )}
-          </div>
-          <div className={css.resolve}>
-            {!markedResolved
-              ? (
-                <div>
-                  <button type="button" onClick={this.resolve}>
-                    <span> mark as resolved </span>
-                  </button>
-                </div>
-              ) : (
-                resolver === user.user_id || user_id === user.user_id
-                  ? (
-                    <div>
-                      <button type="button" onClick={this.unresolve}>
-                        <span> un-resolve </span>
-                      </button>
-                    </div>
-                  ) : (
-                    <div>
-                      <span>Resolved</span>
-                    </div>
-                  )
-              )}
           </div>
         </div>
         <div className={css.voteDiscussion}>

@@ -9,7 +9,7 @@ class AddComment extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      text: null,
+      text: '',
     };
     this.handleChange = this.handleChange.bind(this);
     this.postComment = this.postComment.bind(this);

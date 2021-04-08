@@ -46,8 +46,7 @@ class Home extends React.Component {
       filteredIssues: [],
       myIssuesFilter: false,
       watchedIssuesFilter: false,
-      categories: ['Theft', 'Crime', 'For Sale', 'Infrastructure', 'Nuisance', 'Public Agencies', 'Safety', 'Waste',
-        'Permits', 'Stolen Mail'],
+      watched: [],
       view: 0, // 0 = map view
     };
     this.getIssues = this.getIssues.bind(this);
@@ -183,8 +182,10 @@ class Home extends React.Component {
           }
         }
 
+
         // filter out issues that doesnt match any of the current selected check boxes
         const modifiedIssues = this.state.issues.filter((issue) => atLeastOneCategory(issue.categories));
+
 
         this.setState({
           filteredIssues: noFilter === true ? this.state.issues : modifiedIssues,
@@ -195,7 +196,7 @@ class Home extends React.Component {
 
   render() {
     const {
-      issues, user, location, categories, initialLoad, filteredIssues, view,
+      issues, user, location, initialLoad, filteredIssues, view,
     } = this.state;
     return (
       <div id="homeContainer" className={styles.homeContainer}>
@@ -203,7 +204,6 @@ class Home extends React.Component {
         <div id="flexContainer" className={styles.flexContainer}>
           <LeftSideBar
             user={user}
-            categories={categories}
             filterIssues={this.filterIssues}
             filterMyIssues={this.filterMyIssues}
             filterWatchedIssues={this.filterWatchedIssues}
