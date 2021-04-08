@@ -7,6 +7,8 @@ const { allIssues } = require('../controllers/issuesControllers.js');
 const { getReps } = require('../controllers/repsController.js');
 const { getAddress, getLocation } = require('../controllers/locAddController.js');
 
+const { postIssue } = require('../controllers/postIssueController.js');
+
 const { uploadPhotos } = require('../controllers/photoUploadController.js');
 const issuesMetaRouter = require('./issuesMetaRouter.js');
 
@@ -23,6 +25,7 @@ router.post('/photo', uploadPhotos);
 router.get('/address', getAddress);
 router.get('/location', getLocation);
 router.get('/allIssues', allIssues);
+router.post('/issues', postIssue);
 
 router.use('/allIssues', issuesMetaRouter);
 

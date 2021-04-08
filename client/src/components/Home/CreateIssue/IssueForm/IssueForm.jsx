@@ -41,6 +41,7 @@ class IssueForm extends React.Component {
     this.fileSelectedHandler = this.fileSelectedHandler.bind(this);
     this.fileUploadHandler = this.fileUploadHandler.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.postIssue = this.postIssue.bind(this);
     this.escFunction = this.escFunction.bind(this);
   }
 
@@ -70,6 +71,7 @@ class IssueForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    this.postIssue();
   }
 
   handleRepSelect(event) {
@@ -123,6 +125,31 @@ class IssueForm extends React.Component {
         this.setReps(resp.data);
       })
       .catch((err) => { throw err; });
+  }
+
+  postIssue() {
+    const {
+      location, categories, title, text, photos, selectedRep,
+    } = this.state;
+
+    axios.post('/issues', {
+      lat: location.lat,
+      lng: location.lng,
+      categories,
+      title,
+      text,
+      photos,
+      rep_name: selectedRep.name,
+      rep_email: selectedRep.email,
+      rep_photo_url: selectedRep.photoUrl,
+      date: new Date(),
+    })
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   escFunction(event) {
