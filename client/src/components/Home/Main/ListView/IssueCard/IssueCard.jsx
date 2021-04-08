@@ -258,6 +258,8 @@ class IssueCard extends React.Component {
               ))}
             </div>
           </div>
+        </div>
+        <div className={css.modalContainer}>
           {viewOptions
             ? (
               <OptionsModal issue={issue} user={user} />

@@ -71,6 +71,37 @@
   flex-direction: row;
 }
 
+.modalContainer {
+  position: relative;
+  right: 24%;
+  bottom: 40px;
+  align-self: flex-end;
+  transition: all 0.2s ease-in-out;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.modalContainer .optionsModal {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-self: flex-end;
+  margin: 3px;
+  padding: 5px;
+  height: max-content;
+  width: 120px;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);  margin: 7px;
+  border-radius: 7px;
+  position: absolute;
+}
+
+.watch, .flag, .resolve {
+  margin: 3px;
+  padding: 3px;
+  display: flex;
+  flex-direction: row;
+}
+
 .content {
   margin: 5px;
   padding: 5px;

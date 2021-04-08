@@ -142,42 +142,46 @@ class OptionsModal extends React.Component {
     const { user_id } = issue;
     return (
       <div className={css.optionsModal}>
-        <div className={css.watch}>
+        <div className={css.watchOption}>
           {!watched
             ? (
-              <div>
+              <div className={css.watch}>
+                watch issue
                 <button type="button" onClick={this.watch}>
                   <span className="far fa-eye" />
                 </button>
               </div>
             ) : (
-              <div>
+              <div className={css.watch}>
+                unwatch issue
                 <button type="button" onClick={this.unwatch}>
                   <span className="far fa-eye-slash" />
                 </button>
               </div>
             )}
         </div>
-        <div className={css.flag}>
+        <div className={css.flagOption}>
           {!flagged
             ? (
-              <div>
+              <div className={css.flag}>
+                flag issue for review
                 <button type="button" onClick={this.flag}>
                   <span className="fa fa-flag" />
                 </button>
               </div>
             ) : (
-              <div>
+              <div className={css.flag}>
+                remove flag
                 <button type="button" onClick={this.unflag}>
-                  <span> unflag </span>
+                  <span className="fa fa-flag" />
                 </button>
               </div>
             )}
         </div>
-        <div className={css.resolve}>
+        <div className={css.resolveOption}>
           {!markedResolved
             ? (
-              <div>
+              <div className={css.resolve}>
                 <button type="button" onClick={this.resolve}>
                   <span> mark as resolved </span>
                 </button>
@@ -185,9 +189,9 @@ class OptionsModal extends React.Component {
             ) : (
               resolver === user.user_id || user_id === user.user_id
                 ? (
-                  <div>
+                  <div className={css.resolve}>
                     <button type="button" onClick={this.unresolve}>
-                      <span> un-resolve </span>
+                      <span> mark as unresolved </span>
                     </button>
                   </div>
                 ) : (
