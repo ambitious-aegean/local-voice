@@ -33,6 +33,9 @@ class IssueCard extends React.Component {
     this.unresolve = this.unresolve.bind(this);
     this.getDiscussionData = this.getDiscussionData.bind(this);
     this.closeDiscussion = this.closeDiscussion.bind(this);
+    this.checkVote = this.checkVote.bind(this);
+    this.checkWatched = this.checkWatched.bind(this);
+    this.checkFlag = this.checkFlag.bind(this);
   }
 
   componentDidMount() {
@@ -48,6 +51,12 @@ class IssueCard extends React.Component {
         resolver: resolver,
       })
     }
+    this.checkVote(issue_id, user_id)
+    this.checkWatched(issue_id, user_id)
+    this.checkFlag(issue_id, user_id);
+  }
+
+  checkVote(issue_id, user_id) {
     axios.get(`/allIssues/checkVote/?issue_id=${issue_id}`)
       .then(resp => {
         if (resp.data.indexOf(user_id) !== -1) {
@@ -56,6 +65,9 @@ class IssueCard extends React.Component {
           })
         }
       })
+  }
+
+  checkWatched(issue_id, user_id){
     axios.get(`/allIssues/checkWatched/?issue_id=${issue_id}`)
     .then(resp => {
       if (resp.data.indexOf(user_id) !== -1) {
@@ -64,6 +76,9 @@ class IssueCard extends React.Component {
         })
       }
     })
+  }
+
+  checkFlag(issue_id, user_id){
     axios.get(`/allIssues/checkFlag/?issue_id=${issue_id}`)
     .then(resp => {
       if (resp.data.indexOf(user_id) !== -1) {
