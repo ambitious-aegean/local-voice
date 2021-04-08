@@ -39,7 +39,7 @@ const postIssue = (req, res) => {
             }));
           }))
             .then(() => {
-              if (photos.length) {
+              if (photos) {
                 for (let i = 0; i < photos.length; i++) {
                   const photosQuery = `INSERT INTO photos (issue_id, photo_info) VALUES ('${issueId}', '${photos[i]}');`;
                   db.query(photosQuery, (photoErr) => {

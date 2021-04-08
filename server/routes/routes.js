@@ -25,7 +25,7 @@ router.post('/photo', uploadPhotos);
 router.get('/address', getAddress);
 router.get('/location', getLocation);
 router.get('/allIssues', allIssues);
-router.post('/postIssue', postIssue);
+router.post('/issues', postIssue);
 
 router.use('/allIssues', issuesMetaRouter);
 
