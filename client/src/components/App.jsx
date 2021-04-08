@@ -17,7 +17,7 @@ class App extends React.Component {
   render() {
 
     return (
-      <div id="app">
+      <div id={styles.app}>
         {/* <LogIn /> */}
         <Home/>
       </div>
