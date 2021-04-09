@@ -2,11 +2,15 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
 import React from 'react';
+import ReactDOM from 'react-dom';
 import {
   Map, GoogleApiWrapper, Marker, InfoWindow,
 } from 'google-maps-react';
 import PropTypes from 'prop-types';
 import MapIssueModal from './MapIssueModal/MapIssueModal.jsx';
+import styles from './MapIssueModal/styles.module.css';
+
+// import InfoWindowEx from './MapIssueModal/InfoWindowEx.jsx';
 
 // import API_TOKEN from './mapConfig.js';
 
@@ -38,6 +42,8 @@ class MapView extends React.Component {
     this.displayInfoWindow = this.displayInfoWindow.bind(this);
     this.onMapDragEnd = this.onMapDragEnd.bind(this);
     this.getUserLocation = this.getUserLocation.bind(this);
+    // this.onInfoWindowOpen = this.onInfoWindowOpen.bind(this);
+    // this.displayModal = this.displayModal.bind(this);
   }
 
   componentDidMount() {
@@ -72,6 +78,28 @@ class MapView extends React.Component {
     });
     getLoc(location);
   }
+
+  // displayModal() {
+  //   console.log('show modal');
+  //   return (
+  //     // <div>hello </div>
+  //     <MapIssueModal />
+  //   )
+  // }
+
+  // onInfoWindowOpen(props, e) {
+  //   const button = (
+  //     <button
+  //       onClick={(e) => {this.displayModal}}
+  //     >
+  //       modal
+  //     </button>
+  //   );
+  //   ReactDOM.render(
+  //     React.Children.only(button),
+  //     document.getElementById("iwc")
+  //   );
+  // }
 
   getUserLocation() {
     const { getLoc } = this.props;
@@ -108,6 +136,12 @@ class MapView extends React.Component {
     }
   }
 
+  // showDetails() {
+  //   return (
+  //     <MapIssueModal />
+  //   )
+  // }
+
   displayInfoWindow() {
     return (
       <InfoWindow
@@ -120,29 +154,35 @@ class MapView extends React.Component {
         visible={this.state.showingInfoWindow}
         style={infoWindowStyles}
       >
+        {/* <div id="iwc" /> */}
         <div>
-          Info Window
-          <h4>
+          <h3>
             {this.state.selectedIssue.title}
-          </h4>
+          </h3>
           <h4>
             {this.state.selectedIssue.text}
           </h4>
-          <img src={this.state.selectedIssue.url} alt="" />
-          <MapIssueModal issue={this.state.selectedIssue} />
+          <img className={styles.image} src={this.state.selectedIssue.url} alt="" /> 
+        {/* <MapIssueModal issue={this.state.selectedIssue} /> */}
+        {/* <button
+            type="button"
+            onClick={this.showDetails}
+          >
+            Show Details
+          </button> */}
         </div>
       </InfoWindow>
     );
   }
 
-  displayIssueModal() {
-    const { selectedIssue } = this.state;
-    // invoke axios.get request for comments here?? or within MapIssueModal
-    // conditionally render MapIssueModal based on state
-    return (
-      <MapIssueModal issue={selectedIssue} />
-    );
-  }
+  // displayIssueModal() {
+  //   const { selectedIssue } = this.state;
+  //   // invoke axios.get request for comments here?? or within MapIssueModal
+  //   // conditionally render MapIssueModal based on state
+  //   return (
+  //     <MapIssueModal issue={selectedIssue} />
+  //   );
+  // }
 
   render() {
     const { displayedIssues } = this.props;
@@ -168,6 +208,7 @@ class MapView extends React.Component {
         >
           {this.displayMarkers()}
           {this.displayInfoWindow()}
+          {/* {this.displayModal()} */}
         </Map>
       </div>
     );

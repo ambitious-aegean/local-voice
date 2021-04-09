@@ -1,0 +1,8 @@
+.modal {
+    z-index: 3;
+}
+.image {
+    max-width: 60px;
+    max-height: 60px;
+    object-fit: contain;
+}
