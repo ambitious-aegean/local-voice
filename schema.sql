@@ -267,25 +267,25 @@ ALTER TABLE `categories` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 -- Test Data
 -- ---
 
-INSERT INTO `issues` (`issue_id`,`user_id`,`text`,`lat`,`lng`,`rep_name`,`rep_email`,`rep_photo_url`,`resolved`,`date`,`up_vote`,`flag_count`) VALUES
-('','','','','','','','','','','','');
-INSERT INTO `users` (`user_id`,`username`,`email`) VALUES
-('','','');
-INSERT INTO `comments` (`comment_id`,`issue_id`,`text`,`user_id`,`date`) VALUES
-('','','','','');
-INSERT INTO `issues_category` (`issue_cat_id`,`issue_id`,`cat_id`) VALUES
-('','','');
-INSERT INTO `watched_issues` (`watched_issue_id`,`user_id`,`issue_id`) VALUES
-('','','');
-INSERT INTO `dispute_issues` (`dispute_issue_id`,`issue_id`,`user_id`) VALUES
-('','','');
-INSERT INTO `user_up_vote` (`user_vote_id`,`user_id`,`issue_id`) VALUES
-('','','');
-INSERT INTO `user_flag` (`user_flag_id`,`user_id`,`issue_id`) VALUES
-('','','');
-INSERT INTO `user_resolved` (`user_resolved_id`,`user_id`,`issue_id`) VALUES
-('','','');
-INSERT INTO `photos` (`photo_id`,`issue_id`,`photo_info`) VALUES
-('','','');
-INSERT INTO `categories` (`cat_id`,`cat_name`) VALUES
-('','');
+-- INSERT INTO `issues` (`issue_id`,`user_id`,`text`,`lat`,`lng`,`rep_name`,`rep_email`,`rep_photo_url`,`resolved`,`date`,`up_vote`,`flag_count`) VALUES
+-- ('','','','','','','','','','','','');
+-- INSERT INTO `users` (`user_id`,`username`,`email`) VALUES
+-- ('','','');
+-- INSERT INTO `comments` (`comment_id`,`issue_id`,`text`,`user_id`,`date`) VALUES
+-- ('','','','','');
+-- INSERT INTO `issues_category` (`issue_cat_id`,`issue_id`,`cat_id`) VALUES
+-- ('','','');
+-- INSERT INTO `watched_issues` (`watched_issue_id`,`user_id`,`issue_id`) VALUES
+-- ('','','');
+-- INSERT INTO `dispute_issues` (`dispute_issue_id`,`issue_id`,`user_id`) VALUES
+-- ('','','');
+-- INSERT INTO `user_up_vote` (`user_vote_id`,`user_id`,`issue_id`) VALUES
+-- ('','','');
+-- INSERT INTO `user_flag` (`user_flag_id`,`user_id`,`issue_id`) VALUES
+-- ('','','');
+-- INSERT INTO `user_resolved` (`user_resolved_id`,`user_id`,`issue_id`) VALUES
+-- ('','','');
+-- INSERT INTO `photos` (`photo_id`,`issue_id`,`photo_info`) VALUES
+-- ('','','');
+-- INSERT INTO `categories` (`cat_id`,`cat_name`) VALUES
+-- ('','');
