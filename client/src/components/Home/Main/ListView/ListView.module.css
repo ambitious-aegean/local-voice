@@ -16,7 +16,7 @@
   border-radius: 12px;
   padding: 3px;
   /* background-color: white; */
-  background: linear-gradient(to right  #f0f1f7, #eaecf3, #E1E5F2);
+  background: linear-gradient(to right, #e7f6ff, #fcfcfc, #d9effa);
 }
 
 .voteContainer {
@@ -245,16 +245,6 @@
   margin: 2px;
 }
 
-/* .discussionContainer {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  margin: 5px;
-  padding: 5px;
-  width: 100%;
-} */
-
 .discussion {
   display: flex;
   flex-direction: column;
@@ -270,7 +260,7 @@
   border: none;
   border-radius: 4px;
   border-bottom: 3px solid rgb(233, 233, 233);
-  background: linear-gradient(to right, #eef5fc, #f7fafd, #eef5fc);
+  background: linear-gradient(to right, #e2f0ff, #f7fafd, #deeeff);
   height: 40px;
   width: 100%;
   font-family: 'Montserrat', sans-serif;
