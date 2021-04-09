@@ -12,13 +12,13 @@
   justify-content: center;
   align-items: center;
   margin-right: 22%;
-
+  margin-top: 2%;
 }
 
 .mapViewLabel {
   font-family: 'Montserrat', sans-serif;
-  font-size: 14px;
-  font-weight: bold;
+  font-size: 20px;
+  font-weight: 500;
   margin-bottom: -120px;
   color: rgba(43,39,60,1);
   margin-right: 5px;
@@ -26,8 +26,8 @@
 
 .listViewLabel {
   font-family: 'Montserrat', sans-serif;
-  font-size: 14px;
-  font-weight: bold;
+  font-size: 20px;
+  font-weight: 500;
   margin-bottom: -120px;
   color: rgba(43,39,60,1);
   margin-left: 5px;

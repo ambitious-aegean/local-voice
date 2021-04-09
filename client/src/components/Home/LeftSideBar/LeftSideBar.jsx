@@ -23,7 +23,7 @@ const LeftSideBar = ({ user, filterIssues, filterMyIssues, filterWatchedIssues }
       <div className={styles.welcomeBanner}>
         <div className={styles.welcomeBannerVerticalLayout}>
           <div className={styles.welcomeTagPadding}>
-            <p className={styles.welcomeTag}>Welcome {user.username}!</p>
+            <p className={styles.welcomeTag}>Welcome, {user.username}!</p>
           </div>
         </div>
       </div>

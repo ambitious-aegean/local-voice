@@ -112,7 +112,10 @@ class MapView extends React.Component {
     return (
       <InfoWindow
         marker={this.state.activeMarker}
-        onOpen={this.onOpen}
+        // onOpen={this.onOpen}
+        onOpen={e => {
+          this.onInfoWindowOpen(this.props, e);
+        }}
         onClose={this.onClose}
         visible={this.state.showingInfoWindow}
         style={infoWindowStyles}
@@ -126,7 +129,7 @@ class MapView extends React.Component {
             {this.state.selectedIssue.text}
           </h4>
           <img src={this.state.selectedIssue.url} alt="" />
-          {/* <MapIssueModal issue={this.state.selectedIssue} /> */}
+          <MapIssueModal issue={this.state.selectedIssue} />
         </div>
       </InfoWindow>
     );

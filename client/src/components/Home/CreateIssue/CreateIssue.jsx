@@ -34,7 +34,7 @@ class CreateIssue extends React.Component {
     return (
       <div>
         <button type="button" id={styles.createIssue} onClick={this.openForm}>
-          report an issue
+          Report an Issue
         </button>
         { formOpen
           ? (
