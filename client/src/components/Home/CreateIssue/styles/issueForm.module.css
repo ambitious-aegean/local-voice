@@ -16,7 +16,7 @@
   width: 600px;
   min-height: 850px;
   padding: 20px;
-  border-radius: 20px;
+  border-radius: 10px 20px;
   border: none;
   background-color:#F5F5F5;
   font-size: 1rem;
@@ -35,6 +35,7 @@
 
 #issueForm input, #issueForm select {
   margin-left: 5px;
+  font-family: 'Montserrat', sans-serif;
 }
 
 #heading {
@@ -98,9 +99,9 @@
   width: 300px;
 }
 
-textarea {
-  width: 400px;
-  height: 300px;
+#issueForm textarea {
+  width: 450px;
+  height: 275px;
 }
 
 #text {
@@ -117,6 +118,12 @@ textarea {
   font-family: 'Montserrat', sans-serif;
   align-self: center;
   /* margin: 0 auto; */
+}
+
+#repSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .repOption {
