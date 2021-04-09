@@ -16,7 +16,7 @@
   width: 600px;
   min-height: 850px;
   padding: 20px;
-  border-radius: 20px;
+  border-radius: 10px 20px;
   border: none;
   background-color:#F5F5F5;
   font-size: 1rem;
@@ -123,7 +123,7 @@
 #repSection {
   display: flex;
   flex-direction: column;
-  align-content: center;
+  align-items: center;
 }
 
 .repOption {

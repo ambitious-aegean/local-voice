@@ -271,7 +271,7 @@ class IssueForm extends React.Component {
             <input id={styles.title} type="text" onChange={this.handleChange} required name="title" />
           </div>
           <div id={styles.repSection}>
-            Choose a Rep to Notify
+            <label>Choose a Rep to Notify</label>
             <select id={styles.repSelector} onChange={this.handleRepSelect} name="rep">
               {reps.map((rep, index) => (
                 <option className={styles.repOption} value={index} key={rep.name}>
