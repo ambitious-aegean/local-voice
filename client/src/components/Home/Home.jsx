@@ -63,6 +63,7 @@ class Home extends React.Component {
 
   getIssues(user_id, lat, lng) {
     // query database for the issues based on the user location
+    console.log('getting issues');
     axios.get('/allIssues', {
       params: {
         user_id,
@@ -71,6 +72,7 @@ class Home extends React.Component {
       },
     })
       .then((response) => {
+        console.log(response);
         this.setState({
           issues: response.data.issues,
           user: {

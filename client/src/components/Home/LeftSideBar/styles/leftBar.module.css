@@ -1,3 +1,4 @@
+
 .leftSideBar {
   flex: 2;
   display: flex;
@@ -26,7 +27,7 @@
    */
   /* font-family: 'Courgette', cursive; */
   font-family: 'Montserrat', sans-serif;
-  font-size: 14px;
+  font-size: 18px;
   line-height: 20px;
   font-weight: 600;
   color: #252525;
@@ -56,9 +57,9 @@
   /* font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif; */
   /* font-family: 'Courgette', cursive; */
   font-family: 'Montserrat', sans-serif;
-  font-size: 14px;
+  font-size: 18px;
   line-height: 20px;
-  font-weight: bold;
+  font-weight: 600;
   color: rgba(43,39,60,1);
   text-align: left;
 }
@@ -133,9 +134,9 @@
   /* font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif; */
   /* font-family: 'Courgette', cursive; */
   font-family: 'Montserrat', sans-serif;
-  font-size: 12px;
+  font-size: 18px;
   line-height: 18px;
-  font-weight: 600;
+  /* font-weight: 600; */
   color: inherit;
   text-align: left;
 }
@@ -206,9 +207,9 @@
 .watchedIssuesLabel {
   /* font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif; */
   font-family: 'Montserrat', sans-serif;
-  font-size: 12px;
+  font-size: 18px;
   line-height: 18px;
-  font-weight: 600;
+  /* font-weight: 600; */
   color: inherit;
   text-align: left;
 }
