@@ -14,7 +14,7 @@
 	left: 50%;
 	transform: translate(-50%, -50%);
   width: 600px;
-  height: 700px;
+  height: 800px;
   padding: 20px;
   border-radius: 20px;
   border: none;
@@ -25,7 +25,12 @@
   flex-wrap: nowrap;
 }
 
+#issueForm * {
+  margin: 5px auto;
+}
+
 #icon {
+  margin: 0;
   align-self: flex-end;
 }
 
@@ -45,7 +50,7 @@
   border: none;
   border-radius: 5px;
   padding: 10px 5px;
-  margin: 10px;
+  /* margin: 10px; */
   overflow: auto;
 }
 
@@ -96,7 +101,7 @@ textarea {
 #repSelector {
   font-family: 'Montserrat', sans-serif;
   align-self: center;
-  margin: 0 auto;
+  /* margin: 0 auto; */
 }
 
 .repOption {
@@ -108,8 +113,12 @@ textarea {
   background-color: #BFDBF7;
   border: none;
   padding: 10px;
-  border-radius: 20px;
+  border-radius: 5px;
   cursor: pointer;
-  margin: 10px auto;
+  /* margin: 10px auto; */
   outline: none;
+}
+
+#formSubmit:hover {
+  background-color: #E1E5F2;
 }

@@ -68,9 +68,14 @@ class IssueForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.fileUploadHandler()
-      .then(() => this.postIssue())
-      .catch((err) => console.log(err));
+    const { photoFiles } = this.state;
+    if (photoFiles.length > 0) {
+      this.fileUploadHandler()
+        .then(() => this.postIssue())
+        .catch((err) => console.log(err));
+    } else {
+      this.postIssue();
+    }
   }
 
   handleRepSelect(event) {
@@ -216,7 +221,7 @@ class IssueForm extends React.Component {
             <img src="icons/close.png" alt="close" />
           </div>
           <div>
-            Location/Address
+            Location
             <input id={styles.address} type="text" value={address} onChange={this.locationChange} required name="address" />
           </div>
           <div>
