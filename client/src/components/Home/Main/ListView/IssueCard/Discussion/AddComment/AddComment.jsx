@@ -4,6 +4,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import axios from 'axios';
+import css from './AddComment.module.css';
 
 class AddComment extends React.Component {
   constructor(props) {
@@ -41,7 +42,7 @@ class AddComment extends React.Component {
   render() {
     const { text } = this.state;
     return (
-      <div id="addComment">
+      <div id="addComment" className={css.addCommentForm}>
         <form onSubmit={this.postComment}>
           <input id="text" type="text" value={text} onChange={this.handleChange} />
           <input type="submit" value="comment" />

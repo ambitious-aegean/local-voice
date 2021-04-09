@@ -80,7 +80,7 @@
   display: flex;
   justify-content: flex-end;
   flex-direction: column;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 16px;
   font-weight: 700;
 }
@@ -93,6 +93,7 @@
   position: relative;
   right: 3px;
   bottom: 4px;
+
 }
 
 .dots:hover {
@@ -106,6 +107,7 @@
 .dotsIcon {
   margin: 2px;
   padding: 5px;
+  cursor: pointer;
 }
 
 .dotsCategories .categories {
@@ -197,20 +199,23 @@
 .content .title {
   margin: 5px;
   padding: 5px;
-  font-size: 18px;
-  font-weight: 600;
+  padding-bottom: 0;
+  font-size: 22px;
+  font-weight: 800;
   display: flex;
   justify-self: flex-start;
   align-items: center;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Montserrat', sans-serif;
   color: rgb(19, 19, 19);
 }
 
 .content .text {
   margin: 5px;
+  margin-top: 0;
   padding: 5px;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 18px;
+  padding-top: 0;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 20px;
   font-weight: 300;
   color: rgb(29, 29, 29);
 }
@@ -236,6 +241,7 @@
   border-top: rgb(224, 224, 224) 2px solid;
   margin: 5px;
   padding: 5px;
+  width: 100%;
 }
 
 .discussion {
@@ -245,6 +251,7 @@
   align-items: center;
   margin: 5px;
   padding: 5px;
+  /* width: 100%; */
  }
 
 .discussion button {
@@ -256,10 +263,11 @@
   height: 40px;
   width: 300px;
   height: max-content;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 16px;
   color: rgb(14, 14, 14);
   transition: all 0.2s ease;
+  border-radius: 8px;
 }
 
 .discussion button:hover {
@@ -269,4 +277,12 @@
 
 .discussion button:focus {
   outline: none;
+}
+
+.user {
+  font-weight: 800;
+}
+
+button[type="button"] {
+  cursor: pointer;
 }
