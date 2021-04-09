@@ -211,7 +211,7 @@ FIELDS TERMINATED BY ','
 LINES TERMINATED BY '\r'
 IGNORE 1 ROWS;
 
-/*
+
 LOAD DATA LOCAL INFILE './sample_data/issues.csv'
 INTO TABLE issues
 FIELDS TERMINATED BY ','
@@ -223,7 +223,7 @@ INTO TABLE comments
 FIELDS TERMINATED BY ','
 LINES TERMINATED BY '\n'
 IGNORE 1 ROWS;
-*/
+
 
 LOAD DATA LOCAL INFILE './sample_data/categories.csv'
 INTO TABLE categories
@@ -231,13 +231,13 @@ FIELDS TERMINATED BY ','
 LINES TERMINATED BY '\r'
 IGNORE 1 ROWS;
 
-/*
+
 LOAD DATA LOCAL INFILE './sample_data/issues_category.csv'
 INTO TABLE issues_category
 FIELDS TERMINATED BY ','
 LINES TERMINATED BY '\n'
 IGNORE 1 ROWS;
-*/
+
 
 LOAD DATA LOCAL INFILE './sample_data/photos.csv'
 INTO TABLE photos
