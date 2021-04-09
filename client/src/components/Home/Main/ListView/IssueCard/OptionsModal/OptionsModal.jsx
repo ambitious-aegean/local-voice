@@ -146,16 +146,20 @@ class OptionsModal extends React.Component {
           {!watched
             ? (
               <div className={css.watch}>
-                watch issue
                 <button type="button" onClick={this.watch}>
                   <span className="far fa-eye" />
+                  <div className={css.optionText}>
+                    &nbsp; watch
+                  </div>
                 </button>
               </div>
             ) : (
               <div className={css.watch}>
-                unwatch issue
                 <button type="button" onClick={this.unwatch}>
                   <span className="far fa-eye-slash" />
+                  <div className={css.optionText}>
+                    &nbsp; unwatch
+                  </div>
                 </button>
               </div>
             )}
@@ -164,16 +168,20 @@ class OptionsModal extends React.Component {
           {!flagged
             ? (
               <div className={css.flag}>
-                flag issue for review
                 <button type="button" onClick={this.flag}>
                   <span className="fa fa-flag" />
+                  <div className={css.optionText}>
+                    &nbsp; flag
+                  </div>
                 </button>
               </div>
             ) : (
               <div className={css.flag}>
-                remove flag
                 <button type="button" onClick={this.unflag}>
                   <span className="fa fa-flag" />
+                  <div className={css.optionText}>
+                    &nbsp; unflag
+                  </div>
                 </button>
               </div>
             )}
@@ -182,23 +190,29 @@ class OptionsModal extends React.Component {
           {!markedResolved
             ? (
               <div className={css.resolve}>
-                mark as resolved
                 <button type="button" onClick={this.resolve}>
                   <span className="fa fa-check-circle" />
+                  <div className={css.optionText}>
+                    mark resolved
+                  </div>
                 </button>
               </div>
             ) : (
               resolver === user.user_id || user_id === user.user_id
                 ? (
                   <div className={css.resolve}>
-                    mark as unresolved
                     <button type="button" onClick={this.unresolve}>
                       <span className="fa fa-times-circle" />
+                      <div className={css.optionText}>
+                        mark unresolved
+                      </div>
                     </button>
                   </div>
                 ) : (
                   <div>
-                    <span>Resolved</span>
+                    <div className={css.optionText}>
+                      Resolved
+                    </div>
                   </div>
                 )
             )}
