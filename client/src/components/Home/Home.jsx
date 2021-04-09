@@ -78,10 +78,12 @@ class Home extends React.Component {
           user: {
             username: 'someguy123',
             user_id: 1,
-            watchedList: response.data.watchedList,
             votedList: response.data.votedList,
           },
+          watched: response.data.watchedList,
         }, () => {
+          console.log(response.data.watchedList)
+          console.log(this.state.watched)
           // console.log('this.state.issues: ', this.state.issues);
           // console.log('this.state.watched: ', this.state.watched);
         });
@@ -104,7 +106,7 @@ class Home extends React.Component {
       initialLoad: false,
       myIssuesFilter: !myIssuesFilter,
     }, () => {
-      if (myIssuesFilter) {
+      if (!myIssuesFilter) {
         this.setState({
           filteredIssues: issues.filter((issue) => issue.username === user.username),
         });
@@ -123,7 +125,7 @@ class Home extends React.Component {
       initialLoad: false,
       watchedIssuesFilter: !watchedIssuesFilter,
     }, () => {
-      if (watchedIssuesFilter) {
+      if (!watchedIssuesFilter) {
         const issuesArray = issues;
         const filteredIssues = [];
         for (let i = 0; i < issuesArray.length; i++) {
@@ -132,12 +134,12 @@ class Home extends React.Component {
           }
         }
         this.setState({
-          filteredIssues,
+          filteredIssues:filteredIssues,
         });
       } else {
         this.setState({
           filteredIssues: issues,
-        });
+        }, console.log(this.state.filteredIssues));
       }
     });
   }
@@ -193,8 +195,9 @@ class Home extends React.Component {
 
   render() {
     const {
-      issues, user, location, initialLoad, filteredIssues, view,
+      issues, user, location, initialLoad, filteredIssues, view, watched,
     } = this.state;
+    console.log('watched' + watched);
     return (
       <div id="homeContainer" className={styles.homeContainer}>
         <Header toggle={this.toggle} />

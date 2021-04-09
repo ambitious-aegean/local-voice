@@ -7,7 +7,7 @@ const categories = ['infrastructure', 'nuisance', 'theft', 'safety', 'waste', 'p
 const FilterOptions = ({ filterIssues }) => (
   <div id="FilterOptions" className={styles.filterOptions}>
     <form className={styles.formContainer}>
-      <span className={styles.filterHeader}>Search Filter Options</span>
+      <span className={styles.filterHeader}>Search Filter Categories</span>
       {categories.map((category) => (
         <div className={styles.container} key={category}>
           <input id={category} className={styles.checkbox} name={category} value={category} type="checkbox" onChange={filterIssues} />
