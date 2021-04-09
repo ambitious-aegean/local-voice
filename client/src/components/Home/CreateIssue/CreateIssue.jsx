@@ -32,7 +32,7 @@ class CreateIssue extends React.Component {
     const { formOpen } = this.state;
     const { user, location, getIssues } = this.props;
     return (
-      <div>
+      <div className={styles.createIssueContainer}>
         <button type="button" id={styles.createIssue} onClick={this.openForm}>
           Report an Issue
         </button>

@@ -16,7 +16,7 @@
   border-radius: 12px;
   padding: 3px;
   /* background-color: white; */
-  background: linear-gradient(to right, #e4eaff, #fbfbff, #dee9ff);
+  background: linear-gradient(to right, #e7f6ff, #fcfcfc, #d9effa);
 }
 
 .voteContainer {
@@ -244,16 +244,6 @@
   max-width: 100px;
   margin: 2px;
 }
-
-/* .discussionContainer {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  margin: 5px;
-  padding: 5px;
-  width: 100%;
-} */
 
 .discussion {
   display: flex;
