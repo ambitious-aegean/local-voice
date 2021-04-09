@@ -55,6 +55,7 @@ class IssueForm extends React.Component {
   componentDidMount() {
     const { location } = this.props;
     this.setAddressFromCoordinates(location);
+    this.setReps(location);
     document.addEventListener('keydown', this.escFunction, false);
   }
 
@@ -154,23 +155,23 @@ class IssueForm extends React.Component {
     })
       .then((resp) => {
         this.setState({ location: resp.data });
-        this.setReps(resp.data);
       })
       .catch((err) => { throw err; });
   }
 
   locationChange(event) {
     const { value } = event.target;
+    const debounceSetReps = this.debounce(this.setReps);
     this.setState({ address: value });
     this.setCoordinatesFromAddress(value)
       .then(() => {
         const { location } = this.state;
-        this.debounce(this.setReps(location));
+        debounceSetReps(location);
       })
       .catch((err) => console.log(err));
   }
 
-  debounce(func, delay = 200000) {
+  debounce(func, delay = 3000) {
     let timeoutId;
     return (...args) => {
       if (timeoutId) {
@@ -269,6 +270,16 @@ class IssueForm extends React.Component {
               : null}
             <input id={styles.title} type="text" onChange={this.handleChange} required name="title" />
           </div>
+          <div id={styles.repSection}>
+            <label>Choose a Rep to Notify</label>
+            <select id={styles.repSelector} onChange={this.handleRepSelect} name="rep">
+              {reps.map((rep, index) => (
+                <option className={styles.repOption} value={index} key={rep.name}>
+                  {rep.name} ({rep.title})
+                </option>
+              ))}
+            </select>
+          </div>
           <div id={styles.text}>
             <label>Description</label>
             {noText
@@ -295,16 +306,6 @@ class IssueForm extends React.Component {
           <div>
             Photos (optional)
             <input id={styles.chooseFile} type="file" onChange={this.fileSelectedHandler} name="photos" multiple />
-          </div>
-          <div>
-            Choose a Rep
-            <select id={styles.repSelector} onChange={this.handleRepSelect} name="rep">
-              {reps.map((rep, index) => (
-                <option className={styles.repOption} value={index} key={rep.name}>
-                  {rep.name} ({rep.title})
-                </option>
-              ))}
-            </select>
           </div>
           <button id={styles.formSubmit} onClick={this.handleSubmit}>
             submit issue
