@@ -103,6 +103,7 @@
 .dotsIcon {
   margin: 2px;
   padding: 5px;
+  cursor: pointer;
 }
 
 .dotsIcon:hover {
@@ -248,4 +249,12 @@
 
 .discussion button:focus {
   outline: none;
+}
+
+.user {
+  font-weight: 800;
+}
+
+button[type="button"] {
+  cursor: pointer;
 }

@@ -1,7 +1,7 @@
 .addCommentForm {
   margin-left: auto;
   margin-right: auto;
-  width: fit-content;
+  width: 100%;
 
 }
 
@@ -13,4 +13,18 @@
     padding: 10px 5px;
     margin: 10px;
     overflow: auto;
-}
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  input[type="submit"] {
+    cursor: pointer;
+  }
+
+  input[type="text"] {
+    width: 70%
+  }
+
+  form {
+    margin-left: auto;
+    margin-right: auto;
+  }
