@@ -23,12 +23,12 @@ class Home extends React.Component {
         lng: -122.4194,
       },
       issues: [
-        // {
-        //   loc: {
-        //     lat: 100,
-        //     lng: 100,
-        //   },
-        // },
+        {
+          loc: {
+            lat: 100,
+            lng: 100,
+          },
+        },
       ],
       currentCategories: {
         theft: false,
@@ -63,7 +63,6 @@ class Home extends React.Component {
 
   getIssues(user_id, lat, lng) {
     // query database for the issues based on the user location
-    console.log('getting issues');
     axios.get('/allIssues', {
       params: {
         user_id,
@@ -72,7 +71,6 @@ class Home extends React.Component {
       },
     })
       .then((response) => {
-        console.log(response);
         this.setState({
           issues: response.data.issues,
           user: {
@@ -82,8 +80,6 @@ class Home extends React.Component {
           },
           watched: response.data.watchedList,
         }, () => {
-          console.log(response.data.watchedList)
-          console.log(this.state.watched)
           // console.log('this.state.issues: ', this.state.issues);
           // console.log('this.state.watched: ', this.state.watched);
         });
@@ -153,6 +149,8 @@ class Home extends React.Component {
 
   filterIssues(e) {
     const { issues, currentCategories } = this.state;
+
+
     // change intialLoad to false
     this.setState({
       initialLoad: false,
@@ -194,11 +192,9 @@ class Home extends React.Component {
   }
 
   render() {
-    console.log('render');
     const {
       issues, user, location, initialLoad, filteredIssues, view, watched,
     } = this.state;
-    console.log('watched' + watched);
     if (!issues.length) {
       return (
         <div>
