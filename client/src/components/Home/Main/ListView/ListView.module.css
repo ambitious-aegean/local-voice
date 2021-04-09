@@ -117,8 +117,8 @@
 
 .modalContainer {
   position: relative;
-  right: 24%;
-  bottom: 40px;
+  bottom: 10%;
+  left: 70%;
   align-self: flex-end;
   transition: all 0.2s ease-in-out;
   font-family: Arial, Helvetica, sans-serif;
