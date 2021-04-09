@@ -247,14 +247,14 @@ class IssueForm extends React.Component {
       address, reps, photos, noCat, noTitle, noText,
     } = this.state;
     const { closeForm } = this.props;
-    const categories = ['infrastructure', 'nuisance', 'theft', 'safety', 'waste', 'permits', 'crime'];
+    const categories = ['Infrastructure', 'Nuisance', 'Theft', 'Safety', 'Waste', 'Permits', 'Crime'];
     return (
       <div id={styles.formBackground}>
         <form id={styles.issueForm}>
           <div id={styles.icon} onClick={closeForm}>
             <img src="icons/close.png" alt="close" />
           </div>
-          <div id={styles.heading}>Post an Issue</div>
+          <div id={styles.heading}>Submit an Issue</div>
           <div>
             Location
             <input id={styles.address} type="text" value={address} onChange={this.locationChange} required name="address" />
@@ -308,7 +308,7 @@ class IssueForm extends React.Component {
             <input id={styles.chooseFile} type="file" onChange={this.fileSelectedHandler} name="photos" multiple />
           </div>
           <button id={styles.formSubmit} onClick={this.handleSubmit}>
-            submit issue
+            Submit
           </button>
         </form>
       </div>
