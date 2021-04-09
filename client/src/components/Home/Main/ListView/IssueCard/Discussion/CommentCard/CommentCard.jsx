@@ -4,8 +4,9 @@ import css from './CommentCard.module.css';
 
 const CommentCard = ({ comment, user }) => (
   <div id="comment" className={css.commentBody}>
-    <div>{user.username}</div>
-    <div>{comment.text}</div>
+    <div className={css.commentName}>{user.username}</div>
+    <div className={css.commentText}>{comment.text}</div>
+    <div className={css.divider} />
   </div>
 );
 

@@ -150,11 +150,11 @@ class IssueCard extends React.Component {
         <div className={css.content}>
           <div className={css.title}>
             {title}
-            &nbsp;
-            <div className={css.text}>
-              {text}
-            </div>
           </div>
+          <div className={css.text}>
+            {text}
+          </div>
+
           <div id="issueCard-photos" className={css.photos}>
             {photos.map((photo, index) => (
               <img key={index} className={css.photo} alt={issue.title} src={photo} />

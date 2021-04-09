@@ -37,7 +37,7 @@
   display: flex;
   justify-content: flex-end;
   flex-direction: column;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 16px;
   font-weight: 700;
 }
@@ -50,6 +50,7 @@
   position: relative;
   right: 3px;
   bottom: 4px;
+
 }
 
 .dots:focus {
@@ -78,7 +79,7 @@
   bottom: 40px;
   align-self: flex-end;
   transition: all 0.2s ease-in-out;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .modalContainer .optionsModal {
@@ -129,18 +130,18 @@
   margin: 5px;
   padding: 5px;
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 800;
   display: flex;
   justify-self: flex-start;
   align-items: center;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Montserrat', sans-serif;
   color: rgb(19, 19, 19);
 }
 
 .content .text {
   margin: 5px;
   padding: 5px;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 18px;
   font-weight: 300;
   color: rgb(29, 29, 29);
@@ -176,6 +177,7 @@
   margin: 5px;
   padding: 5px;
   width: 100%;
+
 }
 
 .discussion {
@@ -185,7 +187,7 @@
   align-items: center;
   margin: 5px;
   padding: 5px;
-  width: 100%;
+  /* width: 100%; */
  }
 
 .discussion button {
@@ -197,14 +199,16 @@
   height: 40px;
   width: 300px;
   height: max-content;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 16px;
   color: rgb(14, 14, 14);
   transition: all 0.2s ease;
+  border-radius: 8px;
 }
 
 .discussion button:hover {
   border-bottom: 2px solid rgb(94, 94, 94);
+  cursor: pointer;
 }
 
 .discussion button:focus {

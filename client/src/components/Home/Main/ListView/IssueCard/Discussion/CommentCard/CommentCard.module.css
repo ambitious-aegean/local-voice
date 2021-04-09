@@ -2,3 +2,14 @@
   text-align: left;
   width: 100%;
 }
+
+.commentName {
+  font-weight: 800;
+}
+
+.divider {
+  width: 90%;
+  margin: 5px auto;
+  height: 2px;
+  background-color: #E1E5F2;
+}
