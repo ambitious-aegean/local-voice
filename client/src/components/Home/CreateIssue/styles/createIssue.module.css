@@ -2,8 +2,9 @@
 #createIssue {
   font-size: 20px;
   border: 1px solid #bbbac0;
+  width: 60%;
   padding: 10px;
-  border-radius: 20px;
+  border-radius: 12px;
   cursor: pointer;
   margin: 10px auto;
   outline: none;
