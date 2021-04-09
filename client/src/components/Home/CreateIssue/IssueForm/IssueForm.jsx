@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable camelcase */
 /* eslint-disable react/button-has-type */
 /* eslint-disable jsx-a11y/label-has-associated-control */
@@ -30,6 +32,9 @@ class IssueForm extends React.Component {
       photos: [],
       reps: [],
       selectedRep: {},
+      noCat: false,
+      noTitle: false,
+      noText: false,
     };
 
     this.setAddressFromCoordinates = this.setAddressFromCoordinates.bind(this);
@@ -69,7 +74,29 @@ class IssueForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const { photoFiles, user, location } = this.state;
+    const {
+      user, location, categories, title, text, photoFiles,
+    } = this.state;
+    let error = false;
+    if (!categories.length) {
+      this.setState({ noCat: true });
+      error = true;
+    } else {
+      this.setState({ noCat: false });
+    }
+    if (!title) {
+      this.setState({ noTitle: true });
+      error = true;
+    } else {
+      this.setState({ noTitle: false });
+    }
+    if (!text) {
+      this.setState({ noText: true });
+      error = true;
+    } else {
+      this.setState({ noText: false });
+    }
+    if (error) return;
     const { closeForm } = this.props;
     const { lat, lng } = location;
     const { user_id } = user;
@@ -215,7 +242,9 @@ class IssueForm extends React.Component {
   }
 
   render() {
-    const { address, reps, photos } = this.state;
+    const {
+      address, reps, photos, noCat, noTitle, noText,
+    } = this.state;
     const { closeForm } = this.props;
     const categories = ['infrastructure', 'nuisance', 'theft', 'safety', 'waste', 'permits', 'crime'];
     return (
@@ -231,14 +260,29 @@ class IssueForm extends React.Component {
           </div>
           <div>
             Issue
+            {noTitle
+              ? (
+                <div className={styles.error}>
+                  Please enter a name for the issue
+                </div>
+              )
+              : null}
             <input id={styles.title} type="text" onChange={this.handleChange} required name="title" />
           </div>
           <div id={styles.text}>
             <label>Description</label>
+            {noText
+              ? (
+                <div className={styles.error}>
+                  Please enter a description of the issue
+                </div>
+              )
+              : null}
             <textarea type="text" onChange={this.handleChange} required name="text" />
           </div>
           <div>
             Check all that apply
+            {noCat ? <div className={styles.error}>Please check at least one category</div> : null}
             <div id={styles.categories}>
               {categories.map((category, index) => (
                 <div className={styles.category} key={category}>
