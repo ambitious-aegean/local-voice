@@ -175,10 +175,9 @@ class IssueCard extends React.Component {
           <div className={css.content}>
             <div className={css.title}>
               {title}
-              &nbsp;
-              <div className={css.text}>
-                {text}
-              </div>
+            </div>
+            <div className={css.text}>
+              {text}
             </div>
             <div id="issueCard-photos" className={css.photos}>
               {photos.map((photo, index) => (
@@ -186,17 +185,17 @@ class IssueCard extends React.Component {
               ))}
             </div>
           </div>
-          <div className={css.discussionContainer}>
-            <div className={css.discussion}>
-              <button id="viewDiscussion" type="button" onClick={() => this.handleViewDiscussionClick()} onKeyPress={() => {}} tabIndex={0}>
-                View Discussion
-              </button>
-              {viewDiscussion
-                ? <Discussion discussionData={discussionData} issue={issue} user={user} />
-                : ''}
-            </div>
+          {/* <div className={css.discussionContainer}> */}
+          <div className={css.discussion}>
+            <button id="viewDiscussion" type="button" onClick={() => this.handleViewDiscussionClick()} onKeyPress={() => {}} tabIndex={0}>
+              View Discussion
+            </button>
+            {viewDiscussion
+              ? <Discussion discussionData={discussionData} issue={issue} user={user} />
+              : ''}
           </div>
         </div>
+        {/* </div> */}
         {/* </div> */}
       </div>
     );
