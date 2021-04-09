@@ -185,18 +185,17 @@ class IssueCard extends React.Component {
               ))}
             </div>
           </div>
-          {/* <div className={css.discussionContainer}> */}
           <div className={css.discussion}>
             <button id="viewDiscussion" type="button" onClick={() => this.handleViewDiscussionClick()} onKeyPress={() => {}} tabIndex={0}>
-              View Discussion
+              {!viewDiscussion
+                ? 'View Discussion'
+                : 'Close Discussion'}
             </button>
             {viewDiscussion
               ? <Discussion discussionData={discussionData} issue={issue} user={user} />
               : ''}
           </div>
         </div>
-        {/* </div> */}
-        {/* </div> */}
       </div>
     );
   }
