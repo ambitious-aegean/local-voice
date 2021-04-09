@@ -192,8 +192,14 @@ class IssueCard extends React.Component {
                 : 'Close Discussion'}
             </button>
             {viewDiscussion
-              ? <Discussion discussionData={discussionData} issue={issue} user={user} />
-              : ''}
+              ? (
+                <Discussion
+                  discussionData={discussionData}
+                  issue={issue}
+                  user={user}
+                  onClick={this.getDiscussionData}
+                />
+              ) : ''}
           </div>
         </div>
       </div>

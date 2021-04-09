@@ -25,7 +25,7 @@ class AddComment extends React.Component {
   postComment(e) {
     e.preventDefault();
     const { text } = this.state;
-    const { issue, user } = this.props;
+    const { issue, user, onClick } = this.props;
     axios.post('/comments', {
       issue_id: issue.issue_id,
       text,
@@ -37,6 +37,7 @@ class AddComment extends React.Component {
     this.setState({
       text: '',
     });
+    onClick();
   }
 
   render() {
@@ -55,6 +56,7 @@ class AddComment extends React.Component {
 AddComment.propTypes = {
   user: PropTypes.objectOf(PropTypes.any).isRequired,
   issue: PropTypes.objectOf(PropTypes.any).isRequired,
+  onClick: PropTypes.func.isRequired,
 };
 
 export default AddComment;
