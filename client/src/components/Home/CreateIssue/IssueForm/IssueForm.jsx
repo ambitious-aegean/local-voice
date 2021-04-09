@@ -298,7 +298,7 @@ class IssueForm extends React.Component {
               {categories.map((category, index) => (
                 <div className={styles.category} key={category}>
                   <input onChange={this.addCategory} type="checkbox" value={index + 1} />
-                  <label htmlFor={category}>  {category}</label>
+                  <label>  {category}</label>
                 </div>
               ))}
             </div>

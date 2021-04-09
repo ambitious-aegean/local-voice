@@ -23,12 +23,12 @@ class Home extends React.Component {
         lng: -122.4194,
       },
       issues: [
-        {
-          loc: {
-            lat: 100,
-            lng: 100,
-          },
-        },
+        // {
+        //   loc: {
+        //     lat: 100,
+        //     lng: 100,
+        //   },
+        // },
       ],
       currentCategories: {
         theft: false,
@@ -194,10 +194,18 @@ class Home extends React.Component {
   }
 
   render() {
+    console.log('render');
     const {
       issues, user, location, initialLoad, filteredIssues, view, watched,
     } = this.state;
     console.log('watched' + watched);
+    if (!issues.length) {
+      return (
+        <div>
+          Loading
+        </div>
+      );
+    }
     return (
       <div id="homeContainer" className={styles.homeContainer}>
         <Header toggle={this.toggle} />
