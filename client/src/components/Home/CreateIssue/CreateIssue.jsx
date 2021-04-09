@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -20,18 +21,30 @@ class CreateIssue extends React.Component {
 
   closeForm() {
     this.setState({ formOpen: false });
+    const { getIssues } = this.props;
+    const { user, location } = this.props;
+    const { user_id } = user;
+    const { lat, lng } = location;
+    getIssues(user_id, lat, lng);
   }
 
   render() {
     const { formOpen } = this.state;
-    const { user, location } = this.props;
+    const { user, location, getIssues } = this.props;
     return (
       <div>
         <button type="button" id={styles.createIssue} onClick={this.openForm}>
           report an issue
         </button>
         { formOpen
-          ? <IssueForm user={user} location={location} closeForm={this.closeForm} />
+          ? (
+            <IssueForm
+              user={user}
+              location={location}
+              closeForm={this.closeForm}
+              getIssues={getIssues}
+            />
+          )
           : ''}
       </div>
     );
@@ -41,6 +54,7 @@ class CreateIssue extends React.Component {
 CreateIssue.propTypes = {
   user: PropTypes.objectOf(PropTypes.any).isRequired,
   location: PropTypes.objectOf(PropTypes.number).isRequired,
+  getIssues: PropTypes.func.isRequired,
 };
 
 export default CreateIssue;

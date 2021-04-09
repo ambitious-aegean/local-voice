@@ -5,7 +5,7 @@ import styles from '../styles/filterOptions.module.css';
 const categories = ['infrastructure', 'nuisance', 'theft', 'safety', 'waste', 'permits', 'crime'];
 
 const FilterOptions = ({ filterIssues }) => (
-  <div className={styles.filterOptions}>
+  <div id="FilterOptions" className={styles.filterOptions}>
     <form className={styles.formContainer}>
       <span className={styles.filterHeader}>Search Filter Categories</span>
       {categories.map((category) => (

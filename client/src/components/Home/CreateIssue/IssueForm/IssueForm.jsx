@@ -1,3 +1,6 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable camelcase */
 /* eslint-disable react/button-has-type */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/jsx-one-expression-per-line */
@@ -29,6 +32,9 @@ class IssueForm extends React.Component {
       photos: [],
       reps: [],
       selectedRep: {},
+      noCat: false,
+      noTitle: false,
+      noText: false,
     };
 
     this.setAddressFromCoordinates = this.setAddressFromCoordinates.bind(this);
@@ -40,7 +46,7 @@ class IssueForm extends React.Component {
     this.addCategory = this.addCategory.bind(this);
     this.handleRepSelect = this.handleRepSelect.bind(this);
     this.fileSelectedHandler = this.fileSelectedHandler.bind(this);
-    this.fileUploadHandler = this.fileUploadHandler.bind(this);
+    this.photoUploadHandler = this.photoUploadHandler.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.postIssue = this.postIssue.bind(this);
     this.escFunction = this.escFunction.bind(this);
@@ -49,6 +55,7 @@ class IssueForm extends React.Component {
   componentDidMount() {
     const { location } = this.props;
     this.setAddressFromCoordinates(location);
+    this.setReps(location);
     document.addEventListener('keydown', this.escFunction, false);
   }
 
@@ -68,9 +75,41 @@ class IssueForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.fileUploadHandler()
-      .then(() => this.postIssue())
-      .catch((err) => console.log(err));
+    const {
+      user, location, categories, title, text, photoFiles,
+    } = this.state;
+    let error = false;
+    if (!categories.length) {
+      this.setState({ noCat: true });
+      error = true;
+    } else {
+      this.setState({ noCat: false });
+    }
+    if (!title) {
+      this.setState({ noTitle: true });
+      error = true;
+    } else {
+      this.setState({ noTitle: false });
+    }
+    if (!text) {
+      this.setState({ noText: true });
+      error = true;
+    } else {
+      this.setState({ noText: false });
+    }
+    if (error) return;
+    const { closeForm } = this.props;
+    const { lat, lng } = location;
+    const { user_id } = user;
+    if (photoFiles.length) {
+      this.photoUploadHandler()
+        .then(() => this.postIssue())
+        .then(() => closeForm())
+        .catch((err) => console.log(err));
+    } else {
+      this.postIssue();
+      closeForm();
+    }
   }
 
   handleRepSelect(event) {
@@ -116,23 +155,23 @@ class IssueForm extends React.Component {
     })
       .then((resp) => {
         this.setState({ location: resp.data });
-        this.setReps(resp.data);
       })
       .catch((err) => { throw err; });
   }
 
   locationChange(event) {
     const { value } = event.target;
+    const debounceSetReps = this.debounce(this.setReps);
     this.setState({ address: value });
     this.setCoordinatesFromAddress(value)
       .then(() => {
         const { location } = this.state;
-        this.debounce(this.setReps(location));
+        debounceSetReps(location);
       })
       .catch((err) => console.log(err));
   }
 
-  debounce(func, delay = 200000) {
+  debounce(func, delay = 3000) {
     let timeoutId;
     return (...args) => {
       if (timeoutId) {
@@ -148,9 +187,7 @@ class IssueForm extends React.Component {
     const {
       user, location, categories, title, text, photos, selectedRep,
     } = this.state;
-    const { closeForm } = this.props;
-
-    axios.post('/issues', {
+    return axios.post('/issues', {
       user_id: user.user_id,
       lat: location.lat,
       lng: location.lng,
@@ -163,9 +200,10 @@ class IssueForm extends React.Component {
       rep_photo_url: selectedRep.photoUrl,
       date: new Date(),
     })
-      .then((response) => {
-        console.log(response.data);
-        closeForm();
+      .then(() => {
+        console.log(resp.data);
+        this.setState({ photos: [] });
+        this.setState({ photoFiles: [] });
       })
       .catch((error) => {
         console.log(error);
@@ -183,7 +221,7 @@ class IssueForm extends React.Component {
     this.setState({ photoFiles: event.target.files });
   }
 
-  fileUploadHandler() {
+  photoUploadHandler() {
     const { photoFiles, user } = this.state;
     const photo = photoFiles[0];
     const formData = new FormData();
@@ -191,7 +229,6 @@ class IssueForm extends React.Component {
     return axios.post('/photo', formData)
       .then((resp) => {
         const { photos } = this.state;
-        console.log(resp.data);
         photos.push(resp.data.toString());
         this.setState({ photos });
       })
@@ -206,47 +243,35 @@ class IssueForm extends React.Component {
   }
 
   render() {
-    const { address, reps, photos } = this.state;
+    const {
+      address, reps, photos, noCat, noTitle, noText,
+    } = this.state;
     const { closeForm } = this.props;
     const categories = ['infrastructure', 'nuisance', 'theft', 'safety', 'waste', 'permits', 'crime'];
     return (
       <div id={styles.formBackground}>
-        <form id={styles.issueForm} onSubmit={this.handleSubmit}>
+        <form id={styles.issueForm}>
           <div id={styles.icon} onClick={closeForm}>
             <img src="icons/close.png" alt="close" />
           </div>
-          <label htmlFor="address">
-            Location/Address
+          <div id={styles.heading}>Post an Issue</div>
+          <div>
+            Location
             <input id={styles.address} type="text" value={address} onChange={this.locationChange} required name="address" />
-          </label>
-          {/* <button id={styles.setLocation} type="button" name="setLocation"
-          onClick={this.setLocation}>
-            set location
-          </button> */}
-          <label htmlFor="title">
-            Issue
-          </label>
-          <input id={styles.title} type="text" onChange={this.handleChange} required name="title" />
-          <label htmlFor="text">
-            Description
-          </label>
-          <textarea id={styles.text} type="text" onChange={this.handleChange} required name="text" />
-          <div id={styles.categories}>
-            Check all that apply
-            {categories.map((category, index) => (
-              <div className={styles.category} key={category}>
-                <input onChange={this.addCategory} type="checkbox" value={index + 1} />
-                <label htmlFor={category}>{category}</label>
-              </div>
-            ))}
           </div>
-          <label htmlFor="photos">
-            Photos (optional)
-            <input id={styles.chooseFile} type="file" onChange={this.fileSelectedHandler} name="photos" multiple />
-            {/* <button onClick={this.fileUploadHandler}>upload photos</button> */}
-          </label>
-          <label htmlFor="reps">
-            Choose a Rep
+          <div>
+            Issue
+            {noTitle
+              ? (
+                <div className={styles.error}>
+                  Please enter a name for the issue
+                </div>
+              )
+              : null}
+            <input id={styles.title} type="text" onChange={this.handleChange} required name="title" />
+          </div>
+          <div id={styles.repSection}>
+            <label>Choose a Rep to Notify</label>
             <select id={styles.repSelector} onChange={this.handleRepSelect} name="rep">
               {reps.map((rep, index) => (
                 <option className={styles.repOption} value={index} key={rep.name}>
@@ -254,8 +279,37 @@ class IssueForm extends React.Component {
                 </option>
               ))}
             </select>
-          </label>
-          <input id={styles.formSubmit} type="submit" value="submit issue" />
+          </div>
+          <div id={styles.text}>
+            <label>Description</label>
+            {noText
+              ? (
+                <div className={styles.error}>
+                  Please enter a description of the issue
+                </div>
+              )
+              : null}
+            <textarea type="text" onChange={this.handleChange} required name="text" />
+          </div>
+          <div>
+            Check all that apply
+            {noCat ? <div className={styles.error}>Please check at least one category</div> : null}
+            <div id={styles.categories}>
+              {categories.map((category, index) => (
+                <div className={styles.category} key={category}>
+                  <input onChange={this.addCategory} type="checkbox" value={index + 1} />
+                  <label htmlFor={category}>  {category}</label>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div>
+            Photos (optional)
+            <input id={styles.chooseFile} type="file" onChange={this.fileSelectedHandler} name="photos" multiple />
+          </div>
+          <button id={styles.formSubmit} onClick={this.handleSubmit}>
+            submit issue
+          </button>
         </form>
       </div>
     );

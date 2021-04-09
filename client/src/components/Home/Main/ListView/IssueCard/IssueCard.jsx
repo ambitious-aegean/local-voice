@@ -38,11 +38,11 @@ class IssueCard extends React.Component {
     const {
       resolved, resolver, issue_id, up_vote,
     } = issue;
-    const { user_id } = user;
+    const { user_id, watchedList, votedList } = user;
     this.setState({
       voteCount: up_vote,
     });
-    this.checkVote(issue_id, user_id);
+    this.checkVote(issue_id, votedList);
   }
 
   handleViewOptionsClick() {
@@ -70,15 +70,12 @@ class IssueCard extends React.Component {
     this.setState({ viewDiscussion: false });
   }
 
-  checkVote(issue_id, user_id) {
-    axios.get(`/allIssues/checkVote/?issue_id=${issue_id}`)
-      .then((resp) => {
-        if (resp.data.indexOf(user_id) !== -1) {
-          this.setState({
-            voted: true,
-          });
-        }
+  checkVote(issue_id, votedList) {
+    if (votedList.indexOf(issue_id) !== -1) {
+      this.setState({
+        voted: true,
       });
+    }
   }
 
   up_vote() {
@@ -122,67 +119,73 @@ class IssueCard extends React.Component {
     } = issue;
     return (
       <div id="issueCard" className={css.issueCard}>
-        <div className={css.header}>
-          <div className={css.userDate}>
-            <div className={css.user}>
-              {username}
-            </div>
-            <div className={css.date}>
-              {date}
-            </div>
-          </div>
-          <div className={css.dotsCategories}>
-            <div role="button" className={css.dots} onClick={this.handleViewOptionsClick} onKeyPress={this.handleViewOptionsClick} tabIndex={0}>
-              <i className={`${css.dotsIcon} fa fa-ellipsis-h`} />
-            </div>
-            <div id="issueCard-categories" className={css.categories}>
-              {categories.map((category) => (
-                <div key={category}>
-                  #{category} &nbsp;
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-        <div className={css.modalContainer}>
-          {viewOptions
-            ? (
-              <OptionsModal issue={issue} user={user} />
-            ) : ''}
-        </div>
-        <div className={css.content}>
-          <div className={css.title}>
-            {title}
-            &nbsp;
-            <div className={css.text}>
-              {text}
-            </div>
-          </div>
-          <div id="issueCard-photos" className={css.photos}>
-            {photos.map((photo, index) => (
-              <img key={index} className={css.photo} alt={issue.title} src={photo} />
-            ))}
-          </div>
-        </div>
-        <div className={css.voteDiscussion}>
-          <div className={css.vote}>
+        <div className={css.voteContainer}>
+          <div className={css.voteOption}>
             {!voted
               ? (
-                <div>
+                <div className={css.vote}>
                   <button type="button" onClick={this.up_vote}>
                     <span className="fa fa-chevron-up" />
                   </button>
-                  {voteCount} upvotes
+                  <div className={css.voteCount}>
+                    {voteCount}
+                  </div>
                 </div>
               ) : (
-                <div>
+                <div className={css.vote}>
                   <button type="button" onClick={this.down_vote}>
                     <span className="fa fa-chevron-down" />
                   </button>
-                  {voteCount} upvotes
+                  <div className={css.voteCount}>
+                    {voteCount}
+                  </div>
                 </div>
               )}
           </div>
+        </div>
+        <div className={css.issueCardContent}>
+          <div className={css.header}>
+            <div className={css.userDate}>
+              <div className={css.user}>
+                {username}
+              </div>
+              <div className={css.date}>
+                {date}
+              </div>
+            </div>
+            <div className={css.dotsCategories}>
+              <div role="button" className={css.dots} onClick={this.handleViewOptionsClick} onKeyPress={this.handleViewOptionsClick} tabIndex={0}>
+                <i className={`${css.dotsIcon} fa fa-ellipsis-h`} />
+              </div>
+              <div id="issueCard-categories" className={css.categories}>
+                {categories.map((category) => (
+                  <div key={category}>
+                    #{category} &nbsp;
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+          <div className={css.modalContainer}>
+            {viewOptions
+              ? (
+                <OptionsModal issue={issue} user={user} />
+              ) : ''}
+          </div>
+          <div className={css.content}>
+            <div className={css.title}>
+              {title}
+            </div>
+            <div className={css.text}>
+              {text}
+            </div>
+            <div id="issueCard-photos" className={css.photos}>
+              {photos.map((photo, index) => (
+                <img key={index} className={css.photo} alt={issue.title} src={photo} />
+              ))}
+            </div>
+          </div>
+          {/* <div className={css.discussionContainer}> */}
           <div className={css.discussion}>
             <button id="viewDiscussion" type="button" onClick={() => this.handleViewDiscussionClick()} onKeyPress={() => {}} tabIndex={0}>
               View Discussion
@@ -192,6 +195,8 @@ class IssueCard extends React.Component {
               : ''}
           </div>
         </div>
+        {/* </div> */}
+        {/* </div> */}
       </div>
     );
   }
