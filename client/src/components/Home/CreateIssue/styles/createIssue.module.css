@@ -1,8 +1,8 @@
 
 #createIssue {
-  background-color: white;
+  background-color: #fff;
   font-size: 20px;
-  border: 1px solid black;
+  border: 1px solid #bbbac0;
   padding: 10px;
   border-radius: 20px;
   cursor: pointer;

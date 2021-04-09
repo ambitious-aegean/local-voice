@@ -15,7 +15,10 @@ const postIssue = (req, res) => {
     rep_photo_url,
     date,
   } = req.body;
-  const issuesQuery = `INSERT INTO issues (user_id, title, text, lat, lng, rep_name, rep_email, rep_photo_url, date) VALUES (${user_id}, '${title}', '${text}', ${lat}, ${lng}, '${rep_name}', '${rep_email}', '${rep_photo_url}',' ${date}');`;
+  const newDate = new Date(date);
+  const options = { year: 'numeric', month: 'long', day: 'numeric' };
+  const formattedDate = newDate.toLocaleDateString(undefined, options);
+  const issuesQuery = `INSERT INTO issues (user_id, title, text, lat, lng, rep_name, rep_email, rep_photo_url, date) VALUES (${user_id}, '${title}', '${text}', ${lat}, ${lng}, '${rep_name}', '${rep_email}', '${rep_photo_url}',' ${formattedDate}');`;
   db.query(issuesQuery, (issueErr) => {
     if (issueErr) {
       console.log(issueErr);

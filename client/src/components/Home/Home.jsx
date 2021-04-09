@@ -73,8 +73,9 @@ class Home extends React.Component {
     })
       .then((response) => {
         console.log(response);
+        const reversed = response.data.issues.reverse();
         this.setState({
-          issues: response.data.issues,
+          issues: reversed,
           user: {
             username: 'someguy123',
             user_id: 1,
@@ -82,8 +83,8 @@ class Home extends React.Component {
           },
           watched: response.data.watchedList,
         }, () => {
-          console.log(response.data.watchedList)
-          console.log(this.state.watched)
+          console.log(response.data.watchedList);
+          console.log(this.state.watched);
           // console.log('this.state.issues: ', this.state.issues);
           // console.log('this.state.watched: ', this.state.watched);
         });
