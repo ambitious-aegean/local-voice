@@ -2,7 +2,7 @@
   font-size: 50px;
   /* font-family: 'Montserrat', sans-serif;
    */
-  font-family: 'Courgette', cursive;
+  font-family: 'Kiwi Maru', serif;
   margin-left: 10px;
 }
 
@@ -19,7 +19,7 @@
   font-family: 'Montserrat', sans-serif;
   font-size: 14px;
   font-weight: bold;
-  margin-bottom: -70px;
+  margin-bottom: -120px;
   color: rgba(43,39,60,1);
   margin-right: 5px;
 }
@@ -28,7 +28,7 @@
   font-family: 'Montserrat', sans-serif;
   font-size: 14px;
   font-weight: bold;
-  margin-bottom: -70px;
+  margin-bottom: -120px;
   color: rgba(43,39,60,1);
   margin-left: 5px;
 }
@@ -44,7 +44,7 @@
   display: inline-block;
   width: 30px;
   height: 17px;
-  margin-bottom: -70px;
+  margin-bottom: -120px;
 }
 
 .switch input {

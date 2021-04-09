@@ -2,6 +2,7 @@
   /* margin-top: 50px; */
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   /* border: 1px solid black; */
   padding: 10px;
   margin-top: 16px;
@@ -15,8 +16,8 @@
 
 .filterHeader {
   font-family: 'Montserrat', sans-serif;
-  font-size: 14px;
-  font-weight: bold;
+  font-size: 18px;
+  font-weight: 600;
   margin-bottom: 25px;
   color: rgba(43,39,60,1);
 }
@@ -38,6 +39,7 @@
 .formContainer {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
 }
 
 
@@ -45,7 +47,7 @@
   margin-left: 8px;
   vertical-align: center;
   font-family: 'Montserrat', sans-serif;
-  font-size: 14px;
-  font-weight: bold;
+  font-size: 16px;
+  /* font-weight: bold; */
   color: rgba(43,39,60,1);
 }
