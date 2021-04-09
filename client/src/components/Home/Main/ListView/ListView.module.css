@@ -95,6 +95,10 @@
   bottom: 4px;
 }
 
+.dots:hover {
+  cursor: pointer;
+}
+
 .dots:focus {
   outline: none;
 }
@@ -103,12 +107,6 @@
   margin: 2px;
   padding: 5px;
 }
-
-/* .dotsIcon:hover {
-  color: rgb(82, 82, 82);
-  background-color: rgba(187, 187, 187, 0.521);
-  border-radius: 50%;
-} */
 
 .dotsCategories .categories {
   display: flex;
@@ -177,6 +175,7 @@
 
 .watchOption:hover, .flagOption:hover, .resolveOption:hover, button:hover {
   background-color: rgb(231, 231, 231);
+  cursor: pointer;
 }
 
 
@@ -265,6 +264,7 @@
 
 .discussion button:hover {
   border-bottom: 2px solid rgb(94, 94, 94);
+  cursor: pointer;
 }
 
 .discussion button:focus {
