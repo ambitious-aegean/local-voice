@@ -19,7 +19,7 @@ const LeftSideBar = ({ user, filterIssues, filterMyIssues, filterWatchedIssues }
   };
 
   return (
-    <div className={styles.leftSideBar}>
+    <div id="LeftSideBar" className={styles.leftSideBar}>
       <div className={styles.welcomeBanner}>
         <div className={styles.welcomeBannerVerticalLayout}>
           <div className={styles.welcomeTagPadding}>
