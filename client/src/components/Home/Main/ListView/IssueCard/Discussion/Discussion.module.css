@@ -1,3 +1,10 @@
+.discussionMain {
+  margin: 5px;
+  padding: 5px;
+  background-color: whitesmoke;
+  border-radius: 5px;
+}
+
 .commentCardList, .discussionMain {
   width: 100%;
 }
