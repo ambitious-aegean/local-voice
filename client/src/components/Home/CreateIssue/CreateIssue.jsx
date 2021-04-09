@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -20,6 +21,11 @@ class CreateIssue extends React.Component {
 
   closeForm() {
     this.setState({ formOpen: false });
+    const { getIssues } = this.props;
+    const { user, location } = this.props;
+    const { user_id } = user;
+    const { lat, lng } = location;
+    getIssues(user_id, lat, lng);
   }
 
   render() {
