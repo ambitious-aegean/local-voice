@@ -70,18 +70,17 @@ class IssueForm extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     const { photoFiles, user, location } = this.state;
-    const { getIssues } = this.props;
+    const { closeForm } = this.props;
     const { lat, lng } = location;
     const { user_id } = user;
-    if (photoFiles.length > 0) {
+    if (photoFiles.length) {
       this.photoUploadHandler()
         .then(() => this.postIssue())
-        .then(() => getIssues(user_id, lat, lng))
+        .then(() => closeForm())
         .catch((err) => console.log(err));
     } else {
-      this.postIssue()
-        .then(() => getIssues(user_id, lat, lng))
-        .catch((err) => console.log(err));
+      this.postIssue();
+      closeForm();
     }
   }
 
@@ -160,8 +159,6 @@ class IssueForm extends React.Component {
     const {
       user, location, categories, title, text, photos, selectedRep,
     } = this.state;
-    const { closeForm } = this.props;
-
     return axios.post('/issues', {
       user_id: user.user_id,
       lat: location.lat,
@@ -175,7 +172,11 @@ class IssueForm extends React.Component {
       rep_photo_url: selectedRep.photoUrl,
       date: new Date(),
     })
-      .then((response) => closeForm())
+      .then(() => {
+        console.log(resp.data);
+        this.setState({ photos: [] });
+        this.setState({ photoFiles: [] });
+      })
       .catch((error) => {
         console.log(error);
       });
@@ -200,7 +201,6 @@ class IssueForm extends React.Component {
     return axios.post('/photo', formData)
       .then((resp) => {
         const { photos } = this.state;
-        console.log(resp.data);
         photos.push(resp.data.toString());
         this.setState({ photos });
       })
@@ -275,7 +275,6 @@ IssueForm.propTypes = {
   user: PropTypes.objectOf(PropTypes.any).isRequired,
   location: PropTypes.objectOf(PropTypes.number).isRequired,
   closeForm: PropTypes.func.isRequired,
-  getIssues: PropTypes.func.isRequired,
 };
 
 export default IssueForm;
