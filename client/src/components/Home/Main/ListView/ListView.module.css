@@ -16,7 +16,7 @@
   border-radius: 12px;
   padding: 3px;
   /* background-color: white; */
-  background: linear-gradient(to right  #f0f1f7, #eaecf3, #E1E5F2);
+  background: linear-gradient(to right, #e4eaff, #fbfbff, #dee9ff);
 }
 
 .voteContainer {
@@ -270,7 +270,7 @@
   border: none;
   border-radius: 4px;
   border-bottom: 3px solid rgb(233, 233, 233);
-  background: linear-gradient(to right, #eef5fc, #f7fafd, #eef5fc);
+  background: linear-gradient(to right, #e2f0ff, #f7fafd, #deeeff);
   height: 40px;
   width: 100%;
   font-family: 'Montserrat', sans-serif;
