@@ -1,3 +1,7 @@
+.createIssueContainer {
+  display: flex;
+}
+
 #createIssue {
   font-size: 20px;
   border: 1px solid #bbbac0;
