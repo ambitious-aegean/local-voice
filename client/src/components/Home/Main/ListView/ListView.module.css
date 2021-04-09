@@ -10,15 +10,57 @@
 }
 
 .issueCard {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 10fr;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);  margin: 7px;
   border-radius: 12px;
   padding: 3px;
   background-color: white;
 }
 
-.issueCard .header {
+.voteContainer {
+  grid-column: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.voteContainer .vote {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.vote button {
+  font-size: 22px;
+  background-color: white;
+  border: none;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.vote button:hover {
+  background-color: rgba(192, 192, 192, 0.363);
+  border-radius: 50%;
+}
+
+.vote button:focus {
+  outline: none;
+}
+
+.vote .voteCount {
+  display: flex;
+  justify-content: center;
+  font-size: 36px;
+  color: rgb(24, 24, 24);
+  font-weight: 700;
+}
+
+.issueCardContent {
+  grid-column: 2;
+}
+
+.issueCardContent .header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -119,7 +161,7 @@
   outline: none;
 }
 
-.content {
+.issueCardContent .content {
   margin: 5px;
   padding: 5px;
   background-color: whitesmoke;
@@ -147,7 +189,7 @@
   color: rgb(29, 29, 29);
 }
 
-.photos {
+.issueCardContent .photos {
   display: flex;
   flex-direction: row;
   margin: 5px;
@@ -160,15 +202,7 @@
   margin: 2px;
 }
 
-.options {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  margin: 5px;
-  padding: 5px;
-}
-
-.voteDiscussion {
+.discussionContainer {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -176,7 +210,6 @@
   border-top: rgb(224, 224, 224) 2px solid;
   margin: 5px;
   padding: 5px;
-
 }
 
 .discussion {
