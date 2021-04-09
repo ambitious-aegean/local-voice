@@ -68,9 +68,14 @@ class IssueForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.fileUploadHandler()
-      .then(() => this.postIssue())
-      .catch((err) => console.log(err));
+    const { photoFiles } = this.state;
+    if (photoFiles.length > 0) {
+      this.fileUploadHandler()
+        .then(() => this.postIssue())
+        .catch((err) => console.log(err));
+    } else {
+      this.postIssue();
+    }
   }
 
   handleRepSelect(event) {
@@ -211,37 +216,38 @@ class IssueForm extends React.Component {
     const categories = ['infrastructure', 'nuisance', 'theft', 'safety', 'waste', 'permits', 'crime'];
     return (
       <div id={styles.formBackground}>
-        <form id={styles.issueForm} onSubmit={this.handleSubmit}>
+        <form id={styles.issueForm}>
           <div id={styles.icon} onClick={closeForm}>
             <img src="icons/close.png" alt="close" />
           </div>
-          <label htmlFor="address">
-            Location/Address
+          <div>
+            Location
             <input id={styles.address} type="text" value={address} onChange={this.locationChange} required name="address" />
-          </label>
-          <label htmlFor="title">
-            Issue
-          </label>
-          <input id={styles.title} type="text" onChange={this.handleChange} required name="title" />
-          <label htmlFor="text">
-            Description
-          </label>
-          <textarea id={styles.text} type="text" onChange={this.handleChange} required name="text" />
-          <div id={styles.categories}>
-            Check all that apply
-            {categories.map((category, index) => (
-              <div className={styles.category} key={category}>
-                <input onChange={this.addCategory} type="checkbox" value={index + 1} />
-                <label htmlFor={category}>{category}</label>
-              </div>
-            ))}
           </div>
-          <label htmlFor="photos">
+          <div>
+            Issue
+            <input id={styles.title} type="text" onChange={this.handleChange} required name="title" />
+          </div>
+          <div>
+            <label>Description</label>
+            <textarea id={styles.text} type="text" onChange={this.handleChange} required name="text" />
+          </div>
+          <div>
+            Check all that apply
+            <div id={styles.categories}>
+              {categories.map((category, index) => (
+                <div className={styles.category} key={category}>
+                  <input onChange={this.addCategory} type="checkbox" value={index + 1} />
+                  <label htmlFor={category}>{category}</label>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div>
             Photos (optional)
             <input id={styles.chooseFile} type="file" onChange={this.fileSelectedHandler} name="photos" multiple />
-            {/* <button onClick={this.fileUploadHandler}>upload photos</button> */}
-          </label>
-          <label htmlFor="reps">
+          </div>
+          <div>
             Choose a Rep
             <select id={styles.repSelector} onChange={this.handleRepSelect} name="rep">
               {reps.map((rep, index) => (
@@ -250,8 +256,10 @@ class IssueForm extends React.Component {
                 </option>
               ))}
             </select>
-          </label>
-          <input id={styles.formSubmit} type="submit" value="submit issue" />
+          </div>
+          <button id={styles.formSubmit} onClick={this.handleSubmit}>
+            submit issue
+          </button>
         </form>
       </div>
     );
