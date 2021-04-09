@@ -71,6 +71,10 @@
   border-radius: 8px;
 }
 
+.issueCardContent .header {
+  background-color: rgb(236, 236, 236);
+}
+
 .header .userDate {
   display: flex;
   flex-direction: column;
@@ -192,6 +196,11 @@
   padding: 5px;
   background-color: whitesmoke;
   border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.issueCardContent .content:hover {
+  background-color: rgb(238, 238, 238);
 }
 
 .content .title {
