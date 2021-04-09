@@ -13,8 +13,8 @@
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-  width: 50%;
-  height: auto;
+  width: 600px;
+  height: 850px;
   padding: 20px;
   border-radius: 20px;
   border: none;
@@ -25,7 +25,21 @@
   flex-wrap: nowrap;
 }
 
+#issueForm * {
+  margin: 5px auto;
+}
+
+#issueForm input, #issueForm select {
+  margin-left: 5px;
+}
+
+#heading {
+  font-family: 'Kiwi Maru', serif;
+  font-size: 25px;
+}
+
 #icon {
+  margin: 0;
   align-self: flex-end;
 }
 
@@ -41,11 +55,12 @@
 
 #issueForm input, #issueForm textarea {
   outline: none;
-  background-color:#E1E5F2;
+  /* background-color:#E1E5F2; */
+  background-color: white;
   border: none;
   border-radius: 5px;
   padding: 10px 5px;
-  margin: 10px;
+  /* margin: 10px; */
   overflow: auto;
 }
 
@@ -67,10 +82,11 @@
 }
 
 #categories {
+  display: grid;
+  grid-template: repeat(2, 1fr) / repeat(4, 1fr);
 }
 
 .category {
-
 }
 
 #title {
@@ -80,11 +96,13 @@
 
 textarea {
   width: 400px;
-  height: 100px;
+  height: 300px;
 }
 
 #text {
   align-self: center;
+  display: flex;
+  flex-direction: column;
 }
 
 #photoSelect {
@@ -94,6 +112,7 @@ textarea {
 #repSelector {
   font-family: 'Montserrat', sans-serif;
   align-self: center;
+  /* margin: 0 auto; */
 }
 
 .repOption {
@@ -103,11 +122,14 @@ textarea {
 #formSubmit {
   font-family: 'Montserrat', sans-serif;
   background-color: #BFDBF7;
-  border: 1px solid black;
+  border: none;
   padding: 10px;
-  border-radius: 20px;
+  border-radius: 5px;
   cursor: pointer;
-  margin-bottom: 10px;
+  margin-top: 15px;
   outline: none;
-  align-self: center;
+}
+
+#formSubmit:hover {
+  background-color: #E1E5F2;
 }

@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /* eslint-disable react/button-has-type */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/jsx-one-expression-per-line */
@@ -40,7 +41,7 @@ class IssueForm extends React.Component {
     this.addCategory = this.addCategory.bind(this);
     this.handleRepSelect = this.handleRepSelect.bind(this);
     this.fileSelectedHandler = this.fileSelectedHandler.bind(this);
-    this.fileUploadHandler = this.fileUploadHandler.bind(this);
+    this.photoUploadHandler = this.photoUploadHandler.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.postIssue = this.postIssue.bind(this);
     this.escFunction = this.escFunction.bind(this);
@@ -68,9 +69,20 @@ class IssueForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.fileUploadHandler()
-      .then(() => this.postIssue())
-      .catch((err) => console.log(err));
+    const { photoFiles, user, location } = this.state;
+    const { getIssues } = this.props;
+    const { lat, lng } = location;
+    const { user_id } = user;
+    if (photoFiles.length > 0) {
+      this.photoUploadHandler()
+        .then(() => this.postIssue())
+        .then(() => getIssues(user_id, lat, lng))
+        .catch((err) => console.log(err));
+    } else {
+      this.postIssue()
+        .then(() => getIssues(user_id, lat, lng))
+        .catch((err) => console.log(err));
+    }
   }
 
   handleRepSelect(event) {
@@ -150,7 +162,7 @@ class IssueForm extends React.Component {
     } = this.state;
     const { closeForm } = this.props;
 
-    axios.post('/issues', {
+    return axios.post('/issues', {
       user_id: user.user_id,
       lat: location.lat,
       lng: location.lng,
@@ -163,10 +175,7 @@ class IssueForm extends React.Component {
       rep_photo_url: selectedRep.photoUrl,
       date: new Date(),
     })
-      .then((response) => {
-        console.log(response.data);
-        closeForm();
-      })
+      .then((response) => closeForm())
       .catch((error) => {
         console.log(error);
       });
@@ -183,7 +192,7 @@ class IssueForm extends React.Component {
     this.setState({ photoFiles: event.target.files });
   }
 
-  fileUploadHandler() {
+  photoUploadHandler() {
     const { photoFiles, user } = this.state;
     const photo = photoFiles[0];
     const formData = new FormData();
@@ -211,37 +220,39 @@ class IssueForm extends React.Component {
     const categories = ['infrastructure', 'nuisance', 'theft', 'safety', 'waste', 'permits', 'crime'];
     return (
       <div id={styles.formBackground}>
-        <form id={styles.issueForm} onSubmit={this.handleSubmit}>
+        <form id={styles.issueForm}>
           <div id={styles.icon} onClick={closeForm}>
             <img src="icons/close.png" alt="close" />
           </div>
-          <label htmlFor="address">
-            Location/Address
+          <div id={styles.heading}>Post an Issue</div>
+          <div>
+            Location
             <input id={styles.address} type="text" value={address} onChange={this.locationChange} required name="address" />
-          </label>
-          <label htmlFor="title">
-            Issue
-          </label>
-          <input id={styles.title} type="text" onChange={this.handleChange} required name="title" />
-          <label htmlFor="text">
-            Description
-          </label>
-          <textarea id={styles.text} type="text" onChange={this.handleChange} required name="text" />
-          <div id={styles.categories}>
-            Check all that apply
-            {categories.map((category, index) => (
-              <div className={styles.category} key={category}>
-                <input onChange={this.addCategory} type="checkbox" value={index + 1} />
-                <label htmlFor={category}>{category}</label>
-              </div>
-            ))}
           </div>
-          <label htmlFor="photos">
+          <div>
+            Issue
+            <input id={styles.title} type="text" onChange={this.handleChange} required name="title" />
+          </div>
+          <div id={styles.text}>
+            <label>Description</label>
+            <textarea type="text" onChange={this.handleChange} required name="text" />
+          </div>
+          <div>
+            Check all that apply
+            <div id={styles.categories}>
+              {categories.map((category, index) => (
+                <div className={styles.category} key={category}>
+                  <input onChange={this.addCategory} type="checkbox" value={index + 1} />
+                  <label htmlFor={category}>  {category}</label>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div>
             Photos (optional)
             <input id={styles.chooseFile} type="file" onChange={this.fileSelectedHandler} name="photos" multiple />
-            {/* <button onClick={this.fileUploadHandler}>upload photos</button> */}
-          </label>
-          <label htmlFor="reps">
+          </div>
+          <div>
             Choose a Rep
             <select id={styles.repSelector} onChange={this.handleRepSelect} name="rep">
               {reps.map((rep, index) => (
@@ -250,8 +261,10 @@ class IssueForm extends React.Component {
                 </option>
               ))}
             </select>
-          </label>
-          <input id={styles.formSubmit} type="submit" value="submit issue" />
+          </div>
+          <button id={styles.formSubmit} onClick={this.handleSubmit}>
+            submit issue
+          </button>
         </form>
       </div>
     );
@@ -262,6 +275,7 @@ IssueForm.propTypes = {
   user: PropTypes.objectOf(PropTypes.any).isRequired,
   location: PropTypes.objectOf(PropTypes.number).isRequired,
   closeForm: PropTypes.func.isRequired,
+  getIssues: PropTypes.func.isRequired,
 };
 
 export default IssueForm;
