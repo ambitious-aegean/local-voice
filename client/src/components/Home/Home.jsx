@@ -37,7 +37,7 @@ class Home extends React.Component {
         nuisance: false,
         safety: false,
         waste: false,
-        permits: false,
+        pfermits: false,
       },
       initialLoad: true,
       filteredIssues: [],
@@ -71,8 +71,10 @@ class Home extends React.Component {
       },
     })
       .then((response) => {
+        console.log(response);
+        const reversed = response.data.issues.reverse();
         this.setState({
-          issues: response.data.issues,
+          issues: reversed,
           user: {
             username: 'someguy123',
             user_id: 1,

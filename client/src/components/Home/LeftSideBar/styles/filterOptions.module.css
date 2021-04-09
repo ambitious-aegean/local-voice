@@ -25,6 +25,7 @@
 .checkbox{
   height: 25px;
   width: 25px;
+  cursor: pointer;
 }
 
 .checkbox:checked + label {
@@ -50,4 +51,5 @@
   font-size: 16px;
   /* font-weight: bold; */
   color: rgba(43,39,60,1);
+  cursor: pointer;
 }

@@ -180,9 +180,12 @@ class IssueCard extends React.Component {
               {text}
             </div>
             <div id="issueCard-photos" className={css.photos}>
-              {photos.map((photo, index) => (
-                <img key={index} className={css.photo} alt={issue.title} src={photo} />
-              ))}
+              {photos.map((photo, index) => {
+                if (photo) {
+                  return <img key={index} className={css.photo} alt={issue.title} src={photo} />;
+                }
+                return <div />;
+              })}
             </div>
           </div>
           <div className={css.discussion}>
