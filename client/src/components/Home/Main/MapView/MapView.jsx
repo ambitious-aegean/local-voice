@@ -106,6 +106,7 @@ class MapView extends React.Component {
         />
       ));
     }
+    return null;
   }
 
   displayInfoWindow() {
