@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /* eslint-disable react/button-has-type */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/jsx-one-expression-per-line */
@@ -40,7 +41,7 @@ class IssueForm extends React.Component {
     this.addCategory = this.addCategory.bind(this);
     this.handleRepSelect = this.handleRepSelect.bind(this);
     this.fileSelectedHandler = this.fileSelectedHandler.bind(this);
-    this.fileUploadHandler = this.fileUploadHandler.bind(this);
+    this.photoUploadHandler = this.photoUploadHandler.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.postIssue = this.postIssue.bind(this);
     this.escFunction = this.escFunction.bind(this);
@@ -68,13 +69,19 @@ class IssueForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const { photoFiles } = this.state;
+    const { photoFiles, user, location } = this.state;
+    const { getIssues } = this.props;
+    const { lat, lng } = location;
+    const { user_id } = user;
     if (photoFiles.length > 0) {
-      this.fileUploadHandler()
+      this.photoUploadHandler()
         .then(() => this.postIssue())
+        .then(() => getIssues(user_id, lat, lng))
         .catch((err) => console.log(err));
     } else {
-      this.postIssue();
+      this.postIssue()
+        .then(() => getIssues(user_id, lat, lng))
+        .catch((err) => console.log(err));
     }
   }
 
@@ -155,7 +162,7 @@ class IssueForm extends React.Component {
     } = this.state;
     const { closeForm } = this.props;
 
-    axios.post('/issues', {
+    return axios.post('/issues', {
       user_id: user.user_id,
       lat: location.lat,
       lng: location.lng,
@@ -168,10 +175,7 @@ class IssueForm extends React.Component {
       rep_photo_url: selectedRep.photoUrl,
       date: new Date(),
     })
-      .then((response) => {
-        console.log(response.data);
-        closeForm();
-      })
+      .then((response) => closeForm())
       .catch((error) => {
         console.log(error);
       });
@@ -188,7 +192,7 @@ class IssueForm extends React.Component {
     this.setState({ photoFiles: event.target.files });
   }
 
-  fileUploadHandler() {
+  photoUploadHandler() {
     const { photoFiles, user } = this.state;
     const photo = photoFiles[0];
     const formData = new FormData();
@@ -220,6 +224,7 @@ class IssueForm extends React.Component {
           <div id={styles.icon} onClick={closeForm}>
             <img src="icons/close.png" alt="close" />
           </div>
+          <div id={styles.heading}>Post an Issue</div>
           <div>
             Location
             <input id={styles.address} type="text" value={address} onChange={this.locationChange} required name="address" />
@@ -228,9 +233,9 @@ class IssueForm extends React.Component {
             Issue
             <input id={styles.title} type="text" onChange={this.handleChange} required name="title" />
           </div>
-          <div>
+          <div id={styles.text}>
             <label>Description</label>
-            <textarea id={styles.text} type="text" onChange={this.handleChange} required name="text" />
+            <textarea type="text" onChange={this.handleChange} required name="text" />
           </div>
           <div>
             Check all that apply
@@ -238,7 +243,7 @@ class IssueForm extends React.Component {
               {categories.map((category, index) => (
                 <div className={styles.category} key={category}>
                   <input onChange={this.addCategory} type="checkbox" value={index + 1} />
-                  <label htmlFor={category}>{category}</label>
+                  <label htmlFor={category}>  {category}</label>
                 </div>
               ))}
             </div>
@@ -270,6 +275,7 @@ IssueForm.propTypes = {
   user: PropTypes.objectOf(PropTypes.any).isRequired,
   location: PropTypes.objectOf(PropTypes.number).isRequired,
   closeForm: PropTypes.func.isRequired,
+  getIssues: PropTypes.func.isRequired,
 };
 
 export default IssueForm;

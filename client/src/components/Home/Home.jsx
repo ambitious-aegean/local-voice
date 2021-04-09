@@ -204,7 +204,11 @@ class Home extends React.Component {
             filterWatchedIssues={this.filterWatchedIssues}
           />
           <div id="mainContainer" className={styles.mainContainer}>
-            <CreateIssue user={user} location={location} />
+            <CreateIssue
+              user={user}
+              location={location}
+              getIssues={this.getIssues}
+            />
             <Main
               view={view}
               displayedIssues={initialLoad ? issues : filteredIssues}
