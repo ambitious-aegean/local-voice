@@ -103,7 +103,6 @@ class MapView extends React.Component {
             lat: issue.lat,
             lng: issue.lng,
           }}
-          color="blue"
         />
       ));
     }
