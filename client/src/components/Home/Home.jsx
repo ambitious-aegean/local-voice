@@ -37,7 +37,7 @@ class Home extends React.Component {
         nuisance: false,
         safety: false,
         waste: false,
-        permits: false,
+        pfermits: false,
       },
       initialLoad: true,
       filteredIssues: [],
@@ -63,7 +63,6 @@ class Home extends React.Component {
 
   getIssues(user_id, lat, lng) {
     // query database for the issues based on the user location
-    console.log('getting issues');
     axios.get('/allIssues', {
       params: {
         user_id,
@@ -73,8 +72,9 @@ class Home extends React.Component {
     })
       .then((response) => {
         console.log(response);
+        const reversed = response.data.issues.reverse();
         this.setState({
-          issues: response.data.issues,
+          issues: reversed,
           user: {
             username: 'someguy123',
             user_id: 1,
@@ -82,8 +82,6 @@ class Home extends React.Component {
           },
           watched: response.data.watchedList,
         }, () => {
-          console.log(response.data.watchedList)
-          console.log(this.state.watched)
           // console.log('this.state.issues: ', this.state.issues);
           // console.log('this.state.watched: ', this.state.watched);
         });
@@ -153,6 +151,8 @@ class Home extends React.Component {
 
   filterIssues(e) {
     const { issues, currentCategories } = this.state;
+
+
     // change intialLoad to false
     this.setState({
       initialLoad: false,
@@ -197,7 +197,13 @@ class Home extends React.Component {
     const {
       issues, user, location, initialLoad, filteredIssues, view, watched,
     } = this.state;
-    console.log('watched' + watched);
+    if (!issues.length) {
+      return (
+        <div>
+          Loading
+        </div>
+      );
+    }
     return (
       <div id="homeContainer" className={styles.homeContainer}>
         <Header toggle={this.toggle} />

@@ -14,7 +14,7 @@
 	left: 50%;
 	transform: translate(-50%, -50%);
   width: 600px;
-  min-height: 850px;
+  min-height: 650px;
   padding: 20px;
   border-radius: 10px 20px;
   border: none;
@@ -101,7 +101,7 @@
 
 #issueForm textarea {
   width: 450px;
-  height: 275px;
+  height: 150px;
 }
 
 #text {

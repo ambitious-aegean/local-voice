@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from '../styles/filterOptions.module.css';
 
-const categories = ['Infrastructure', 'Nuisance', 'Theft', 'Safety', 'Waste', 'Permits', 'Crime'];
+const categories = ['infrastructure', 'nuisance', 'theft', 'safety', 'waste', 'permits', 'crime'];
 
 const FilterOptions = ({ filterIssues }) => (
   <div id="FilterOptions" className={styles.filterOptions}>
@@ -12,7 +12,7 @@ const FilterOptions = ({ filterIssues }) => (
         <div className={styles.container} key={category}>
           <input id={category} className={styles.checkbox} name={category} value={category} type="checkbox" onChange={filterIssues} />
           <label htmlFor={category} className={styles.labels} key={category}>
-            {category}
+            {category[0].toUpperCase().concat(category.slice(1))}
           </label>
         </div>
       ))}
