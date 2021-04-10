@@ -23,9 +23,6 @@
 }
 
 .welcomeTag {
-  /* font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
-   */
-  /* font-family: 'Courgette', cursive; */
   font-family: 'Montserrat', sans-serif;
   font-size: 18px;
   line-height: 20px;
@@ -55,9 +52,6 @@
 }
 
 .personalFiltersLabel {
-  /* font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif; */
-  /* font-family: 'Courgette', cursive; */
-  font-family: 'Montserrat', sans-serif;
   font-size: 18px;
   line-height: 20px;
   font-weight: 600;
@@ -80,15 +74,15 @@
 .myIssuesFilterOff {
   cursor: pointer;
   display: inline-block;
-  border: 1px solid#bbbac0;
+  /* border: 1px solid#bbbac0;
   border-radius: 16px;
   background: #fff;
   padding: 6px 12px;
   outline: none;
-  color: #252525;
+  color: #252525; */
   transition: background-color .4s,border-color .4s,color .4s,clip-path .45s,transform .4s,-webkit-clip-path .45s;
   vertical-align: baseline;
-  font: inherit;
+  /* font: inherit; */
   font-size: 100%;
   position: relative;
   margin: 4px;
@@ -107,15 +101,15 @@
 .myIssuesFilterOn {
   cursor: pointer;
   display: inline-block;
-  border: 1px solid #1F7A8C;
+  /* border: 1px solid #1F7A8C;
   border-radius: 16px;
   background: #e7f2f3;
-  padding: 6px 12px;
+  padding: 6px 12px; */
   outline: none;
-  color: #1F7A8C;
+  /* color: #1F7A8C; */
   transition: background-color .4s,border-color .4s,color .4s,clip-path .45s,transform .4s,-webkit-clip-path .45s;
   vertical-align: baseline;
-  font: inherit;
+  /* font: inherit; */
   font-size: 100%;
   position: relative;
   margin: 4px;
@@ -132,9 +126,6 @@
 }
 
 .myIssuesLabel {
-  /* font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif; */
-  /* font-family: 'Courgette', cursive; */
-  font-family: 'Montserrat', sans-serif;
   font-size: 18px;
   line-height: 18px;
   /* font-weight: 600; */
@@ -154,15 +145,15 @@
 .watchedIssuesFilterOff {
   cursor: pointer;
   display: inline-block;
-  border: 1px solid#bbbac0;
+  /* border: 1px solid#bbbac0;
   border-radius: 16px;
   background: #fff;
   padding: 6px 12px;
   outline: none;
-  color: #252525;
+  color: #252525; */
   transition: background-color .4s,border-color .4s,color .4s,clip-path .45s,transform .4s,-webkit-clip-path .45s;
   vertical-align: baseline;
-  font: inherit;
+  /* font: inherit; */
   font-size: 100%;
   position: relative;
   margin: 4px;
@@ -181,15 +172,15 @@
 .watchedIssuesFilterOn {
   cursor: pointer;
   display: inline-block;
-  border: 1px solid #1F7A8C;
+  /* border: 1px solid #1F7A8C;
   border-radius: 16px;
   background: #e7f2f3;
-  padding: 6px 12px;
+  padding: 6px 12px; */
   outline: none;
-  color: #1F7A8C;
+  /* color: #1F7A8C; */
   transition: background-color .4s,border-color .4s,color .4s,clip-path .45s,transform .4s,-webkit-clip-path .45s;
   vertical-align: baseline;
-  font: inherit;
+  /* font: inherit; */
   font-size: 100%;
   position: relative;
   margin: 4px;
@@ -206,8 +197,6 @@
 }
 
 .watchedIssuesLabel {
-  /* font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif; */
-  font-family: 'Montserrat', sans-serif;
   font-size: 18px;
   line-height: 18px;
   /* font-weight: 600; */

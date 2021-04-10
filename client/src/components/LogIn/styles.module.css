@@ -1,41 +1,44 @@
-
 .maindiv{
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
   display: flex;
-  background-image: url('https://community-local-voice.s3-us-west-1.amazonaws.com/blue+buildings+outline1.jpg');
-  background-position: center;
+  flex-direction: column;
+  background-image: url(../../../public/images/skyscrapers.jpg);
+  background-position: cover;
   background-repeat: no-repeat;
-  /* margin: 0 200px; */
+  padding: 3%;
 }
 
 .heading {
   font-size: 55px;
-  font-family: 'Courgette', cursive;
+  font-family: 'Kiwi Maru', serif;
   letter-spacing: .3em;
   color: #1f7a8c;
-  padding-top: 175px;
-  margin-left: 45px;
+  top: 10%;
 }
 
 .subheading {
-  margin-left: 55px;
   font-size: 24px;
-  font-family: 'Montserrat', sans-serif;
-  /* letter-spacing: .5em; */
-
+  font-family: 'Kiwi Maru', serif;
+  color: #252525;
+  margin-top: -1%;
 }
 
 .button {
-
+  position: fixed;
+  top: 2%;
+  right: 2%;
   background-color: #f2dfd7;
   border: 1px solid #1f7a8c;
-  font-size: 23px;
+  font-size: 20px;
   margin-left: 300px;
   padding: 15px;
-  height: 55px;
-  width: 175px;
-  margin-top: 250px;
+  /* height: 55px;
+  width: 175px; */
   border-radius: 7px;
-  color:  #1f7a8c
+  color:  #1f7a8c;
+  transition: background-image 0.2s ease-in-out;
 }
 .button:hover {
   background:  #1f7a8c;

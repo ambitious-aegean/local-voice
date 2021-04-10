@@ -12,11 +12,15 @@ const LogIn = () => {
       {
         !isAuthenticated && (
           <div className={styles.maindiv}>
-          <div>
-            <h1 className={styles.heading}>Local Voice</h1>
-            <h5 className={styles.subheading}>Bringing local issues to the palm of your hand</h5>
-          </div>
-          <button onClick={() => loginWithRedirect()} className={styles.button}>Log In</button>
+            <h1 className={styles.heading}>
+              Local Voice
+            </h1>
+            <h5 className={styles.subheading}>
+              Bringing local issues to the palm of your hand
+            </h5>
+            <button type="button" onClick={() => loginWithRedirect()} className={styles.button}>
+              Log In
+            </button>
           </div>
         )
       }
