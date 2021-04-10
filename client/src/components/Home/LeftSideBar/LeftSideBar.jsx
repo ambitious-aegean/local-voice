@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import FilterOptions from './FilterOptions/FilterOptions.jsx';
 import styles from './styles/leftBar.module.css';
-import {useState} from 'react';
 
-const LeftSideBar = ({ user, filterIssues, filterMyIssues, filterWatchedIssues }) => {
+const LeftSideBar = ({
+  user, filterIssues, filterMyIssues, filterWatchedIssues,
+}) => {
   const [myIssuesFilter, toggleMyIssues] = useState(false);
   const [watchedIssuesFilter, toggleWatchedIssues] = useState(false);
 
@@ -20,33 +21,40 @@ const LeftSideBar = ({ user, filterIssues, filterMyIssues, filterWatchedIssues }
 
   return (
     <div id="LeftSideBar" className={styles.leftSideBar}>
-      <div className={styles.welcomeBanner}>
-        <div className={styles.welcomeBannerVerticalLayout}>
-          <div className={styles.welcomeTagPadding}>
-            <p className={styles.welcomeTag}>Welcome, {user.username}!</p>
-          </div>
-        </div>
-      </div>
-      <div className={styles.personalFiltersContainer}>
-        <div className={styles.personalFiltersVerticalLayout}>
-          <div className={styles.personalFiltersPadding}>
-            <p className={styles.personalFiltersLabel}>Personal Filters</p>
-          </div>
-          <div className={styles.filterToggleSet}>
-            <div className={styles.myIssuesFilterContainer}>
-              <button className={myIssuesFilter ? styles.myIssuesFilterOn : styles.myIssuesFilterOff} onClick={handleMyIssuesClick}>
-                <span className={styles.myIssuesLabel}>My Issues</span>
-              </button>
-            </div>
-            <div className={styles.watchedIssuesFilterContainer}>
-              <button className={watchedIssuesFilter ? styles.watchedIssuesFilterOn : styles.watchedIssuesFilterOff} onClick={handleWatchedIssuesClick}>
-                <span className={styles.watchedIssuesLabel}>Watched Issues</span>
-              </button>
+      <div className={styles.allFilters}>
+        <div className={styles.welcomeBanner}>
+          <div className={styles.welcomeBannerVerticalLayout}>
+            <div className={styles.welcomeTagPadding}>
+              <p className={styles.welcomeTag}>
+                Welcome,
+                {user.username}
+                !
+              </p>
             </div>
           </div>
         </div>
+
+        <div className={styles.personalFiltersContainer}>
+          <div className={styles.personalFiltersVerticalLayout}>
+            <div className={styles.personalFiltersPadding}>
+              <p className={styles.personalFiltersLabel}>Personal Filters</p>
+            </div>
+            <div className={styles.filterToggleSet}>
+              <div className={styles.myIssuesFilterContainer}>
+                <button className={myIssuesFilter ? styles.myIssuesFilterOn : styles.myIssuesFilterOff} onClick={handleMyIssuesClick}>
+                  <span className={styles.myIssuesLabel}>My Issues</span>
+                </button>
+              </div>
+              <div className={styles.watchedIssuesFilterContainer}>
+                <button className={watchedIssuesFilter ? styles.watchedIssuesFilterOn : styles.watchedIssuesFilterOff} onClick={handleWatchedIssuesClick}>
+                  <span className={styles.watchedIssuesLabel}>Watched Issues</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <FilterOptions filterIssues={filterIssues} />
       </div>
-      <FilterOptions filterIssues={filterIssues} />
     </div>
   );
 };

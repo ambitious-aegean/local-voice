@@ -25,3 +25,7 @@
   margin-right: auto;
   /* object-fit: contain; */
 }
+
+.rightSideFixed {
+  position: fixed;
+}
