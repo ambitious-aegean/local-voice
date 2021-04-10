@@ -88,8 +88,8 @@
 .issueCardContent .header {
   /* background-color: rgb(236, 236, 236);
   background: linear-gradient(to bottom right, #fafdff, #fcfdff, #f7fbff); */
-  background-color: whitesmoke;
-  background: linear-gradient(to bottom right, #e7f6ff, #fdfdfd, whitesmoke);
+  /* background: linear-gradient(to bottom right, #e7f6ff, #fdfdfd, whitesmoke); new */
+  background-color: transparent;
 }
 
 .header .userDate {
@@ -214,9 +214,10 @@
 .issueCardContent .content {
   margin: 5px;
   padding: 5px;
-  background-color: whitesmoke;
+  /* background-color: whitesmoke; */
   /* background: linear-gradient(to bottom right, #fafdff, #fcfdff, whitesmoke); */
-  background: linear-gradient(to bottom right, #e7f6ff, #fdfdfd, whitesmoke);
+  /* background: linear-gradient(to bottom right, #e7f6ff, #fdfdfd, whitesmoke); new */
+  background-color: transparent;
   border-radius: 8px;
   transition: all 0.2s ease;
   /* filter: drop-shadow(5px 5px 10px #d9effa) */
