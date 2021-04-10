@@ -18,7 +18,7 @@ button {
   outline: none;
   border: 1px solid #F2DFD7;
   border-radius: 5px;
-  font-family: 'Times New Roman', Times, serif;
+  font-family: 'Montserrat', sans-serif;
   transition: background-color .2s ease-in-out;
 }
 
