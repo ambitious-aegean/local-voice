@@ -141,7 +141,7 @@ class OptionsModal extends React.Component {
     const { user, issue } = this.props;
     const { user_id } = issue;
     return (
-      <div className={css.optionsModal}>
+      <div id="optionsModal" className={css.optionsModal}>
         <div className={css.watchOption}>
           {!watched
             ? (
