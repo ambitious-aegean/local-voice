@@ -46,7 +46,7 @@ class AddComment extends React.Component {
       <div id="addComment" className={css.addCommentForm}>
         <form onSubmit={this.postComment}>
           <input id="text" type="text" value={text} onChange={this.handleChange} />
-          <input type="submit" value="Comment" />
+          <input type="submit" value="Add Comment" />
         </form>
       </div>
     );

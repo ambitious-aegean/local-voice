@@ -10,15 +10,18 @@
 }
 
 .issueCard {
+  /* display: grid; */
+  grid-template-columns: 1fr 10fr;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(30, 8, 65, 0.19);  margin: 7px;
+  border-radius: 12px;
+  padding: 20px 3px;
+  /* background-color: white; */
+  background: linear-gradient(to right, #e7f6ff, #fcfcfc, #d9effa);
+}
+
+.issueCardTop {
   display: grid;
   grid-template-columns: 1fr 10fr;
-  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(30, 8, 65, 0.19);  margin: 7px; */
-  border-radius: 10px;
-  padding: 1%;
-  /* background: linear-gradient(to right, #e7f6ff, #fcfcfc, #d9effa); */
-  /* background-color: lightgrey; */
-  background-color: white;
-  margin-bottom: 15px;
 }
 
 /* .issueCard {
@@ -57,7 +60,7 @@
   /* background-color: rgba(192, 192, 192, 0.363);
    */
    background-color: transparent;
-  color: red;
+   opacity: .7;
   border-radius: 50%;
 }
 
@@ -119,9 +122,9 @@
 
 }
 
-.dots:hover {
+.dotsIcon:hover {
   cursor: pointer;
-  color: red;
+  opacity: .7;
 }
 
 .dots:focus {
@@ -141,8 +144,8 @@
 
 .modalContainer {
   position: relative;
-  bottom: 10%;
-  left: 80%;
+  top: -50%;
+  left: 75%;
   align-self: flex-end;
   transition: all 0.2s ease-in-out;
   font-family: Arial, Helvetica, sans-serif;
@@ -158,21 +161,24 @@
   padding: 5px;
   height: max-content;
   width: 120px;
-  background-color: whitesmoke;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);  margin: 7px;
+  /* background-color: whitesmoke; */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin: 7px;
   border-radius: 7px;
   position: absolute;
+  background: linear-gradient(to right, #e7f6ff, #fcfcfc, #d9effa);
+  z-index: 10;
 }
 
 .watchOption, .flagOption, .resolveOption {
   margin: 3px;
   padding: 3px;
-  height: 50px;
+  height: 30px;
   width: 120px;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: white;
+  background-color:transparent;
   transition: all 0.2s ease;
 }
 
@@ -200,8 +206,9 @@
 }
 
 .watchOption:hover, .flagOption:hover, .resolveOption:hover, button:hover {
-  background-color: rgb(231, 231, 231);
+  /* background-color: rgb(231, 231, 231); */
   cursor: pointer;
+  opacity: .7;
 }
 
 
@@ -212,6 +219,12 @@
 /*  */
 /*  */
 /*  */
+
+.issueContainerBody {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
 
 .issueCardContent .content {
   margin: 5px;
