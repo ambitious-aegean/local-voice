@@ -44,9 +44,9 @@ class AddComment extends React.Component {
     const { text } = this.state;
     return (
       <div id="addComment" className={css.addCommentForm}>
-        <form>
-          <input type="text" value={text} onChange={this.handleChange} />
-          <button type="button" onClick={this.postComment}>Comment</button>
+        <form onSubmit={this.postComment}>
+          <input id="text" type="text" value={text} onChange={this.handleChange} />
+          <input type="submit" value="Add Comment" />
         </form>
       </div>
     );
