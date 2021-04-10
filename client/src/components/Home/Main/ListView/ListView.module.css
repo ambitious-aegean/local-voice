@@ -19,6 +19,16 @@
   background: linear-gradient(to right, #e7f6ff, #fcfcfc, #d9effa);
 }
 
+/* .issueCard {
+  display: grid;
+  grid-template-columns: 1fr 10fr;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(30, 8, 65, 0.19);  margin: 7px;
+  border-radius: 12px;
+  padding: 3px;
+  background-color: white;
+  background: linear-gradient(to right, #e7f6ff, #fcfcfc, #d9effa);
+} */
+
 .voteContainer {
   grid-column: 1;
   display: flex;
@@ -79,6 +89,7 @@
   /* background-color: rgb(236, 236, 236);
   background: linear-gradient(to bottom right, #fafdff, #fcfdff, #f7fbff); */
   background-color: whitesmoke;
+  background: linear-gradient(to bottom right, #e7f6ff, #fdfdfd, whitesmoke);
 }
 
 .header .userDate {
@@ -95,7 +106,7 @@
   font-weight: 700;
 }
 
-.dotsCategories .dots {
+.dots {
   display: flex;
   justify-content: flex-end;
   font-size: 25px;
@@ -204,10 +215,11 @@
   margin: 5px;
   padding: 5px;
   background-color: whitesmoke;
-  /* background: linear-gradient(to bottom right, #fafdff, #fcfdff, #f7fbff); */
+  /* background: linear-gradient(to bottom right, #fafdff, #fcfdff, whitesmoke); */
+  background: linear-gradient(to bottom right, #e7f6ff, #fdfdfd, whitesmoke);
   border-radius: 8px;
   transition: all 0.2s ease;
-  filter: drop-shadow(5px 5px 10px transparent)
+  /* filter: drop-shadow(5px 5px 10px #d9effa) */
 }
 
 .issueCardContent .content:hover {
@@ -291,4 +303,12 @@
 
 button[type="button"] {
   cursor: pointer;
+}
+
+.issueCardRight {
+  grid-column: 3;
+  display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
 }
