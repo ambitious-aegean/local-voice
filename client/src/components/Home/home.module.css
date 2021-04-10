@@ -1,5 +1,6 @@
 .homeContainer {
   height: 100%;
+  /* background-color: #F2DFD7; */
   background-color: whitesmoke;
 }
 
@@ -16,12 +17,14 @@
 button {
   background-color: white;
   outline: none;
-  border: 1px solid #F2DFD7;
-  border-radius: 5px;
+  border: 1px solid #252525;
+  border-radius: 10px;
+  padding-left: 5%;
+  padding-right: 5%;
   font-family: 'Montserrat', sans-serif;
   transition: background-color .2s ease-in-out;
 }
 
 button:hover {
-  background-color: #F2DFD7;
+  background-color: #BFDBF7;
 }
