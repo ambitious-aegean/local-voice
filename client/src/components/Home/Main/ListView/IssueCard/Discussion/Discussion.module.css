@@ -3,6 +3,7 @@
   padding: 5px;
   background-color: whitesmoke;
   border-radius: 5px;
+  background: linear-gradient(to bottom right, #e7f6ff, #fdfdfd, whitesmoke);
 }
 
 .commentCardList, .discussionMain {

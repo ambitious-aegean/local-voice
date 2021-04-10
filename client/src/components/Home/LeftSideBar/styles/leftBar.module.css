@@ -43,7 +43,7 @@
 .personalFiltersVerticalLayout {
   width: 100%;
   border-color: white;
-  display: inline-block;
+  display: block;
   vertical-align: baseline;
 }
 
@@ -60,7 +60,7 @@
 }
 
 .filterToggleSet {
-  display: flex;
+  /* display: flex; */
   flex-wrap: wrap;
   margin-left: -4px;
   border-color: white;
@@ -206,4 +206,8 @@
 
 .watchedIssuesFilter:hover {
   background-color:#e6e6e6
+}
+
+.allFilters {
+  position: fixed;
 }
