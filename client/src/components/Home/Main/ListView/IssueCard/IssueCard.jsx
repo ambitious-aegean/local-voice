@@ -154,9 +154,7 @@ class IssueCard extends React.Component {
               </div>
             </div>
             <div className={css.dotsCategories}>
-              <div role="button" className={css.dots} onClick={this.handleViewOptionsClick} onKeyPress={this.handleViewOptionsClick} tabIndex={0}>
-                <i className={`${css.dotsIcon} fa fa-ellipsis-h`} />
-              </div>
+
               <div id="issueCard-categories" className={css.categories}>
                 {categories.map((category) => (
                   <div key={category}>
@@ -204,6 +202,11 @@ class IssueCard extends React.Component {
                 />
               ) : ''}
           </div>
+        </div>
+        <div className={css.issueCardRight}>
+            <div role="button" className={css.dots} onClick={this.handleViewOptionsClick} onKeyPress={this.handleViewOptionsClick} tabIndex={0}>
+              <i className={`${css.dotsIcon} fa fa-ellipsis-h`} />
+            </div>
         </div>
       </div>
     );
