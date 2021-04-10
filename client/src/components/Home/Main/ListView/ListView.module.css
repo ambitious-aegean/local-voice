@@ -12,11 +12,13 @@
 .issueCard {
   display: grid;
   grid-template-columns: 1fr 10fr;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(30, 8, 65, 0.19);  margin: 7px;
-  border-radius: 12px;
-  padding: 3px;
-  /* background-color: white; */
-  background: linear-gradient(to right, #e7f6ff, #fcfcfc, #d9effa);
+  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(30, 8, 65, 0.19);  margin: 7px; */
+  border-radius: 10px;
+  padding: 1%;
+  /* background: linear-gradient(to right, #e7f6ff, #fcfcfc, #d9effa); */
+  /* background-color: lightgrey; */
+  background-color: white;
+  margin-bottom: 15px;
 }
 
 /* .issueCard {
@@ -81,7 +83,7 @@
   justify-content: space-between;
   margin: 5px;
   padding: 5px;
-  background-color: whitesmoke;
+  /* background-color: whitesmoke; */
   border-radius: 8px;
 }
 
@@ -189,7 +191,7 @@
 .optionText {
   display: flex;
   justify-content: center;
-  font-family: Arial, Helvetica, sans-serif;
+  /* font-family: Arial, Helvetica, sans-serif; */
   font-size: 18px;
 }
 
@@ -218,6 +220,9 @@
   /* background: linear-gradient(to bottom right, #fafdff, #fcfdff, whitesmoke); */
   /* background: linear-gradient(to bottom right, #e7f6ff, #fdfdfd, whitesmoke); new */
   background-color: transparent;
+  /* background: , #fafdff, #fcfdff, #f7fbff); */
+  /* background: linear-gradient(to bottom right, #fafdff, #fcfdff, whitesmoke); */
+  /* background: linear-gradient(to bottom right, #e7f6ff, #fdfdfd, whitesmoke); */
   border-radius: 8px;
   transition: all 0.2s ease;
   /* filter: drop-shadow(5px 5px 10px #d9effa) */
@@ -276,21 +281,22 @@
 }
 
 .discussion button {
-  padding: 2px;
+  /* padding: 2px;
   border: none;
   border-radius: 4px;
   border-bottom: 3px solid rgb(233, 233, 233);
-  background: linear-gradient(to right, #e2f0ff, #f7fafd, #deeeff);
-  height: 40px;
-  width: 100%;
-  font-family: 'Montserrat', sans-serif;
+  background: linear-gradient(to right, #e2f0ff, #f7fafd, #deeeff); */
+  /* font-family: 'Montserrat', sans-serif;
   font-size: 16px;
-  color: rgb(14, 14, 14);
-  transition: all 0.2s ease;
+  color: rgb(14, 14, 14); */
+  /* background-color: transparent; */
+  font-size: 16px;
+  transition: font-weight 0.2s ease-in-out;
+  align-self: flex-start;
 }
 
 .discussion button:hover {
-  border-bottom: 3px solid rgb(94, 94, 94);
+  /* border-bottom: 3px solid rgb(94, 94, 94); */
   cursor: pointer;
 }
 
