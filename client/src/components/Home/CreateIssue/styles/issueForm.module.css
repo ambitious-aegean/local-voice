@@ -35,7 +35,6 @@
 
 #issueForm input, #issueForm select {
   margin-left: 5px;
-  font-family: 'Montserrat', sans-serif;
 }
 
 #heading {
@@ -70,7 +69,6 @@
 }
 
 #issueForm button {
-  font-family: 'Montserrat', sans-serif;
 }
 
 #chooseFile {
@@ -79,11 +77,9 @@
 
 #address {
   width: 350px;
-  font-family: 'Montserrat', sans-serif;
 }
 
 #setLocation {
-  font-family: 'Montserrat', sans-serif;
 }
 
 #categories {
@@ -115,7 +111,6 @@
 }
 
 #repSelector {
-  font-family: 'Montserrat', sans-serif;
   align-self: center;
   /* margin: 0 auto; */
 }
@@ -127,20 +122,18 @@
 }
 
 .repOption {
-  font-family: 'Montserrat', sans-serif;
 }
 
 #formSubmit {
-  font-family: 'Montserrat', sans-serif;
-  background-color: white;
-  border: 1px solid black;
-  padding: 10px;
-  border-radius: 20px;
+  /* background-color: white;
+  border: 1px solid black; */
+  /* padding: 10px;
+  border-radius: 20px; */
   cursor: pointer;
   margin-top: 15px;
   outline: none;
 }
 
 #formSubmit:hover {
-  background-color: #e6e6e6;
+  /* background-color: #e6e6e6; */
 }
