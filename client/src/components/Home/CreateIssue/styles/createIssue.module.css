@@ -4,18 +4,18 @@
 
 #createIssue {
   font-size: 20px;
-  /* border: 1px solid #bbbac0; */
   width: 60%;
-  /* padding: 10px;
-  border-radius: 12px; */
   cursor: pointer;
   margin: 10px auto;
-  /*outline: none;
-  background: linear-gradient(to right, rgb(195, 255, 255), rgb(211, 253, 243), rgb(240, 253, 255));
-  transition: background 0.2s ease; */
+  border: 1px solid #bbbac0;
+  border-radius: 10px;
+  padding-left: 5%;
+  padding-right: 5%;
+  background-color: white;
+  transition: background-color .2s ease-in-out;
 }
 
 #createIssue:hover {
-  /* background: linear-gradient(to right, rgb(237, 255, 255), rgb(211, 255, 250), rgb(199, 248, 255)); */
+  background-color: #BFDBF7;
   cursor: pointer;
 }

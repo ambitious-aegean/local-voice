@@ -23,15 +23,3 @@
 .mainContainer {
   flex: 6;
 }
-
-/* button {
-  border: 1px solid #bbbac0;
-  border-radius: 10px;
-  padding-left: 5%;
-  padding-right: 5%;
-  transition: background-color .2s ease-in-out;
-}
-
-button:hover {
-  background-color: #BFDBF7;
-} */
