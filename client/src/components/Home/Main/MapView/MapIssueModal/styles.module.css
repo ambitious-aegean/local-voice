@@ -6,3 +6,16 @@
     max-height: 60px;
     object-fit: contain;
 }
+
+.infoWindowTitle, .infoWindowText {
+    font-family: 'Commissioner', serif;
+    font-size: 18px;
+}
+
+.infoWindowTitle {
+    font-weight: 500;
+}
+
+.infoWindowText {
+    font-weight: 300;
+}

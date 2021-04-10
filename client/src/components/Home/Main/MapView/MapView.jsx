@@ -157,13 +157,13 @@ class MapView extends React.Component {
       >
         {/* <div id="iwc" /> */}
         <div>
-          <h3>
+          <h3 className={styles.infoWindowTitle}>
             {this.state.selectedIssue.title}
           </h3>
-          <h4>
+          <h4 className={styles.infoWindowText}>
             {this.state.selectedIssue.text}
           </h4>
-          <img className={styles.image} src={this.state.selectedIssue.url} alt="" /> 
+          <img className={styles.image} src={this.state.selectedIssue.url} alt="" />
         {/* <MapIssueModal issue={this.state.selectedIssue} /> */}
         {/* <button
             type="button"

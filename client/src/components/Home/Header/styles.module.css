@@ -2,14 +2,14 @@
   background-image: url(../../../../public/images/logo.png);
   background-size: auto 100%;
   background-repeat: no-repeat;
-  height: 15%;
+  height: 17%;
   margin-left: 2%;
   margin-top: 1%;
+  font-family: 'Flamenco', cursive;
 }
 
 .title {
   font-size: 40px;
-  font-family: 'Kiwi Maru', serif;
   color: #252525;
   margin-left: 6%;
   margin-top: 3%;
@@ -18,8 +18,8 @@
 .toggleContainer {
   position: fixed;
   top: 5%;
-  right: 0%;
-
+  right: -10%;
+  font-family: 'Commissioner', sans-serif;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -29,7 +29,6 @@
 }
 
 .mapViewLabel {
-  font-family: 'Montserrat', sans-serif;
   font-size: 20px;
   font-weight: 500;
   /* margin-bottom: -120px; */
@@ -38,7 +37,6 @@
 }
 
 .listViewLabel {
-  font-family: 'Montserrat', sans-serif;
   font-size: 20px;
   font-weight: 500;
   /* margin-bottom: -120px; */
@@ -97,11 +95,11 @@
 }
 
 input:checked + .sliderRound {
-  background-color: #1F7A8C;
+  background-color: #252525;
 }
 
 input:focus + .sliderRound {
-  box-shadow: 0 0 1px #1F7A8C;
+  box-shadow: 0 0 1px #252525;
 }
 
 input:checked + .sliderRound:before {
