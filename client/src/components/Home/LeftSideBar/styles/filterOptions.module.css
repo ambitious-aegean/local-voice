@@ -47,7 +47,7 @@
 .labels {
   margin-left: 8px;
   vertical-align: center;
-  font-family: 'Montserrat', sans-serif;
+  /* font-family: 'Montserrat', sans-serif; */
   font-size: 16px;
   /* font-weight: bold; */
   color: rgba(43,39,60,1);

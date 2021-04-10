@@ -1,4 +1,4 @@
-/* 
+/*
 Don't delete this!
 Copy the contents of this file into 'db/index.js' and configure it to your local machine.
 It'll be gitignored
@@ -10,16 +10,14 @@ const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   port: 3306,
-  password: 'password',
-  database: 'my_db',
+  password: '',
+  database: 'local_voice',
 });
-
-const db = connection.connect((err) => {
+connection.connect((err) => {
   if (err) {
     console.log('Error connecting to db');
   } else {
     console.log('success');
   }
 });
-
-module.exports = db;
+module.exports = connection;

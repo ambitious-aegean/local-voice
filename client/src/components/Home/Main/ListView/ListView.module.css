@@ -12,11 +12,11 @@
 .issueCard {
   display: grid;
   grid-template-columns: 1fr 10fr;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(30, 8, 65, 0.19);  margin: 7px;
-  border-radius: 12px;
-  padding: 3px;
+  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(30, 8, 65, 0.19);  margin: 7px; */
+  border-radius: 5px;
+  padding: 1%;
   /* background-color: white; */
-  background: linear-gradient(to right, #e7f6ff, #fcfcfc, #d9effa);
+  /* background: linear-gradient(to right, #e7f6ff, #fcfcfc, #d9effa); */
 }
 
 .voteContainer {
@@ -173,7 +173,7 @@
 .optionText {
   display: flex;
   justify-content: center;
-  font-family: Arial, Helvetica, sans-serif;
+  /* font-family: Arial, Helvetica, sans-serif; */
   font-size: 18px;
 }
 
@@ -256,21 +256,21 @@
 }
 
 .discussion button {
-  padding: 2px;
+  /* padding: 2px;
   border: none;
   border-radius: 4px;
   border-bottom: 3px solid rgb(233, 233, 233);
-  background: linear-gradient(to right, #e2f0ff, #f7fafd, #deeeff);
+  background: linear-gradient(to right, #e2f0ff, #f7fafd, #deeeff); */
   height: 40px;
   width: 100%;
-  font-family: 'Montserrat', sans-serif;
+  /* font-family: 'Montserrat', sans-serif;
   font-size: 16px;
-  color: rgb(14, 14, 14);
+  color: rgb(14, 14, 14); */
   transition: all 0.2s ease;
 }
 
 .discussion button:hover {
-  border-bottom: 3px solid rgb(94, 94, 94);
+  /* border-bottom: 3px solid rgb(94, 94, 94); */
   cursor: pointer;
 }
 
