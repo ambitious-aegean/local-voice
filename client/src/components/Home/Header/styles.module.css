@@ -18,14 +18,12 @@
 .toggleContainer {
   position: fixed;
   top: 5%;
-  right: -10%;
+  right: 2%;
   font-family: 'Commissioner', sans-serif;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin-right: 22%;
-  margin-top: 2%;
 }
 
 .mapViewLabel {

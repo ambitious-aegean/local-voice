@@ -4,9 +4,10 @@
 
 #createIssue {
   font-size: 20px;
-  width: 60%;
+  position: fixed;
   cursor: pointer;
-  margin: 10px auto;
+  margin:  0 auto;
+  top: 6%;
   border: 1px solid #bbbac0;
   border-radius: 10px;
   padding-left: 5%;
