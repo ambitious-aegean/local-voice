@@ -38,7 +38,7 @@
 }
 
 #heading {
-  font-family: 'Kiwi Maru', serif;
+  font-family: 'Flamenco', cursive;
   font-size: 25px;
 }
 
@@ -132,8 +132,14 @@
   cursor: pointer;
   margin-top: 15px;
   outline: none;
-}
+  border: 1px solid #bbbac0;
+  border-radius: 10px;
+  padding-left: 5%;
+  padding-right: 5%;
+  background-color: white;
+  transition: background-color .2s ease-in-out;
+  }
 
-#formSubmit:hover {
-  /* background-color: #e6e6e6; */
-}
+  #formSubmit:hover {
+    background-color: #BFDBF7;
+  }

@@ -7,13 +7,12 @@
 
 .addCommentForm input {
   outline: none;
-    background-color:#E1E5F2;
+    background-color:whitesmoke;
     border: none;
     border-radius: 5px;
     padding: 10px 5px;
     margin: 10px;
     overflow: auto;
-    font-family: 'Montserrat', sans-serif;
   }
 
   input[type="submit"] {

@@ -23,7 +23,6 @@
 }
 
 .welcomeTag {
-  font-family: 'Montserrat', sans-serif;
   font-size: 18px;
   line-height: 20px;
   font-weight: 600;
@@ -210,4 +209,17 @@
 
 .allFilters {
   position: fixed;
+}
+
+.leftSideBar button {
+  border: 1px solid #bbbac0;
+  border-radius: 10px;
+  padding-left: 5%;
+  padding-right: 5%;
+  background-color: white;
+  transition: background-color .2s ease-in-out;
+}
+
+.leftSideBar button:hover {
+  background-color: #BFDBF7;
 }

@@ -206,7 +206,9 @@ class Home extends React.Component {
     }
     return (
       <div id="homeContainer" className={styles.homeContainer}>
-        <Header toggle={this.toggle} />
+        <div id="header">
+          <Header toggle={this.toggle} />
+        </div>
         <div id="flexContainer" className={styles.flexContainer}>
           <LeftSideBar
             user={user}
